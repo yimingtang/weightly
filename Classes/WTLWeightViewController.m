@@ -13,7 +13,7 @@
 
 @interface WTLWeightViewController () 
 
-@property (strong, nonatomic, readonly) WTLLineGraphModelController *lineChartModelController;
+@property (strong, nonatomic, readonly) WTLLineGraphModelController *lineGraphModelController;
 
 @end
 
@@ -21,7 +21,7 @@
 
 #pragma mark - Accessors
 
-@synthesize lineChartModelController = _lineChartModelController;
+@synthesize lineGraphModelController = _lineGraphModelController;
 @synthesize weightLabel = _weightLabel;
 @synthesize unitLabel = _unitLabel;
 @synthesize bmiLabel = _bmiLabel;
@@ -29,11 +29,11 @@
 @synthesize lineGraphView = _lineGraphView;
 @synthesize segmentedControl = _segmentedControl;
 
-- (WTLLineGraphModelController *)lineChartModelController {
-    if (!_lineChartModelController) {
-        _lineChartModelController = [[WTLLineGraphModelController alloc] init];
+- (WTLLineGraphModelController *)lineGraphModelController {
+    if (!_lineGraphModelController) {
+        _lineGraphModelController = [[WTLLineGraphModelController alloc] init];
     }
-    return _lineChartModelController;
+    return _lineGraphModelController;
 }
 
 
@@ -88,7 +88,7 @@
     if (!_lineGraphView) {
         _lineGraphView = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(0, 60, 320, 250)];
         _lineGraphView.delegate = self;
-        _lineGraphView.dataSource = self.lineChartModelController;
+        _lineGraphView.dataSource = self.lineGraphModelController;
         _lineGraphView.colorTop = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
         _lineGraphView.colorBottom = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
         _lineGraphView.colorLine = [UIColor whiteColor];
@@ -161,7 +161,8 @@
 #pragma mark - Actions
 
 - (void)updateLineChart:(id)sender {
-    
+    self.lineGraphModelController.timePeriod = self.segmentedControl.selectedSegmentIndex;
+    [self.lineGraphView reloadGraph];
 }
 
 
