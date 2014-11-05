@@ -1,1 +1,13 @@
+PODS:
+  - BEMSimpleLineGraph (3.2)
+  - Masonry (0.5.3)
+
+DEPENDENCIES:
+  - BEMSimpleLineGraph
+  - Masonry
+
+SPEC CHECKSUMS:
+  BEMSimpleLineGraph: 68e349eb22320d1a21a29e390d0f67772f6f6f44
+  Masonry: 35368c2ca9577ca87722c12fc52c4bad9b1c1516
+
 COCOAPODS: 0.34.4
