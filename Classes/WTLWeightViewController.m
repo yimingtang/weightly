@@ -11,7 +11,7 @@
 #import <BEMSimpleLineGraphView.h>
 #import <Masonry.h>
 
-@interface WTLWeightViewController () 
+@interface WTLWeightViewController ()
 
 @property (strong, nonatomic, readonly) WTLLineGraphModelController *lineGraphModelController;
 
@@ -19,11 +19,34 @@
 
 @implementation WTLWeightViewController
 
+
+#pragma mark - Class Methods
+
++ (NSDictionary *)weightLabelAttributes {
+    static NSDictionary *_weightLabelAttributes = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _weightLabelAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Avenir" size:88.0f]};
+    });
+    
+    return _weightLabelAttributes;
+}
+
+
++ (NSDictionary *)unitLabelAttributes {
+    static NSDictionary *_unitLabelAttributes = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _unitLabelAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Avenir" size:20.0f]};
+    });
+    
+    return _unitLabelAttributes;
+}
+
 #pragma mark - Accessors
 
 @synthesize lineGraphModelController = _lineGraphModelController;
 @synthesize weightLabel = _weightLabel;
-@synthesize unitLabel = _unitLabel;
 @synthesize bmiLabel = _bmiLabel;
 @synthesize historyButton = _historyButton;
 @synthesize lineGraphView = _lineGraphView;
@@ -41,7 +64,7 @@
     if (!_weightLabel) {
         _weightLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _weightLabel.textColor = [UIColor whiteColor];
-        _weightLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:88.0f];
+        _weightLabel.font = [UIFont fontWithName:@"Avenir" size:88.0f];
     }
     return _weightLabel;
 }
@@ -57,23 +80,13 @@
 }
 
 
-- (UILabel *)unitLabel {
-    if (!_unitLabel) {
-        _unitLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _unitLabel.textColor = [UIColor whiteColor];
-        _unitLabel.font = [UIFont fontWithName:@"Avenir-Regular" size:20.0f];
-        _unitLabel.text = @"KG";
-    }
-    return _unitLabel;
-}
-
-
 - (UIButton *)historyButton {
     if (!_historyButton) {
         _historyButton = [[UIButton alloc] initWithFrame:CGRectZero];
         _historyButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:18.0f];
         [_historyButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateNormal];
         [_historyButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.8f] forState:UIControlStateHighlighted];
+        [_historyButton addTarget:self action:@selector(showHistory:) forControlEvents:UIControlEventTouchUpInside];
         [_historyButton setTitle:@"All Records" forState:UIControlStateNormal];
         _historyButton.contentEdgeInsets = UIEdgeInsetsMake(5.0f, 10.0f, 5.0f, 10.0f);
         _historyButton.layer.cornerRadius = 4.0f;
@@ -92,7 +105,7 @@
         _lineGraphView.colorTop = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
         _lineGraphView.colorBottom = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
         _lineGraphView.colorLine = [UIColor whiteColor];
-        _lineGraphView.widthLine = 3.0;
+        _lineGraphView.widthLine = 2.0;
         _lineGraphView.enableTouchReport = YES;
         _lineGraphView.enableBezierCurve = YES;
         _lineGraphView.animationGraphStyle = BEMLineAnimationDraw;
@@ -103,7 +116,7 @@
 
 - (UISegmentedControl *)segmentedControl {
     if (!_segmentedControl) {
-        _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"7 DAYS", @"1 MONTH", @"3 MONTHS", @"1 YEAR"]];
+        _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"7 days", @"1 month", @"3 months", @"1 year"]];
         [_segmentedControl addTarget:self action:@selector(updateLineChart:) forControlEvents:UIControlEventValueChanged];
     }
     return _segmentedControl;
@@ -114,32 +127,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.extendedLayoutIncludesOpaqueBars = YES;
     self.view.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
-    
-    [self.view addSubview:self.weightLabel];
-    [self.weightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view).centerOffset(CGPointMake(-10.0f, -120.0f));
-    }];
-    self.weightLabel.text = @"65.3";
-    
-//    [self.view addSubview:self.unitLabel];
-//    [self.unitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(self.weightLabel.mas_right);
-//        make.bottom.equalTo(self.weightLabel.mas_bottom);
-//    }];
-    
-    [self.view addSubview:self.bmiLabel];
-    [self.bmiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.weightLabel.mas_bottom);
-        make.centerX.equalTo(self.view);
-    }];
-    self.bmiLabel.text = @"BMI 21.8 - NORMAL";
-    
-    [self.view addSubview:self.historyButton];
-    [self.historyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bmiLabel.mas_bottom).with.offset(10.0f);
-        make.centerX.equalTo(self.view);
-    }];
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]];
     
     [self.view addSubview:self.segmentedControl];
     [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -150,11 +140,36 @@
     
     [self.view addSubview:self.lineGraphView];
     [self.lineGraphView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.historyButton.mas_bottom);
+        make.top.equalTo(self.view.mas_centerY).with.offset(30.0f);
+        make.bottom.equalTo(self.segmentedControl.mas_top).with.offset(-20.0f);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.bottom.equalTo(self.segmentedControl.mas_top).with.offset(-20.0f);
     }];
+    
+    [self.view addSubview:self.historyButton];
+    [self.historyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.lineGraphView.mas_top).with.offset(-20.0f);
+        make.centerX.equalTo(self.view);
+    }];
+    
+    [self.view addSubview:self.bmiLabel];
+    [self.bmiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.historyButton.mas_top).with.offset(-8.0f);
+        make.centerX.equalTo(self.view);
+    }];
+    self.bmiLabel.text = @"BMI 21.8 - NORMAL";
+    
+    [self.view addSubview:self.weightLabel];
+    [self.weightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view).with.offset(10.0f);
+        make.bottom.equalTo(self.bmiLabel.mas_top);
+        make.height.lessThanOrEqualTo(@90.0f);
+    }];
+    
+    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:@"65.4KG" attributes:[[self class] weightLabelAttributes]];
+    // This will replace the attribute if it exists
+    [mutableAttributedString addAttributes:[[self class] unitLabelAttributes] range:NSMakeRange(4, 2)];
+    self.weightLabel.attributedText = mutableAttributedString;
 }
 
 
@@ -163,6 +178,68 @@
 - (void)updateLineChart:(id)sender {
     self.lineGraphModelController.timePeriod = self.segmentedControl.selectedSegmentIndex;
     [self.lineGraphView reloadGraph];
+}
+
+
+- (void)hideOrShowControls:(id)sender {
+    if ([UIApplication sharedApplication].statusBarHidden) {
+        [self showControls:YES];
+    } else {
+        [self hideControls:YES];
+    }
+}
+
+
+- (void)showHistory:(id)sender {
+    NSLog(@"Show History");
+}
+
+
+- (void)showWeightInput:(id)sender {
+    NSLog(@"Input weight");
+}
+
+
+- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer {
+    CGPoint point = [gestureRecognizer locationInView:self.weightLabel];
+    CGRect labelRect = self.weightLabel.bounds;
+    if (CGRectContainsPoint(labelRect, point)) {
+        [self showWeightInput:nil];
+    } else {
+        [self hideOrShowControls:nil];
+    }
+}
+
+
+#pragma mark - Private
+
+- (void)hideControls:(BOOL)animated {
+    void (^change)(void) = ^{
+        self.historyButton.alpha = 0.0f;
+        self.segmentedControl.alpha = 0.0f;
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.5f animations:change completion:nil];
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    } else {
+        change();
+    }
+}
+
+
+- (void)showControls:(BOOL)animated {
+    void (^change)(void) = ^{
+        self.historyButton.alpha = 1.0f;
+        self.segmentedControl.alpha = 1.0f;
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.5f animations:change completion:nil];
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    } else {
+        change();
+    }
 }
 
 

@@ -75,7 +75,8 @@
     
     // UISegmented Control
     UISegmentedControl *segmentedControl = [UISegmentedControl appearance];
-    NSDictionary *segmentedControlTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [segmentedControl setTintColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
+    NSDictionary *segmentedControlTextAttributes = @{NSForegroundColorAttributeName : [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f]};
     [segmentedControl setTitleTextAttributes:segmentedControlTextAttributes forState:UIControlStateSelected];
 }
 

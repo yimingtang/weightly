@@ -12,11 +12,13 @@
 
 @property (nonatomic, strong, readonly) UILabel *weightLabel;
 @property (nonatomic, strong, readonly) UILabel *bmiLabel;
-@property (nonatomic, strong, readonly) UILabel *unitLabel;
 @property (nonatomic, strong, readonly) UIButton *historyButton;
 @property (nonatomic, strong, readonly) BEMSimpleLineGraphView *lineGraphView;
 @property (nonatomic, strong, readonly) UISegmentedControl *segmentedControl;
 
 - (void)updateLineChart:(id)sender;
+- (void)hideOrShowControls:(id)sender;
+- (void)showHistory:(id)sender;
+- (void)showWeightInput:(id)sender;
 
 @end
