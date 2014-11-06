@@ -124,7 +124,7 @@
         make.centerY.equalTo(self.view.mas_top).with.offset(height);
     }];
     
-    [UIView animateWithDuration:duration delay:0 options:(curve << 16) animations:^{
+    [UIView animateWithDuration:1.0 delay:0 usingSpringWithDamping:0.55f initialSpringVelocity:.4f options:0 animations:^{
         [self.view layoutIfNeeded];
     } completion:nil];
 }

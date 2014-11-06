@@ -63,7 +63,7 @@
 #pragma mark - Private
 
 - (void)initialize {
-    self.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.25f];
+    self.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
     self.textAlignment = NSTextAlignmentCenter;
     self.textColor = [UIColor whiteColor];
     self.font = [UIFont fontWithName:@"Avenir" size:32.0f];
