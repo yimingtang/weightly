@@ -1,5 +1,5 @@
 //
-//  WTLLineChartModelController.h
+//  WTLLineGraphModelController.h
 //  Weightly
 //
 //  Created by Yiming Tang on 11/4/14.

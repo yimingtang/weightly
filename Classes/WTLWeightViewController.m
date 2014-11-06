@@ -8,10 +8,13 @@
 
 #import "WTLWeightViewController.h"
 #import "WTLLineGraphModelController.h"
+#import "WTLInputViewController.h"
+#import "WTLPresentInputAnimator.h"
+#import "WTLDismissInputAnimator.h"
 #import <BEMSimpleLineGraphView.h>
 #import <Masonry.h>
 
-@interface WTLWeightViewController ()
+@interface WTLWeightViewController () <UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic, readonly) WTLLineGraphModelController *lineGraphModelController;
 
@@ -51,12 +54,23 @@
 @synthesize historyButton = _historyButton;
 @synthesize lineGraphView = _lineGraphView;
 @synthesize segmentedControl = _segmentedControl;
+@synthesize settingsButton = _settingsButton;
 
 - (WTLLineGraphModelController *)lineGraphModelController {
     if (!_lineGraphModelController) {
         _lineGraphModelController = [[WTLLineGraphModelController alloc] init];
     }
     return _lineGraphModelController;
+}
+
+
+- (UIButton *)settingsButton {
+    if (!_settingsButton) {
+        _settingsButton = [[UIButton alloc] initWithFrame:CGRectZero];
+        [_settingsButton setImage:[UIImage imageNamed:@"settings-button"] forState:UIControlStateNormal];
+        [_settingsButton addTarget:self action:@selector(showPreferences:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _settingsButton;
 }
 
 
@@ -127,9 +141,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.navigationController.navigationBarHidden = YES;
+    
     self.view.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]];
+    
+    [self.view addSubview:self.settingsButton];
+    [self.settingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).with.offset(32.0f);
+        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
+    }];
     
     [self.view addSubview:self.segmentedControl];
     [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -196,7 +217,15 @@
 
 
 - (void)showWeightInput:(id)sender {
-    NSLog(@"Input weight");
+    WTLInputViewController *viewController = [[WTLInputViewController alloc] init];
+    viewController.modalPresentationStyle = UIModalPresentationCustom;
+    viewController.transitioningDelegate = self;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+
+- (void)showPreferences:(id)sender {
+    NSLog(@"Preferences");
 }
 
 
@@ -215,12 +244,13 @@
 
 - (void)hideControls:(BOOL)animated {
     void (^change)(void) = ^{
+        self.settingsButton.alpha = 0.0f;
         self.historyButton.alpha = 0.0f;
         self.segmentedControl.alpha = 0.0f;
     };
     
     if (animated) {
-        [UIView animateWithDuration:0.5f animations:change completion:nil];
+        [UIView animateWithDuration:0.4f animations:change completion:nil];
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     } else {
         change();
@@ -230,16 +260,29 @@
 
 - (void)showControls:(BOOL)animated {
     void (^change)(void) = ^{
+        self.settingsButton.alpha = 1.0f;
         self.historyButton.alpha = 1.0f;
         self.segmentedControl.alpha = 1.0f;
     };
     
     if (animated) {
-        [UIView animateWithDuration:0.5f animations:change completion:nil];
+        [UIView animateWithDuration:0.4f animations:change completion:nil];
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     } else {
         change();
     }
+}
+
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return [[WTLPresentInputAnimator alloc] init];
+}
+
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    return [[WTLDismissInputAnimator alloc] init];
 }
 
 

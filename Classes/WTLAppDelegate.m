@@ -71,7 +71,7 @@
     // Remove shadow image
     // http://stackoverflow.com/questions/19226965/how-to-hide-ios7-uinavigationbar-1px-bottom-line
     [navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [navigationBar setShadowImage:[[UIImage alloc] init]];
+//    [navigationBar setShadowImage:[[UIImage alloc] init]];
     
     // UISegmented Control
     UISegmentedControl *segmentedControl = [UISegmentedControl appearance];

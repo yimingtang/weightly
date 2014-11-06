@@ -10,6 +10,7 @@
 
 @interface WTLWeightViewController : UIViewController <BEMSimpleLineGraphDelegate>
 
+@property (nonatomic, strong, readonly) UIButton *settingsButton;
 @property (nonatomic, strong, readonly) UILabel *weightLabel;
 @property (nonatomic, strong, readonly) UILabel *bmiLabel;
 @property (nonatomic, strong, readonly) UIButton *historyButton;
@@ -20,5 +21,6 @@
 - (void)hideOrShowControls:(id)sender;
 - (void)showHistory:(id)sender;
 - (void)showWeightInput:(id)sender;
+- (void)showPreferences:(id)sender;
 
 @end
