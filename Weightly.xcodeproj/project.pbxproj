@@ -15,7 +15,7 @@
 		20156B3619FE5C9E00142EC0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20156B3519FE5C9E00142EC0 /* Images.xcassets */; };
 		20156B3919FE5C9E00142EC0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20156B3719FE5C9E00142EC0 /* LaunchScreen.xib */; };
 		20156B4519FE5C9E00142EC0 /* WeightlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B4419FE5C9E00142EC0 /* WeightlyTests.m */; };
-		2035933C1A0A373C0097A1AC /* WTLPreferencesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035933B1A0A373C0097A1AC /* WTLPreferencesTableViewController.m */; };
+		2035933C1A0A373C0097A1AC /* WTLSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035933B1A0A373C0097A1AC /* WTLSettingsTableViewController.m */; };
 		2035933F1A0A377F0097A1AC /* WTLWeightsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035933E1A0A377F0097A1AC /* WTLWeightsTableViewController.m */; };
 		203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203593411A0A57560097A1AC /* WTLInputViewController.m */; };
 		203593451A0A5E550097A1AC /* WTLPresentInputAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 203593441A0A5E550097A1AC /* WTLPresentInputAnimator.m */; };
@@ -50,8 +50,8 @@
 		20156B3E19FE5C9E00142EC0 /* WeightlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeightlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20156B4319FE5C9E00142EC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20156B4419FE5C9E00142EC0 /* WeightlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeightlyTests.m; sourceTree = "<group>"; };
-		2035933A1A0A373C0097A1AC /* WTLPreferencesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLPreferencesTableViewController.h; sourceTree = "<group>"; };
-		2035933B1A0A373C0097A1AC /* WTLPreferencesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLPreferencesTableViewController.m; sourceTree = "<group>"; };
+		2035933A1A0A373C0097A1AC /* WTLSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSettingsTableViewController.h; sourceTree = "<group>"; };
+		2035933B1A0A373C0097A1AC /* WTLSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSettingsTableViewController.m; sourceTree = "<group>"; };
 		2035933D1A0A377F0097A1AC /* WTLWeightsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLWeightsTableViewController.h; sourceTree = "<group>"; };
 		2035933E1A0A377F0097A1AC /* WTLWeightsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLWeightsTableViewController.m; sourceTree = "<group>"; };
 		203593401A0A57560097A1AC /* WTLInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLInputViewController.h; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 				20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */,
 				204931E81A08CE090075F43B /* WTLLineGraphModelController.h */,
 				204931E91A08CE090075F43B /* WTLLineGraphModelController.m */,
-				2035933A1A0A373C0097A1AC /* WTLPreferencesTableViewController.h */,
-				2035933B1A0A373C0097A1AC /* WTLPreferencesTableViewController.m */,
+				2035933A1A0A373C0097A1AC /* WTLSettingsTableViewController.h */,
+				2035933B1A0A373C0097A1AC /* WTLSettingsTableViewController.m */,
 				2035933D1A0A377F0097A1AC /* WTLWeightsTableViewController.h */,
 				2035933E1A0A377F0097A1AC /* WTLWeightsTableViewController.m */,
 				203593401A0A57560097A1AC /* WTLInputViewController.h */,
@@ -325,7 +325,7 @@
 				2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */,
 				20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */,
 				203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */,
-				2035933C1A0A373C0097A1AC /* WTLPreferencesTableViewController.m in Sources */,
+				2035933C1A0A373C0097A1AC /* WTLSettingsTableViewController.m in Sources */,
 				20156B2E19FE5C9E00142EC0 /* WTLAppDelegate.m in Sources */,
 				20156B2B19FE5C9E00142EC0 /* main.m in Sources */,
 				2011B3AD1A0B6293000DD457 /* WTLDismissInputAnimator.m in Sources */,

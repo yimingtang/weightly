@@ -66,9 +66,8 @@
     
     [self.view addSubview:self.textField];
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left).with.offset(20.0f);
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
-        make.bottom.equalTo(self.view.mas_centerY);
+        make.center.equalTo(self.view);
+        make.width.equalTo(@(roundf(self.view.bounds.size.width * 0.9)));
     }];
     self.textField.unitLabel.text = @"KG";
     
@@ -112,19 +111,19 @@
     
     [self.doneButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
-        make.top.equalTo(self.view.mas_top).with.offset(16.0f + offsetY);
+        make.top.equalTo(self.view.mas_top).with.offset(12.0f + offsetY);
     }];
     
     CGFloat height = self.view.bounds.size.height;
     height = roundf((height - keyboardFrame.size.height - offsetY) / 2);
     
     [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left).with.offset(20.0f);
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
+        make.centerX.equalTo(self.view.mas_centerX);
         make.centerY.equalTo(self.view.mas_top).with.offset(height);
+        make.width.equalTo(@(roundf(self.view.bounds.size.width * 0.9)));
     }];
     
-    [UIView animateWithDuration:1.0 delay:0 usingSpringWithDamping:0.55f initialSpringVelocity:9.0f options:0 animations:^{
+    [UIView animateWithDuration:0.7 delay:0 usingSpringWithDamping:0.5f initialSpringVelocity:0.7f options:0 animations:^{
         [self.view layoutIfNeeded];
     } completion:nil];
 }
@@ -137,9 +136,8 @@
     }];
     
     [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left).with.offset(20.0f);
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
-        make.top.equalTo(self.view.mas_centerY).with.offset(30.0f);
+        make.center.equalTo(self.view);
+        make.width.equalTo(@(roundf(self.view.bounds.size.width * 0.9)));
     }];
     
     [UIView animateWithDuration:duration delay:0 options:(curve << 16) animations:^{

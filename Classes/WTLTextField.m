@@ -18,7 +18,7 @@
     if (!_unitLabel) {
         _unitLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _unitLabel.textColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
-        _unitLabel.font = [UIFont fontWithName:@"Avenir-Light" size:32.0f];
+        _unitLabel.font = [UIFont fontWithName:@"AvenirNext-UltraLight" size:30.0f];
     }
     return _unitLabel;
 }
@@ -66,15 +66,15 @@
     self.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
     self.textAlignment = NSTextAlignmentCenter;
     self.textColor = [UIColor whiteColor];
-    self.font = [UIFont fontWithName:@"Avenir" size:32.0f];
+    self.font = [UIFont fontWithName:@"Avenir" size:30.0f];
     self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"0" attributes:
                                   @{NSForegroundColorAttributeName : [UIColor colorWithWhite:1.0f alpha:0.5f]}];
     self.keyboardType = UIKeyboardTypeNumberPad;
     self.layer.cornerRadius = 5.0f;
     self.rightView = self.unitLabel;
     self.rightViewMode = UITextFieldViewModeAlways;
-    self.textEdgeInsets = UIEdgeInsetsMake(10.0f, 16.0f, 10.0f, 16.0f);
-    self.unitLabelEdgeInsets = UIEdgeInsetsMake(10.0f, 0.0f, 10.0f, 16.0f);
+    self.textEdgeInsets = UIEdgeInsetsMake(8.0f, 16.0f, 8.0f, 16.0f);
+    self.unitLabelEdgeInsets = UIEdgeInsetsMake(8.0f, 0.0f, 8.0f, 16.0f);
 }
 
 @end

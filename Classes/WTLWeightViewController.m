@@ -78,7 +78,7 @@
     if (!_weightLabel) {
         _weightLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _weightLabel.textColor = [UIColor whiteColor];
-        _weightLabel.font = [UIFont fontWithName:@"Avenir" size:88.0f];
+        _weightLabel.font = [UIFont fontWithName:@"Avenir" size:85.0f];
     }
     return _weightLabel;
 }
@@ -157,14 +157,14 @@
         make.left.equalTo(self.view.mas_left).with.offset(20.0f);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-20.0f);
         make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
+        make.centerX.equalTo(self.view.mas_centerX);
     }];
     
     [self.view addSubview:self.lineGraphView];
     [self.lineGraphView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_centerY).with.offset(30.0f);
         make.bottom.equalTo(self.segmentedControl.mas_top).with.offset(-20.0f);
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
+        make.width.equalTo(self.view.mas_width);
     }];
     
     [self.view addSubview:self.historyButton];

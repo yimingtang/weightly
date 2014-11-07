@@ -6,17 +6,16 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
-#import "WTLPreferencesTableViewController.h"
+#import "WTLSettingsTableViewController.h"
 
-@interface WTLPreferencesTableViewController ()
+@interface WTLSettingsTableViewController ()
 
 @end
 
-@implementation WTLPreferencesTableViewController
+@implementation WTLSettingsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 #pragma mark - Table view data source
