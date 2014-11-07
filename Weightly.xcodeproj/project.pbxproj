@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2011B3AD1A0B6293000DD457 /* WTLDismissInputAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011B3AC1A0B6293000DD457 /* WTLDismissInputAnimator.m */; };
 		2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */; };
-		2011B3B31A0CFB56000DD457 /* WTLDotKeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011B3B21A0CFB56000DD457 /* WTLDotKeyButton.m */; };
 		20156B2B19FE5C9E00142EC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2A19FE5C9E00142EC0 /* main.m */; };
 		20156B2E19FE5C9E00142EC0 /* WTLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */; };
 		20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */; };
@@ -39,8 +38,6 @@
 		2011B3AC1A0B6293000DD457 /* WTLDismissInputAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDismissInputAnimator.m; sourceTree = "<group>"; };
 		2011B3AE1A0B7B5D000DD457 /* WTLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLTextField.h; sourceTree = "<group>"; };
 		2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLTextField.m; sourceTree = "<group>"; };
-		2011B3B11A0CFB56000DD457 /* WTLDotKeyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLDotKeyButton.h; sourceTree = "<group>"; };
-		2011B3B21A0CFB56000DD457 /* WTLDotKeyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDotKeyButton.m; sourceTree = "<group>"; };
 		20156B2519FE5C9E00142EC0 /* Weightly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weightly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20156B2919FE5C9E00142EC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20156B2A19FE5C9E00142EC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,8 +144,6 @@
 				2011B3AC1A0B6293000DD457 /* WTLDismissInputAnimator.m */,
 				2011B3AE1A0B7B5D000DD457 /* WTLTextField.h */,
 				2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */,
-				2011B3B11A0CFB56000DD457 /* WTLDotKeyButton.h */,
-				2011B3B21A0CFB56000DD457 /* WTLDotKeyButton.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -332,7 +327,6 @@
 				203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */,
 				2035933C1A0A373C0097A1AC /* WTLSettingsTableViewController.m in Sources */,
 				20156B2E19FE5C9E00142EC0 /* WTLAppDelegate.m in Sources */,
-				2011B3B31A0CFB56000DD457 /* WTLDotKeyButton.m in Sources */,
 				20156B2B19FE5C9E00142EC0 /* main.m in Sources */,
 				2011B3AD1A0B6293000DD457 /* WTLDismissInputAnimator.m in Sources */,
 			);

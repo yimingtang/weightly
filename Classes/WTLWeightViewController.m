@@ -97,12 +97,12 @@
 - (UIButton *)historyButton {
     if (!_historyButton) {
         _historyButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        _historyButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:18.0f];
+        _historyButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16.0f];
         [_historyButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateNormal];
         [_historyButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.8f] forState:UIControlStateHighlighted];
         [_historyButton addTarget:self action:@selector(showHistory:) forControlEvents:UIControlEventTouchUpInside];
         [_historyButton setTitle:@"All Records" forState:UIControlStateNormal];
-        _historyButton.contentEdgeInsets = UIEdgeInsetsMake(5.0f, 10.0f, 5.0f, 10.0f);
+        _historyButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 10.0f, 4.0f, 10.0f);
         _historyButton.layer.cornerRadius = 4.0f;
         _historyButton.layer.borderColor = [[UIColor colorWithWhite:1.0f alpha:0.5f] CGColor];
         _historyButton.layer.borderWidth = 1.0f;
@@ -154,9 +154,8 @@
     
     [self.view addSubview:self.segmentedControl];
     [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left).with.offset(20.0f);
+        make.left.greaterThanOrEqualTo(self.view.mas_left).with.offset(20.0f);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-20.0f);
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
         make.centerX.equalTo(self.view.mas_centerX);
     }];
     

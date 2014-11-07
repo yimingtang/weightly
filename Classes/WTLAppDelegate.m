@@ -66,7 +66,6 @@
     
     // Navigation Bar
     UINavigationBar *navigationBar = [UINavigationBar appearance];
-    [navigationBar setTranslucent:NO];
     [navigationBar setBarTintColor:[UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f]];
     // Remove shadow image
     // http://stackoverflow.com/questions/19226965/how-to-hide-ios7-uinavigationbar-1px-bottom-line
