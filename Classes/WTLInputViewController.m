@@ -68,7 +68,7 @@
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(20.0f);
         make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
-        make.top.equalTo(self.view.mas_centerY).with.offset(30.0f);
+        make.bottom.equalTo(self.view.mas_centerY);
     }];
     self.textField.unitLabel.text = @"KG";
     
@@ -124,7 +124,7 @@
         make.centerY.equalTo(self.view.mas_top).with.offset(height);
     }];
     
-    [UIView animateWithDuration:1.0 delay:0 usingSpringWithDamping:0.55f initialSpringVelocity:.4f options:0 animations:^{
+    [UIView animateWithDuration:1.0 delay:0 usingSpringWithDamping:0.55f initialSpringVelocity:9.0f options:0 animations:^{
         [self.view layoutIfNeeded];
     } completion:nil];
 }
