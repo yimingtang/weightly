@@ -68,7 +68,7 @@
     
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
-        make.width.equalTo(@(roundf(self.view.bounds.size.width * 0.9)));
+        make.width.equalTo(self.view).multipliedBy(0.85f);
     }];
     
     self.textField.text = self.initialInput;
@@ -126,7 +126,7 @@
     [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
         make.centerY.equalTo(self.view.mas_top).with.offset(height + offsetY);
-        make.width.equalTo(@(roundf(self.view.bounds.size.width * 0.9)));
+        make.width.equalTo(self.view).multipliedBy(0.85f);
     }];
     
     [UIView animateWithDuration:0.7 delay:0 usingSpringWithDamping:0.5f initialSpringVelocity:0.7f options:0 animations:^{
@@ -143,7 +143,7 @@
     
     [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
-        make.width.equalTo(@(roundf(self.view.bounds.size.width * 0.9)));
+        make.width.equalTo(self.view).multipliedBy(0.85f);
     }];
     
     [UIView animateWithDuration:duration delay:0 options:(curve << 16) animations:^{
