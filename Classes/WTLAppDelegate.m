@@ -28,8 +28,8 @@
     WTLWeightViewController *weightViewController = [[WTLWeightViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:weightViewController];
     self.window.rootViewController = navigationController;
-    [self.window makeKeyAndVisible];
     [self applyStyle];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -69,7 +69,7 @@
     [navigationBar setBarTintColor:[UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f]];
     // Remove shadow image
     // http://stackoverflow.com/questions/19226965/how-to-hide-ios7-uinavigationbar-1px-bottom-line
-    [navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+//    [navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
 //    [navigationBar setShadowImage:[[UIImage alloc] init]];
     
     // UISegmented Control

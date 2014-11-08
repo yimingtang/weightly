@@ -123,27 +123,67 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		20DA9FC419FF4F1300CB50CB /* Classes */ = {
+		20566C3A1A0DEB0F0071D05D /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				20156B2C19FE5C9E00142EC0 /* WTLAppDelegate.h */,
-				20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */,
-				20156B2F19FE5C9E00142EC0 /* WTLWeightViewController.h */,
-				20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */,
+				2011B3AB1A0B6293000DD457 /* WTLDismissInputAnimator.h */,
+				2011B3AC1A0B6293000DD457 /* WTLDismissInputAnimator.m */,
+				203593431A0A5E550097A1AC /* WTLPresentInputAnimator.h */,
+				203593441A0A5E550097A1AC /* WTLPresentInputAnimator.m */,
+			);
+			name = Animations;
+			sourceTree = "<group>";
+		};
+		20566C3B1A0DEB1F0071D05D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				203593401A0A57560097A1AC /* WTLInputViewController.h */,
+				203593411A0A57560097A1AC /* WTLInputViewController.m */,
 				204931E81A08CE090075F43B /* WTLLineGraphModelController.h */,
 				204931E91A08CE090075F43B /* WTLLineGraphModelController.m */,
 				2035933A1A0A373C0097A1AC /* WTLSettingsTableViewController.h */,
 				2035933B1A0A373C0097A1AC /* WTLSettingsTableViewController.m */,
 				2035933D1A0A377F0097A1AC /* WTLWeightsTableViewController.h */,
 				2035933E1A0A377F0097A1AC /* WTLWeightsTableViewController.m */,
-				203593401A0A57560097A1AC /* WTLInputViewController.h */,
-				203593411A0A57560097A1AC /* WTLInputViewController.m */,
-				203593431A0A5E550097A1AC /* WTLPresentInputAnimator.h */,
-				203593441A0A5E550097A1AC /* WTLPresentInputAnimator.m */,
-				2011B3AB1A0B6293000DD457 /* WTLDismissInputAnimator.h */,
-				2011B3AC1A0B6293000DD457 /* WTLDismissInputAnimator.m */,
+				20156B2F19FE5C9E00142EC0 /* WTLWeightViewController.h */,
+				20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		20566C3C1A0DEB340071D05D /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				2011B3AE1A0B7B5D000DD457 /* WTLTextField.h */,
 				2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		20566C3D1A0DEB520071D05D /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				20156B2C19FE5C9E00142EC0 /* WTLAppDelegate.h */,
+				20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		20566C3E1A0DEB640071D05D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		20DA9FC419FF4F1300CB50CB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				20566C3D1A0DEB520071D05D /* Application */,
+				20566C3B1A0DEB1F0071D05D /* View Controllers */,
+				20566C3E1A0DEB640071D05D /* Models */,
+				20566C3C1A0DEB340071D05D /* Views */,
+				20566C3A1A0DEB0F0071D05D /* Animations */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

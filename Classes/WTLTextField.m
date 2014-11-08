@@ -7,7 +7,6 @@
 //
 
 #import "WTLTextField.h"
-#import "WTLDotKeyButton.h"
 
 @implementation WTLTextField
 
