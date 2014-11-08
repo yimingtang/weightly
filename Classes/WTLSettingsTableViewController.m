@@ -175,6 +175,9 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     } else if (indexPath.section == 2) {
         // TODO:
     }
+    
+    // Deselect it
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 
