@@ -9,10 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class WTLTextField;
+@protocol WTLInputViewControllerDelegate;
 
 @interface WTLInputViewController : UIViewController
 
-@property (strong, nonatomic, readonly) WTLTextField *textField;
-@property (strong, nonatomic, readonly) UIButton *doneButton;
+@property (nonatomic, strong, readonly) WTLTextField *textField;
+@property (nonatomic, strong, readonly) UIButton *doneButton;
+@property (nonatomic, copy) NSString *unitString;
+@property (nonatomic, copy) NSString *initialInput;
+@property (nonatomic, weak) id<WTLInputViewControllerDelegate> delegate;
 
+@end
+
+@protocol WTLInputViewControllerDelegate <NSObject>
+@optional
+- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result;
 @end

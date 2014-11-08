@@ -9,6 +9,7 @@
 #import "WTLWeightViewController.h"
 #import "WTLLineGraphModelController.h"
 #import "WTLInputViewController.h"
+#import "WTLSettingsTableViewController.h"
 #import "WTLPresentInputAnimator.h"
 #import "WTLDismissInputAnimator.h"
 #import <BEMSimpleLineGraphView.h>
@@ -68,7 +69,7 @@
     if (!_settingsButton) {
         _settingsButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [_settingsButton setImage:[UIImage imageNamed:@"settings-button"] forState:UIControlStateNormal];
-        [_settingsButton addTarget:self action:@selector(showPreferences:) forControlEvents:UIControlEventTouchUpInside];
+        [_settingsButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _settingsButton;
 }
@@ -217,14 +218,20 @@
 
 - (void)showWeightInput:(id)sender {
     WTLInputViewController *viewController = [[WTLInputViewController alloc] init];
+    viewController.unitString = @"KG";
+    viewController.initialInput = @"65.3";
     viewController.modalPresentationStyle = UIModalPresentationCustom;
     viewController.transitioningDelegate = self;
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
 
-- (void)showPreferences:(id)sender {
-    NSLog(@"Preferences");
+- (void)showSettings:(id)sender {
+    WTLSettingsTableViewController *viewController = [[WTLSettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    navigationController.modalPresentationStyle = UIModalPresentationCustom;
+    navigationController.transitioningDelegate = self;
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 

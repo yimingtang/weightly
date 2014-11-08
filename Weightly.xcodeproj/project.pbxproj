@@ -20,6 +20,8 @@
 		203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203593411A0A57560097A1AC /* WTLInputViewController.m */; };
 		203593451A0A5E550097A1AC /* WTLPresentInputAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 203593441A0A5E550097A1AC /* WTLPresentInputAnimator.m */; };
 		204931EA1A08CE090075F43B /* WTLLineGraphModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 204931E91A08CE090075F43B /* WTLLineGraphModelController.m */; };
+		20566C411A0DEE9F0071D05D /* WTLSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C401A0DEE9F0071D05D /* WTLSettingsTableViewCell.m */; };
+		20566C441A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C431A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m */; };
 		3A060596F618E2427750AB0B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451AF153B83AF3AC0D7C3F2B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,10 @@
 		203593441A0A5E550097A1AC /* WTLPresentInputAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLPresentInputAnimator.m; sourceTree = "<group>"; };
 		204931E81A08CE090075F43B /* WTLLineGraphModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLLineGraphModelController.h; sourceTree = "<group>"; };
 		204931E91A08CE090075F43B /* WTLLineGraphModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLLineGraphModelController.m; sourceTree = "<group>"; };
+		20566C3F1A0DEE9F0071D05D /* WTLSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSettingsTableViewCell.h; sourceTree = "<group>"; };
+		20566C401A0DEE9F0071D05D /* WTLSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSettingsTableViewCell.m; sourceTree = "<group>"; };
+		20566C421A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSegmentedSettingsTableViewCell.h; sourceTree = "<group>"; };
+		20566C431A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSegmentedSettingsTableViewCell.m; sourceTree = "<group>"; };
 		451AF153B83AF3AC0D7C3F2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		784F9B486AC5AF793682D6C2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BCD0B65CCD2C66B7F42AC5B5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +162,10 @@
 			children = (
 				2011B3AE1A0B7B5D000DD457 /* WTLTextField.h */,
 				2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */,
+				20566C3F1A0DEE9F0071D05D /* WTLSettingsTableViewCell.h */,
+				20566C401A0DEE9F0071D05D /* WTLSettingsTableViewCell.m */,
+				20566C421A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.h */,
+				20566C431A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -359,10 +369,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20566C411A0DEE9F0071D05D /* WTLSettingsTableViewCell.m in Sources */,
 				204931EA1A08CE090075F43B /* WTLLineGraphModelController.m in Sources */,
 				203593451A0A5E550097A1AC /* WTLPresentInputAnimator.m in Sources */,
 				2035933F1A0A377F0097A1AC /* WTLWeightsTableViewController.m in Sources */,
 				2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */,
+				20566C441A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m in Sources */,
 				20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */,
 				203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */,
 				2035933C1A0A373C0097A1AC /* WTLSettingsTableViewController.m in Sources */,

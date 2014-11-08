@@ -59,17 +59,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     [self.view addSubview:self.doneButton];
+    [self.view addSubview:self.textField];
+    
     [self.doneButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
         make.bottom.equalTo(self.view.mas_top);
     }];
     
-    [self.view addSubview:self.textField];
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.width.equalTo(@(roundf(self.view.bounds.size.width * 0.9)));
     }];
-    self.textField.unitLabel.text = @"KG";
+    
+    self.textField.text = self.initialInput;
+    self.textField.unitLabel.text = self.unitString;
     
     [self.view layoutIfNeeded];
 }
@@ -90,6 +93,9 @@
 #pragma mark - Actions
 
 - (void)save:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(inputViewController:didFinishEditingWithResult:)]) {
+        [self.delegate inputViewController:self didFinishEditingWithResult:self.textField.text];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

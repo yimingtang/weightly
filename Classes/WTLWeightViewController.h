@@ -21,6 +21,6 @@
 - (void)hideOrShowControls:(id)sender;
 - (void)showHistory:(id)sender;
 - (void)showWeightInput:(id)sender;
-- (void)showPreferences:(id)sender;
+- (void)showSettings:(id)sender;
 
 @end
