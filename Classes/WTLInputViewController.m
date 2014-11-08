@@ -33,7 +33,7 @@
         [_doneButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.8f] forState:UIControlStateHighlighted];
         [_doneButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
         [_doneButton setTitle:@"Done" forState:UIControlStateNormal];
-        _doneButton.contentEdgeInsets = UIEdgeInsetsMake(5.0f, 10.0f, 5.0f, 10.0f);
+        _doneButton.contentEdgeInsets = UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 10.0f);
         _doneButton.layer.cornerRadius = 4.0f;
         _doneButton.layer.borderColor = [[UIColor colorWithWhite:1.0f alpha:0.5f] CGColor];
         _doneButton.layer.borderWidth = 1.0f;
@@ -119,7 +119,7 @@
     
     [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
-        make.centerY.equalTo(self.view.mas_top).with.offset(height);
+        make.centerY.equalTo(self.view.mas_top).with.offset(height + offsetY);
         make.width.equalTo(@(roundf(self.view.bounds.size.width * 0.9)));
     }];
     
