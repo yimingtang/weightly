@@ -12,7 +12,7 @@ extern CGFloat kWTLSettingsTableViewCellFontSize;
 
 @interface WTLSettingsTableViewCell : UITableViewCell
 
-@property (nonatomic, strong, readonly) UILabel *titleLabel;
-@property (nonatomic, strong, readonly) UILabel *valueLabel;
+@property (nonatomic, readonly) UILabel *titleLabel;
+@property (nonatomic, readonly) UILabel *valueLabel;
 
 @end

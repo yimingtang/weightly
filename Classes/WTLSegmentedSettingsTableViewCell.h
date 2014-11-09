@@ -10,6 +10,6 @@
 
 @interface WTLSegmentedSettingsTableViewCell : WTLSettingsTableViewCell
 
-@property (nonatomic, strong, readonly) UISegmentedControl *segmentedControl;
+@property (nonatomic, readonly) UISegmentedControl *segmentedControl;
 
 @end

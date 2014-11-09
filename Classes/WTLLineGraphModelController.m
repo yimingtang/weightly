@@ -9,7 +9,7 @@
 #import "WTLLineGraphModelController.h"
 
 @interface WTLLineGraphModelController ()
-@property (strong, nonatomic, readonly) NSArray *weightData;
+@property (nonatomic, readonly) NSArray *weightData;
 @end
 
 @implementation WTLLineGraphModelController

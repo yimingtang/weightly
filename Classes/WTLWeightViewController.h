@@ -10,12 +10,12 @@
 
 @interface WTLWeightViewController : UIViewController <BEMSimpleLineGraphDelegate>
 
-@property (nonatomic, strong, readonly) UIButton *settingsButton;
-@property (nonatomic, strong, readonly) UILabel *weightLabel;
-@property (nonatomic, strong, readonly) UILabel *bmiLabel;
-@property (nonatomic, strong, readonly) UIButton *historyButton;
-@property (nonatomic, strong, readonly) BEMSimpleLineGraphView *lineGraphView;
-@property (nonatomic, strong, readonly) UISegmentedControl *segmentedControl;
+@property (nonatomic, readonly) UIButton *settingsButton;
+@property (nonatomic, readonly) UILabel *weightLabel;
+@property (nonatomic, readonly) UILabel *bmiLabel;
+@property (nonatomic, readonly) UIButton *historyButton;
+@property (nonatomic, readonly) BEMSimpleLineGraphView *lineGraphView;
+@property (nonatomic, readonly) UISegmentedControl *segmentedControl;
 
 - (void)updateLineChart:(id)sender;
 - (void)hideOrShowControls:(id)sender;

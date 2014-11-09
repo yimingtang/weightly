@@ -18,7 +18,7 @@
 
 @interface WTLWeightViewController () <UIViewControllerTransitioningDelegate>
 
-@property (strong, nonatomic, readonly) WTLLineGraphModelController *lineGraphModelController;
+@property (nonatomic, readonly) WTLLineGraphModelController *lineGraphModelController;
 
 @end
 

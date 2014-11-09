@@ -13,8 +13,8 @@
 
 @interface WTLInputViewController : UIViewController
 
-@property (nonatomic, strong, readonly) WTLTextField *textField;
-@property (nonatomic, strong, readonly) UIButton *doneButton;
+@property (nonatomic, readonly) WTLTextField *textField;
+@property (nonatomic, readonly) UIButton *doneButton;
 @property (nonatomic, copy) NSString *unitString;
 @property (nonatomic, copy) NSString *initialInput;
 @property (nonatomic, weak) id<WTLInputViewControllerDelegate> delegate;

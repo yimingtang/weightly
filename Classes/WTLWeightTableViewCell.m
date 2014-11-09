@@ -11,8 +11,8 @@
 
 @interface WTLWeightTableViewCell ()
 
-@property (nonatomic, strong) UIView *lineView;
-@property (nonatomic, strong) UIView *circleView;
+@property (nonatomic) UIView *lineView;
+@property (nonatomic) UIView *circleView;
 
 @end
 

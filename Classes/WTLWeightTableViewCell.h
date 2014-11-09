@@ -10,7 +10,7 @@
 
 @interface WTLWeightTableViewCell : UITableViewCell
 
-@property (nonatomic, strong, readonly) UILabel *dateLabel;
-@property (nonatomic, strong, readonly) UILabel *titleLabel;
+@property (nonatomic, readonly) UILabel *dateLabel;
+@property (nonatomic, readonly) UILabel *titleLabel;
 
 @end

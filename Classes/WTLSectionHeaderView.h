@@ -10,6 +10,6 @@
 
 @interface WTLSectionHeaderView : UITableViewHeaderFooterView
 
-@property (nonatomic, strong, readonly) UILabel *titleLabel;
+@property (nonatomic, readonly) UILabel *titleLabel;
 
 @end

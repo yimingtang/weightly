@@ -10,6 +10,6 @@
 
 @interface WTLAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic) UIWindow *window;
 
 @end

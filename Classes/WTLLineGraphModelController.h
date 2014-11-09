@@ -17,6 +17,6 @@ typedef NS_ENUM(NSUInteger, WTLLineGraphTimePeriod) {
 
 @interface WTLLineGraphModelController : NSObject <BEMSimpleLineGraphDataSource>
 
-@property (assign, nonatomic) WTLLineGraphTimePeriod timePeriod;
+@property (nonatomic) WTLLineGraphTimePeriod timePeriod;
 
 @end

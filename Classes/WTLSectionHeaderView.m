@@ -10,7 +10,7 @@
 #import <Masonry.h>
 
 @interface WTLSectionHeaderView ()
-@property (nonatomic, strong) UIView *lineView;
+@property (nonatomic) UIView *lineView;
 @end
 
 @implementation WTLSectionHeaderView
