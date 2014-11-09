@@ -234,8 +234,6 @@
 - (void)showSettings:(id)sender {
     WTLSettingsViewController *viewController = [[WTLSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    navigationController.modalPresentationStyle = UIModalPresentationCustom;
-    navigationController.transitioningDelegate = self;
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 

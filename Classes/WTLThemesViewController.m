@@ -8,7 +8,10 @@
 
 #import "WTLThemesViewController.h"
 
-@interface WTLThemesViewController ()
+@interface WTLThemesViewController () <UICollectionViewDelegateFlowLayout>
+
+@property (nonatomic) CGSize itemSize;
+@property (nonatomic) BOOL needsUpdateItemSize;
 
 @end
 
@@ -16,9 +19,19 @@
 
 static NSString *const reuseIdentifier = @"themeCell";
 
+@synthesize itemSize = _itemSize;
+
 - (instancetype)init {
-    UICollectionViewLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    return (self = [super initWithCollectionViewLayout:layout]);
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    
+    if ((self = [super initWithCollectionViewLayout:layout])) {
+        _itemSize = CGSizeZero;
+        _needsUpdateItemSize = YES;
+    }
+    
+    return self;
 }
 
 
@@ -33,6 +46,43 @@ static NSString *const reuseIdentifier = @"themeCell";
 }
 
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    // NOTE: http://stackoverflow.com/questions/22451793/setcollectionviewlayoutanimated-causing-debug-error-snapshotting-a-view-that-h
+    // In this method, the bounds of collection view is not updated. However, we can get the new value when it
+    // finishes. After that, layout delegate methods are called, thus we assign the recalculated size to layout.
+    // There's another solution: assign new item size and re-layout in `willAnimateRotationToInterfaceOrientation:duration`.
+    // But a message will show in the console: 'Snapshotting a view that has not been rendered results in an empty snapshot. Ensure your view has been rendered at least once before snapshotting or snapshot after screen updates.'
+    // Therefore, we choose the first one.
+    
+    // if portrait -> landscape or landscape -> portrait, change item size and trigger layout
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation) != UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        self.needsUpdateItemSize = YES;
+        [self.collectionViewLayout invalidateLayout];
+    }
+}
+
+
+#pragma mark - Private Methods
+
+- (CGSize)itemSize {
+    if (self.needsUpdateItemSize) {
+        CGSize collectionViewSize = self.collectionView.bounds.size;
+        CGFloat width = 0;
+        if (collectionViewSize.width > collectionViewSize.height) {
+            width = collectionViewSize.width / 3;
+        } else {
+            width = collectionViewSize.width / 2;
+        }
+        _itemSize = CGSizeMake(width, width * 1.25f);
+        self.needsUpdateItemSize = NO;
+    }
+    
+    return _itemSize;
+}
+
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -42,7 +92,8 @@ static NSString *const reuseIdentifier = @"themeCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor greenColor];
+    
+    cell.backgroundColor = [UIColor colorWithWhite:(indexPath.item / 10.0f) alpha:1.0f];
     
     return cell;
 }
@@ -50,33 +101,11 @@ static NSString *const reuseIdentifier = @"themeCell";
 
 #pragma mark - UICollectionViewDelegate
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
 
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
+#pragma mark - UICollectionViewDelegateFlowLayout
 
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.itemSize;
 }
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
 
 @end
