@@ -1,26 +1,30 @@
 //
-//  WTLPreferencesTableViewController.m
+//  WTLSettingsViewController.m
 //  Weightly
 //
 //  Created by Yiming Tang on 11/5/14.
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
-#import "WTLSettingsTableViewController.h"
+#import "WTLSettingsViewController.h"
 #import "WTLInputViewController.h"
+#import "WTLThemesViewController.h"
 #import "WTLPresentInputAnimator.h"
 #import "WTLDismissInputAnimator.h"
 #import "WTLSettingsTableViewCell.h"
 #import "WTLSegmentedSettingsTableViewCell.h"
 
-static NSString *const cellIdentifier = @"cell";
-static NSString *const segmentedCellIdentifier = @"segmentedCell";
-
-@interface WTLSettingsTableViewController () <UIViewControllerTransitioningDelegate>
+@interface WTLSettingsViewController () <UIViewControllerTransitioningDelegate>
 
 @end
 
-@implementation WTLSettingsTableViewController
+@implementation WTLSettingsViewController
+
+static NSString *const cellIdentifier = @"cell";
+static NSString *const segmentedCellIdentifier = @"segmentedCell";
+
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -171,7 +175,10 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
             [self showViewController:inputViewController animated:YES];
         }
     } else if (indexPath.section == 1) {
-        // TODO:
+        if (indexPath.row == 0) {
+            WTLThemesViewController *viewController = [[WTLThemesViewController alloc] init];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
     } else if (indexPath.section == 2) {
         // TODO:
     }

@@ -9,8 +9,8 @@
 #import "WTLWeightViewController.h"
 #import "WTLLineGraphModelController.h"
 #import "WTLInputViewController.h"
-#import "WTLSettingsTableViewController.h"
-#import "WTLHistoryTableViewController.h"
+#import "WTLSettingsViewController.h"
+#import "WTLHistoryViewController.h"
 #import "WTLPresentInputAnimator.h"
 #import "WTLDismissInputAnimator.h"
 #import <BEMSimpleLineGraphView.h>
@@ -216,7 +216,7 @@
 
 
 - (void)showHistory:(id)sender {
-    WTLHistoryTableViewController *viewController = [[WTLHistoryTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    WTLHistoryViewController *viewController = [[WTLHistoryViewController alloc] initWithStyle:UITableViewStylePlain];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -232,7 +232,7 @@
 
 
 - (void)showSettings:(id)sender {
-    WTLSettingsTableViewController *viewController = [[WTLSettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    WTLSettingsViewController *viewController = [[WTLSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navigationController.modalPresentationStyle = UIModalPresentationCustom;
     navigationController.transitioningDelegate = self;

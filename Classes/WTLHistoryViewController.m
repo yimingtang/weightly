@@ -1,16 +1,16 @@
 //
-//  WTLHistoryTableViewController.m
+//  WTLHistoryViewController.m
 //  Weightly
 //
 //  Created by Yiming Tang on 11/5/14.
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
-#import "WTLHistoryTableViewController.h"
+#import "WTLHistoryViewController.h"
 #import "WTLWeightTableViewCell.h"
 #import "WTLSectionHeaderView.h"
 
-@implementation WTLHistoryTableViewController
+@implementation WTLHistoryViewController
 
 #pragma mark - UIViewController
 
