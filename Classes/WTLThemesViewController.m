@@ -7,6 +7,7 @@
 //
 
 #import "WTLThemesViewController.h"
+#import "WTLThemeCollectionViewCell.h"
 
 @interface WTLThemesViewController () <UICollectionViewDelegateFlowLayout>
 
@@ -42,7 +43,7 @@ static NSString *const reuseIdentifier = @"themeCell";
     self.clearsSelectionOnViewWillAppear = NO;
     
     self.collectionView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[WTLThemeCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
 }
 
 
@@ -91,9 +92,12 @@ static NSString *const reuseIdentifier = @"themeCell";
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    WTLThemeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     cell.backgroundColor = [UIColor colorWithWhite:(indexPath.item / 10.0f) alpha:1.0f];
+    cell.titleLabel.text = @"BELIZE HOLE";
+    cell.weightLabel.text = @"65.3";
+    cell.bmiLabel.text = @"21.8 - NORMAL";
     
     return cell;
 }

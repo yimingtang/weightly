@@ -25,6 +25,7 @@
 		20566C471A0E27B20071D05D /* WTLWeightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C461A0E27B20071D05D /* WTLWeightTableViewCell.m */; };
 		20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C491A0E27FC0071D05D /* WTLSectionHeaderView.m */; };
 		20566C4D1A0F0C5D0071D05D /* WTLThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */; };
+		20566C501A0F9B040071D05D /* WTLThemeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */; };
 		3A060596F618E2427750AB0B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451AF153B83AF3AC0D7C3F2B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,8 @@
 		20566C491A0E27FC0071D05D /* WTLSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSectionHeaderView.m; sourceTree = "<group>"; };
 		20566C4B1A0F0C5D0071D05D /* WTLThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLThemesViewController.h; sourceTree = "<group>"; };
 		20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLThemesViewController.m; sourceTree = "<group>"; };
+		20566C4E1A0F9B040071D05D /* WTLThemeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLThemeCollectionViewCell.h; sourceTree = "<group>"; };
+		20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLThemeCollectionViewCell.m; sourceTree = "<group>"; };
 		451AF153B83AF3AC0D7C3F2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		784F9B486AC5AF793682D6C2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BCD0B65CCD2C66B7F42AC5B5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 				2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */,
 				20566C451A0E27B20071D05D /* WTLWeightTableViewCell.h */,
 				20566C461A0E27B20071D05D /* WTLWeightTableViewCell.m */,
+				20566C4E1A0F9B040071D05D /* WTLThemeCollectionViewCell.h */,
+				20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -392,6 +397,7 @@
 				20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */,
 				20566C441A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m in Sources */,
 				20566C4D1A0F0C5D0071D05D /* WTLThemesViewController.m in Sources */,
+				20566C501A0F9B040071D05D /* WTLThemeCollectionViewCell.m in Sources */,
 				20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */,
 				203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */,
 				2035933C1A0A373C0097A1AC /* WTLSettingsViewController.m in Sources */,
