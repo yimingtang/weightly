@@ -66,11 +66,11 @@
     
     // Navigation Bar
     UINavigationBar *navigationBar = [UINavigationBar appearance];
+    [navigationBar setTintColor:[UIColor whiteColor]];
     [navigationBar setBarTintColor:[UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f]];
-    // Remove shadow image
-    // http://stackoverflow.com/questions/19226965/how-to-hide-ios7-uinavigationbar-1px-bottom-line
-//    [navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-//    [navigationBar setShadowImage:[[UIImage alloc] init]];
+    [navigationBar setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Avenir" size:22.0f],
+                                            NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [navigationBar setTitleVerticalPositionAdjustment:3.0f forBarMetrics:UIBarMetricsDefault];
     
     // UISegmented Control
     UISegmentedControl *segmentedControl = [UISegmentedControl appearance];

@@ -1,5 +1,5 @@
 //
-//  WTLWeightsTableViewController.h
+//  WTLHistoryTableViewController.h
 //  Weightly
 //
 //  Created by Yiming Tang on 11/5/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WTLWeightsTableViewController : UITableViewController
+@interface WTLHistoryTableViewController : UITableViewController
 
 @end

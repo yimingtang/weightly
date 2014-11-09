@@ -10,6 +10,7 @@
 #import "WTLLineGraphModelController.h"
 #import "WTLInputViewController.h"
 #import "WTLSettingsTableViewController.h"
+#import "WTLHistoryTableViewController.h"
 #import "WTLPresentInputAnimator.h"
 #import "WTLDismissInputAnimator.h"
 #import <BEMSimpleLineGraphView.h>
@@ -143,6 +144,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
+    // Remove "Back" title for detail view controller
+    self.navigationItem.title = @"";
     
     self.view.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]];
@@ -212,7 +215,8 @@
 
 
 - (void)showHistory:(id)sender {
-    NSLog(@"Show History");
+    WTLHistoryTableViewController *viewController = [[WTLHistoryTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 
