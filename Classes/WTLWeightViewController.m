@@ -71,6 +71,9 @@
         _settingsButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [_settingsButton setImage:[UIImage imageNamed:@"settings-button"] forState:UIControlStateNormal];
         [_settingsButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
+        [_settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [_settingsButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+        [_settingsButton setAdjustsImageWhenHighlighted:NO];
     }
     return _settingsButton;
 }
@@ -155,6 +158,7 @@
     [self.settingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).with.offset(32.0f);
         make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
+        make.size.mas_equalTo(CGSizeMake(75.0f, 75.0f));
     }];
     
     [self.view addSubview:self.segmentedControl];

@@ -9,7 +9,7 @@
 #import "WTLSettingsTableViewCell.h"
 #import <Masonry.h>
 
-CGFloat kWTLSettingsTableViewCellFontSize = 22.0f;
+CGFloat kWTLSettingsTableViewCellFontSize = 20.0f;
 
 @implementation WTLSettingsTableViewCell
 
