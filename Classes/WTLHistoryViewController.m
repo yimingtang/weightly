@@ -58,15 +58,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WTLWeightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.dateLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
-    cell.titleLabel.text = [NSString stringWithFormat:@"%ldkg", indexPath.row];
+    cell.dateLabel.text = [NSString stringWithFormat:@"%d", indexPath.row];
+    cell.titleLabel.text = [NSString stringWithFormat:@"%dkg", indexPath.row];
     return cell;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     WTLSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"sectionHeader"];
-    headerView.titleLabel.text = [NSString stringWithFormat:@"Section: %ld", section];
+    headerView.titleLabel.text = [NSString stringWithFormat:@"SECTION %d", section];
     return headerView;
 }
 
