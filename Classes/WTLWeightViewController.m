@@ -145,7 +145,8 @@
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
     // Remove "Back" title for detail view controller
-    self.navigationItem.title = @"";
+    // http://stackoverflow.com/questions/18870128/ios-7-navigation-bar-custom-back-button-without-title
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.view.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]];
