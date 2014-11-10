@@ -42,38 +42,19 @@
 }
 
 
-#pragma mark - NSObject
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
     [self.view addSubview:self.doneButton];
     [self.view addSubview:self.textField];
-    
-    [self.doneButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
-        make.bottom.equalTo(self.view.mas_top);
-    }];
-    
-    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        make.width.equalTo(self.view).multipliedBy(0.85f);
-    }];
     
     self.textField.text = self.initialInput;
     self.textField.unitLabel.text = self.unitString;
     
+    [self resetViewConstraints];
     [self.view layoutIfNeeded];
 }
 
@@ -81,12 +62,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.textField becomeFirstResponder];
+    [self animateViewsIn];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.textField resignFirstResponder];
+    [self animateViewsOut];
 }
 
 
@@ -100,19 +83,27 @@
 }
 
 
-- (void)cancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
 - (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer {
-    [self cancel:nil];
+    [self save:nil];
 }
 
 
 #pragma mark - Private Methods
 
-- (void)animateViewsIn:(NSTimeInterval)duration animationCurve:(NSInteger)curve withKeyboardFrame:(CGRect)keyboardFrame {
+- (void)resetViewConstraints {
+    [self.doneButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
+        make.bottom.equalTo(self.view.mas_top);
+    }];
+    [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.centerY.equalTo(self.view).multipliedBy(1.25f);
+        make.width.equalTo(self.view).multipliedBy(0.85f);
+    }];
+}
+
+
+- (void)animateViewsIn {
     CGFloat offsetY = [UIApplication sharedApplication].statusBarHidden ? 0 : 20.0f;
     
     [self.doneButton mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -120,55 +111,26 @@
         make.top.equalTo(self.view.mas_top).with.offset(12.0f + offsetY);
     }];
     
-    CGFloat height = self.view.bounds.size.height;
-    height = roundf((height - keyboardFrame.size.height - offsetY) / 2);
-    
     [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.centerY.equalTo(self.view.mas_top).with.offset(height + offsetY);
+        make.centerX.equalTo(self.view);
+        make.centerY.equalTo(self.view.mas_bottom).dividedBy(3.0f);
         make.width.equalTo(self.view).multipliedBy(0.85f);
     }];
     
-    [UIView animateWithDuration:0.7 delay:0 usingSpringWithDamping:0.5f initialSpringVelocity:0.7f options:0 animations:^{
+    [UIView animateWithDuration:1.0 delay:0 usingSpringWithDamping:0.55f initialSpringVelocity:0.7f options:0 animations:^{
         [self.view layoutIfNeeded];
     } completion:nil];
 }
 
 
-- (void)animateViewsOut:(NSTimeInterval)duration animationCurve:(NSInteger)curve {
-    [self.doneButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
-        make.bottom.equalTo(self.view.mas_top);
-    }];
+- (void)animateViewsOut {
+    [self resetViewConstraints];
     
-    [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        make.width.equalTo(self.view).multipliedBy(0.85f);
-    }];
-    
-    [UIView animateWithDuration:duration delay:0 options:(curve << 16) animations:^{
+    // duration = keyboard animation duration
+    // option = keyboard animation curve. not documented
+    [UIView animateWithDuration:0.3 delay:0 options:(7 << 16) animations:^{
         [self.view layoutIfNeeded];
     } completion:nil];
-}
-
-
-#pragma mark - Hanlde Notifications
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    NSDictionary *userInfo = notification.userInfo;
-    NSTimeInterval duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    NSUInteger curve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    CGRect frame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    frame = [self.view convertRect:frame fromView:nil];
-    [self animateViewsIn:duration animationCurve:curve withKeyboardFrame:frame];
-}
-
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    NSDictionary *userInfo = notification.userInfo;
-    NSTimeInterval duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    NSUInteger animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    [self animateViewsOut:duration animationCurve:animationCurve];
 }
 
 @end
