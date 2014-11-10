@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2011B3AD1A0B6293000DD457 /* WTLDismissInputAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011B3AC1A0B6293000DD457 /* WTLDismissInputAnimator.m */; };
+		2011B3AD1A0B6293000DD457 /* WTLDismissInputTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011B3AC1A0B6293000DD457 /* WTLDismissInputTransition.m */; };
 		2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */; };
 		20156B2B19FE5C9E00142EC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2A19FE5C9E00142EC0 /* main.m */; };
 		20156B2E19FE5C9E00142EC0 /* WTLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */; };
@@ -18,7 +18,7 @@
 		2035933C1A0A373C0097A1AC /* WTLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035933B1A0A373C0097A1AC /* WTLSettingsViewController.m */; };
 		2035933F1A0A377F0097A1AC /* WTLHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035933E1A0A377F0097A1AC /* WTLHistoryViewController.m */; };
 		203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203593411A0A57560097A1AC /* WTLInputViewController.m */; };
-		203593451A0A5E550097A1AC /* WTLPresentInputAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 203593441A0A5E550097A1AC /* WTLPresentInputAnimator.m */; };
+		203593451A0A5E550097A1AC /* WTLPresentInputTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 203593441A0A5E550097A1AC /* WTLPresentInputTransition.m */; };
 		204931EA1A08CE090075F43B /* WTLLineGraphModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 204931E91A08CE090075F43B /* WTLLineGraphModelController.m */; };
 		20566C411A0DEE9F0071D05D /* WTLSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C401A0DEE9F0071D05D /* WTLSettingsTableViewCell.m */; };
 		20566C441A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C431A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m */; };
@@ -40,8 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2011B3AB1A0B6293000DD457 /* WTLDismissInputAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLDismissInputAnimator.h; sourceTree = "<group>"; };
-		2011B3AC1A0B6293000DD457 /* WTLDismissInputAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDismissInputAnimator.m; sourceTree = "<group>"; };
+		2011B3AB1A0B6293000DD457 /* WTLDismissInputTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLDismissInputTransition.h; sourceTree = "<group>"; };
+		2011B3AC1A0B6293000DD457 /* WTLDismissInputTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDismissInputTransition.m; sourceTree = "<group>"; };
 		2011B3AE1A0B7B5D000DD457 /* WTLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLTextField.h; sourceTree = "<group>"; };
 		2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLTextField.m; sourceTree = "<group>"; };
 		20156B2519FE5C9E00142EC0 /* Weightly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weightly.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,8 +62,8 @@
 		2035933E1A0A377F0097A1AC /* WTLHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLHistoryViewController.m; sourceTree = "<group>"; };
 		203593401A0A57560097A1AC /* WTLInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLInputViewController.h; sourceTree = "<group>"; };
 		203593411A0A57560097A1AC /* WTLInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLInputViewController.m; sourceTree = "<group>"; };
-		203593431A0A5E550097A1AC /* WTLPresentInputAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLPresentInputAnimator.h; sourceTree = "<group>"; };
-		203593441A0A5E550097A1AC /* WTLPresentInputAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLPresentInputAnimator.m; sourceTree = "<group>"; };
+		203593431A0A5E550097A1AC /* WTLPresentInputTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLPresentInputTransition.h; sourceTree = "<group>"; };
+		203593441A0A5E550097A1AC /* WTLPresentInputTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLPresentInputTransition.m; sourceTree = "<group>"; };
 		204931E81A08CE090075F43B /* WTLLineGraphModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLLineGraphModelController.h; sourceTree = "<group>"; };
 		204931E91A08CE090075F43B /* WTLLineGraphModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLLineGraphModelController.m; sourceTree = "<group>"; };
 		20566C3F1A0DEE9F0071D05D /* WTLSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSettingsTableViewCell.h; sourceTree = "<group>"; };
@@ -144,10 +144,10 @@
 		20566C3A1A0DEB0F0071D05D /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				2011B3AB1A0B6293000DD457 /* WTLDismissInputAnimator.h */,
-				2011B3AC1A0B6293000DD457 /* WTLDismissInputAnimator.m */,
-				203593431A0A5E550097A1AC /* WTLPresentInputAnimator.h */,
-				203593441A0A5E550097A1AC /* WTLPresentInputAnimator.m */,
+				2011B3AB1A0B6293000DD457 /* WTLDismissInputTransition.h */,
+				2011B3AC1A0B6293000DD457 /* WTLDismissInputTransition.m */,
+				203593431A0A5E550097A1AC /* WTLPresentInputTransition.h */,
+				203593441A0A5E550097A1AC /* WTLPresentInputTransition.m */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -391,7 +391,7 @@
 			files = (
 				20566C411A0DEE9F0071D05D /* WTLSettingsTableViewCell.m in Sources */,
 				204931EA1A08CE090075F43B /* WTLLineGraphModelController.m in Sources */,
-				203593451A0A5E550097A1AC /* WTLPresentInputAnimator.m in Sources */,
+				203593451A0A5E550097A1AC /* WTLPresentInputTransition.m in Sources */,
 				2035933F1A0A377F0097A1AC /* WTLHistoryViewController.m in Sources */,
 				2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */,
 				20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */,
@@ -404,7 +404,7 @@
 				20156B2E19FE5C9E00142EC0 /* WTLAppDelegate.m in Sources */,
 				20566C471A0E27B20071D05D /* WTLWeightTableViewCell.m in Sources */,
 				20156B2B19FE5C9E00142EC0 /* main.m in Sources */,
-				2011B3AD1A0B6293000DD457 /* WTLDismissInputAnimator.m in Sources */,
+				2011B3AD1A0B6293000DD457 /* WTLDismissInputTransition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

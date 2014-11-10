@@ -1,5 +1,5 @@
 //
-//  WTLPresentInputAnimator.h
+//  WTLPresentInputTransition.h
 //  Weightly
 //
 //  Created by Yiming Tang on 11/5/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WTLPresentInputAnimator : NSObject <UIViewControllerAnimatedTransitioning>
+@interface WTLPresentInputTransition : NSObject <UIViewControllerAnimatedTransitioning>
 
 @end

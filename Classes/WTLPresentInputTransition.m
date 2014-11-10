@@ -1,14 +1,14 @@
 //
-//  WTLPresentInputAnimator.m
+//  WTLPresentInputTransition.m
 //  Weightly
 //
 //  Created by Yiming Tang on 11/5/14.
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
-#import "WTLPresentInputAnimator.h"
+#import "WTLPresentInputTransition.h"
 
-@implementation WTLPresentInputAnimator
+@implementation WTLPresentInputTransition
 
 #pragma mark - UIViewControllerAnimatedTransitioning
 

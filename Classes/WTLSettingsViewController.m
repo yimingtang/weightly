@@ -9,8 +9,8 @@
 #import "WTLSettingsViewController.h"
 #import "WTLInputViewController.h"
 #import "WTLThemesViewController.h"
-#import "WTLPresentInputAnimator.h"
-#import "WTLDismissInputAnimator.h"
+#import "WTLPresentInputTransition.h"
+#import "WTLDismissInputTransition.h"
 #import "WTLSettingsTableViewCell.h"
 #import "WTLSegmentedSettingsTableViewCell.h"
 
@@ -191,12 +191,12 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    return [[WTLPresentInputAnimator alloc] init];
+    return [[WTLPresentInputTransition alloc] init];
 }
 
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return [[WTLDismissInputAnimator alloc] init];
+    return [[WTLDismissInputTransition alloc] init];
 }
 
 @end

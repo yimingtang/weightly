@@ -11,8 +11,8 @@
 #import "WTLInputViewController.h"
 #import "WTLSettingsViewController.h"
 #import "WTLHistoryViewController.h"
-#import "WTLPresentInputAnimator.h"
-#import "WTLDismissInputAnimator.h"
+#import "WTLPresentInputTransition.h"
+#import "WTLDismissInputTransition.h"
 #import <BEMSimpleLineGraphView.h>
 #import <Masonry.h>
 
@@ -290,12 +290,12 @@
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    return [[WTLPresentInputAnimator alloc] init];
+    return [[WTLPresentInputTransition alloc] init];
 }
 
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return [[WTLDismissInputAnimator alloc] init];
+    return [[WTLDismissInputTransition alloc] init];
 }
 
 

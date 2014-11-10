@@ -1,5 +1,5 @@
 //
-//  WTLDismissInputAnimator.h
+//  WTLDismissInputTransition.h
 //  Weightly
 //
 //  Created by Yiming Tang on 11/6/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WTLDismissInputAnimator : NSObject <UIViewControllerAnimatedTransitioning>
+@interface WTLDismissInputTransition : NSObject <UIViewControllerAnimatedTransitioning>
 
 @end
