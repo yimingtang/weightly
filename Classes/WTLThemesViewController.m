@@ -8,11 +8,13 @@
 
 #import "WTLThemesViewController.h"
 #import "WTLThemeCollectionViewCell.h"
+#import <SAMCategories/UIColor+SAMAdditions.h>
 
 @interface WTLThemesViewController () <UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic) CGSize itemSize;
 @property (nonatomic) BOOL needsUpdateItemSize;
+@property (nonatomic) NSArray *themes;
 
 @end
 
@@ -33,6 +35,18 @@ static NSString *const reuseIdentifier = @"themeCell";
     }
     
     return self;
+}
+
+
+#pragma mark - Accessors
+
+- (NSArray *)themes {
+    if (!_themes) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"themes" ofType:@"json"];
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        _themes = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    }
+    return _themes;
 }
 
 
@@ -87,15 +101,16 @@ static NSString *const reuseIdentifier = @"themeCell";
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return self.themes.count;
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     WTLThemeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor colorWithWhite:(indexPath.item / 10.0f) alpha:1.0f];
-    cell.titleLabel.text = @"BELIZE HOLE";
+    NSDictionary *theme = self.themes[indexPath.item];
+    cell.titleLabel.text = [[theme objectForKey:@"title"] uppercaseString];
+    cell.backgroundColor = [UIColor sam_colorWithHex:[theme objectForKey:@"bg-color"]];
     cell.weightLabel.text = @"65.3";
     cell.bmiLabel.text = @"21.8 - NORMAL";
     
