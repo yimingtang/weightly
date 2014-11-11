@@ -165,10 +165,10 @@
 				204931E91A08CE090075F43B /* WTLLineGraphModelController.m */,
 				2035933A1A0A373C0097A1AC /* WTLSettingsViewController.h */,
 				2035933B1A0A373C0097A1AC /* WTLSettingsViewController.m */,
-				20156B2F19FE5C9E00142EC0 /* WTLWeightViewController.h */,
-				20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */,
 				20566C4B1A0F0C5D0071D05D /* WTLThemesViewController.h */,
 				20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */,
+				20156B2F19FE5C9E00142EC0 /* WTLWeightViewController.h */,
+				20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -184,10 +184,10 @@
 				20566C401A0DEE9F0071D05D /* WTLSettingsTableViewCell.m */,
 				2011B3AE1A0B7B5D000DD457 /* WTLTextField.h */,
 				2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */,
-				20566C451A0E27B20071D05D /* WTLWeightTableViewCell.h */,
-				20566C461A0E27B20071D05D /* WTLWeightTableViewCell.m */,
 				20566C4E1A0F9B040071D05D /* WTLThemeCollectionViewCell.h */,
 				20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */,
+				20566C451A0E27B20071D05D /* WTLWeightTableViewCell.h */,
+				20566C461A0E27B20071D05D /* WTLWeightTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";

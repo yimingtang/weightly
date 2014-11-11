@@ -9,6 +9,12 @@
 #import "WTLThemeCollectionViewCell.h"
 #import <Masonry.h>
 
+@interface WTLThemeCollectionViewCell ()
+
+@property (nonatomic) UIImageView *checkmarkImageView;
+
+@end
+
 @implementation WTLThemeCollectionViewCell
 
 #pragma mark - Accessors
@@ -47,6 +53,15 @@
 }
 
 
+- (UIImageView *)checkmarkImageView {
+    if (!_checkmarkImageView) {
+        _checkmarkImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-mark"]];
+        _checkmarkImageView.hidden = YES;
+    }
+    return _checkmarkImageView;
+}
+
+
 #pragma mark - UIView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -54,6 +69,7 @@
         [self.contentView addSubview:self.weightLabel];
         [self.contentView addSubview:self.bmiLabel];
         [self.contentView addSubview:self.titleLabel];
+        [self.contentView addSubview:self.checkmarkImageView];
         
         [self.bmiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.contentView);
@@ -69,8 +85,20 @@
             make.centerX.equalTo(self.contentView);
             make.top.equalTo(self.contentView.mas_bottom).multipliedBy(0.75f);
         }];
+        
+        [self.checkmarkImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView).with.offset(12.0f);
+            make.right.equalTo(self.contentView).with.offset(-12.0f);
+        }];
     }
     return self;
+}
+
+
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    
+    self.checkmarkImageView.hidden = !selected;
 }
 
 @end

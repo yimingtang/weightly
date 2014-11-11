@@ -15,6 +15,7 @@
 @property (nonatomic) CGSize itemSize;
 @property (nonatomic) BOOL needsUpdateItemSize;
 @property (nonatomic) NSArray *themes;
+@property (nonatomic) NSString *selectedTheme;
 
 @end
 
@@ -58,6 +59,7 @@ static NSString *const reuseIdentifier = @"themeCell";
     
     self.collectionView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     [self.collectionView registerClass:[WTLThemeCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    self.selectedTheme = [[NSUserDefaults standardUserDefaults] objectForKey:@"theme"];
 }
 
 
@@ -98,6 +100,11 @@ static NSString *const reuseIdentifier = @"themeCell";
 }
 
 
+- (NSDictionary *)objectForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.themes[indexPath.item];
+}
+
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -108,17 +115,33 @@ static NSString *const reuseIdentifier = @"themeCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     WTLThemeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    NSDictionary *theme = self.themes[indexPath.item];
-    cell.titleLabel.text = [[theme objectForKey:@"title"] uppercaseString];
+    NSDictionary *theme = [self objectForItemAtIndexPath:indexPath];
+    NSString *title = [theme objectForKey:@"title"];
+    
+    cell.titleLabel.text = [title uppercaseString];
     cell.backgroundColor = [UIColor sam_colorWithHex:[theme objectForKey:@"bg-color"]];
     cell.weightLabel.text = @"65.3";
     cell.bmiLabel.text = @"21.8 - NORMAL";
+    
+    if ([title isEqualToString:self.selectedTheme]) {
+        cell.selected = YES;
+        // http://stackoverflow.com/questions/15330844/uicollectionview-select-and-deselect-issue
+        // should also call this method so that the collection view will deselect this cell after
+        // we select another one.
+        [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    }
     
     return cell;
 }
 
 
 #pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *theme = [self objectForItemAtIndexPath:indexPath];
+    self.selectedTheme = [theme objectForKey:@"title"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.selectedTheme forKey:@"theme"];
+}
 
 
 #pragma mark - UICollectionViewDelegateFlowLayout
