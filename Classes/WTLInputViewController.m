@@ -117,7 +117,7 @@
         make.width.equalTo(self.view).multipliedBy(0.85f);
     }];
     
-    [UIView animateWithDuration:1.0 delay:0 usingSpringWithDamping:0.55f initialSpringVelocity:0.7f options:0 animations:^{
+    [UIView animateWithDuration:1.0 delay:0 usingSpringWithDamping:0.65f initialSpringVelocity:0.75f options:0 animations:^{
         [self.view layoutIfNeeded];
     } completion:nil];
 }
