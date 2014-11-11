@@ -28,6 +28,7 @@
     WTLWeightViewController *weightViewController = [[WTLWeightViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:weightViewController];
     self.window.rootViewController = navigationController;
+    [self registerUserDefaults];
     [self applyStyle];
     [self.window makeKeyAndVisible];
     return YES;
@@ -55,7 +56,7 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -77,6 +78,24 @@
     [segmentedControl setTintColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
     NSDictionary *segmentedControlTextAttributes = @{NSForegroundColorAttributeName : [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f]};
     [segmentedControl setTitleTextAttributes:segmentedControlTextAttributes forState:UIControlStateSelected];
+}
+
+
+- (void)registerUserDefaults {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *date = [NSDate date];
+    // TODO: iOS 7 solution
+    NSDate *alarmDate = [calendar dateBySettingHour:8 minute:0 second:0 ofDate:date options:kNilOptions];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"height" : @170,
+                                                              @"gender" : @0,
+                                                              @"goal" : @60,
+                                                              @"unit" : @0,
+                                                              @"theme" : @"Cinnabar",
+                                                              @"reminder" : @NO,
+                                                              @"time": alarmDate,
+                                                              }];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"WTLVersion"];
 }
 
 @end

@@ -59,7 +59,7 @@ static NSString *const reuseIdentifier = @"themeCell";
     
     self.collectionView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     [self.collectionView registerClass:[WTLThemeCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    self.selectedTheme = [[NSUserDefaults standardUserDefaults] objectForKey:@"theme"];
+    self.selectedTheme = [[NSUserDefaults standardUserDefaults] stringForKey:@"theme"];
 }
 
 

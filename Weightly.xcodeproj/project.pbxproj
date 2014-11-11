@@ -27,6 +27,7 @@
 		20566C4D1A0F0C5D0071D05D /* WTLThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */; };
 		20566C501A0F9B040071D05D /* WTLThemeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */; };
 		20D912231A11E89D007AF596 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = 20D912221A11E89D007AF596 /* themes.json */; };
+		20D912251A12087D007AF596 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20D912241A12087D007AF596 /* Settings.bundle */; };
 		3A060596F618E2427750AB0B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451AF153B83AF3AC0D7C3F2B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		20566C4E1A0F9B040071D05D /* WTLThemeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLThemeCollectionViewCell.h; sourceTree = "<group>"; };
 		20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLThemeCollectionViewCell.m; sourceTree = "<group>"; };
 		20D912221A11E89D007AF596 /* themes.json */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = themes.json; sourceTree = "<group>"; };
+		20D912241A12087D007AF596 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		451AF153B83AF3AC0D7C3F2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		784F9B486AC5AF793682D6C2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BCD0B65CCD2C66B7F42AC5B5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				20156B3519FE5C9E00142EC0 /* Images.xcassets */,
 				20156B2919FE5C9E00142EC0 /* Info.plist */,
 				20D912221A11E89D007AF596 /* themes.json */,
+				20D912241A12087D007AF596 /* Settings.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20D912251A12087D007AF596 /* Settings.bundle in Resources */,
 				20156B3919FE5C9E00142EC0 /* LaunchScreen.xib in Resources */,
 				20D912231A11E89D007AF596 /* themes.json in Resources */,
 				20156B3619FE5C9E00142EC0 /* Images.xcassets in Resources */,

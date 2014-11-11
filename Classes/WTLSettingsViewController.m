@@ -28,30 +28,24 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
-    
+    self.tableView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     self.tableView.rowHeight = 45.0f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[WTLSettingsTableViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.tableView registerClass:[WTLSegmentedSettingsTableViewCell class] forCellReuseIdentifier:segmentedCellIdentifier];
     
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    doneButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16.0f];
-    [doneButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateNormal];
-    [doneButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.8f] forState:UIControlStateHighlighted];
-    [doneButton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
-    doneButton.contentEdgeInsets = UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 10.0f);
-    doneButton.layer.cornerRadius = 4.0f;
-    doneButton.layer.borderColor = [[UIColor colorWithWhite:1.0f alpha:0.5f] CGColor];
-    doneButton.layer.borderWidth = 1.0f;
-    [doneButton sizeToFit];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(done:)];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 
 
 #pragma mark - Actions

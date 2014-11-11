@@ -10,3 +10,8 @@ pod 'Masonry'
 
 # A collection of useful Foundation and UIKit categories.
 pod 'SAMCategories'
+
+post_install do | installer |
+    require 'fileutils'
+    FileUtils.cp_r('Pods/Target Support Files/Pods/Pods-Acknowledgements.plist', 'Resources/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+end
