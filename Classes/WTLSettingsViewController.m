@@ -95,7 +95,7 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 
@@ -104,8 +104,6 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
         return 4;
     } else if (section == 1) {
         return 3;
-    } else if (section == 2) {
-        return 2;
     } else {
         return 0;
     }
@@ -164,16 +162,6 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
             dateFormatter.timeStyle = NSDateFormatterShortStyle;
             cell.valueLabel.text = [dateFormatter stringFromDate:date];
         }
-    } else if (indexPath.section == 2) {
-        if (indexPath.row == 0) {
-            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = @"Contact Us";
-            cell.valueLabel.text = nil;
-        } else if (indexPath.row == 1) {
-            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = @"Rate Us";
-            cell.valueLabel.text = nil;
-        }
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -202,8 +190,6 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
             WTLThemesViewController *viewController = [[WTLThemesViewController alloc] init];
             [self.navigationController pushViewController:viewController animated:YES];
         }
-    } else if (indexPath.section == 2) {
-        // TODO:
     }
     
     // Deselect it

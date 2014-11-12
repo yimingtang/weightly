@@ -16,7 +16,6 @@
 @property (nonatomic) CGSize itemSize;
 @property (nonatomic) BOOL needsUpdateItemSize;
 @property (nonatomic) NSArray *themes;
-@property (nonatomic) NSString *selectedTheme;
 
 @end
 
