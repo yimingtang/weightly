@@ -57,7 +57,7 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 
@@ -83,10 +83,14 @@
 
 
 - (void)registerUserDefaults {
+    // Initialize alarm clock
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *date = [NSDate date];
-    // TODO: iOS 7 solution
-    NSDate *alarmDate = [calendar dateBySettingHour:8 minute:0 second:0 ofDate:date options:kNilOptions];
+    NSDateComponents *components = [calendar components:NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    [components setHour:8];
+    [components setMinute:0];
+    [components setSecond:0];
+    NSDate *alarmDate = [calendar dateFromComponents:components];
     
     NSDictionary *defaults = @{kWTLHeightDefaultsKey: @170.0f,
                                kWTLGenderDefaultsKey : @(WTLGenderMale),
