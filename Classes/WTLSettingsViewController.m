@@ -14,6 +14,14 @@
 #import "WTLSettingsTableViewCell.h"
 #import "WTLSegmentedSettingsTableViewCell.h"
 
+NSString *const kWTLHeightDefaultsKey = @"WTLHeight";
+NSString *const kWTLGenderDefaultsKey = @"WTLGender";
+NSString *const kWTLGoalDefaultsKey = @"WTLGoal";
+NSString *const kWTLUnitsDefaultsKey = @"WTLUnits";
+NSString *const kWTLThemeDefaultsKey = @"WTLTheme";
+NSString *const kWTLReminderDefaultsKey = @"WTLReminder";
+NSString *const kWTLAlarmClockDefaultsKey = @"WTLTime";
+
 @interface WTLSettingsViewController () <UIViewControllerTransitioningDelegate>
 
 @end
@@ -87,6 +95,7 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     WTLSettingsTableViewCell *cell = nil;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     // Profile
     if (indexPath.section == 0) {
@@ -95,35 +104,37 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
             segmentedCell.titleLabel.text = @"Gender";
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Male" atIndex:0 animated:NO];
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Female" atIndex:1 animated:NO];
-            segmentedCell.segmentedControl.selectedSegmentIndex = 0;
+            segmentedCell.segmentedControl.selectedSegmentIndex = [userDefaults integerForKey:kWTLGenderDefaultsKey] == WTLGenderMale ? 0 : 1;
             cell = segmentedCell;
         } else if (indexPath.row == 1) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             cell.titleLabel.text = @"Height";
-            cell.valueLabel.text = @"173cm";
+            NSInteger height = [userDefaults integerForKey:kWTLHeightDefaultsKey];
+            cell.valueLabel.text = [NSString stringWithFormat:@"%ldcm", (long)height];
         } else if (indexPath.row == 2) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             cell.titleLabel.text = @"Goal";
-            cell.valueLabel.text = @"60.0kg";
+            NSInteger goal = [userDefaults integerForKey:kWTLGoalDefaultsKey];
+            cell.valueLabel.text = [NSString stringWithFormat:@"%ldkg", (long)goal];
         } else if (indexPath.row == 3) {
             WTLSegmentedSettingsTableViewCell *segmentedCell = (WTLSegmentedSettingsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
-            segmentedCell.titleLabel.text = @"Unit";
+            segmentedCell.titleLabel.text = @"Units";
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Metric" atIndex:0 animated:NO];
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Imperial" atIndex:1 animated:NO];
-            segmentedCell.segmentedControl.selectedSegmentIndex = 0;
+            segmentedCell.segmentedControl.selectedSegmentIndex = [userDefaults integerForKey:kWTLUnitsDefaultsKey] == WTLUnitsMetric ? 0 : 1;
             cell = segmentedCell;
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             cell.titleLabel.text = @"Theme";
-            cell.valueLabel.text = @"Cinnabar";
+            cell.valueLabel.text = [userDefaults stringForKey:kWTLThemeDefaultsKey];
         } else if (indexPath.row == 1) {
             WTLSegmentedSettingsTableViewCell *segmentedCell = (WTLSegmentedSettingsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
             segmentedCell.titleLabel.text = @"Reminder";
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Off" atIndex:0 animated:NO];
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"On" atIndex:1 animated:NO];
-            segmentedCell.segmentedControl.selectedSegmentIndex = 0;
+            segmentedCell.segmentedControl.selectedSegmentIndex = [userDefaults boolForKey:kWTLReminderDefaultsKey] ? 1 : 0;
             cell = segmentedCell;
         } else if (indexPath.row == 2) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];

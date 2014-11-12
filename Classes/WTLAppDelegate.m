@@ -8,6 +8,7 @@
 
 #import "WTLAppDelegate.h"
 #import "WTLWeightViewController.h"
+#import "WTLSettingsViewController.h"
 
 @implementation WTLAppDelegate
 
@@ -86,16 +87,26 @@
     NSDate *date = [NSDate date];
     // TODO: iOS 7 solution
     NSDate *alarmDate = [calendar dateBySettingHour:8 minute:0 second:0 ofDate:date options:kNilOptions];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"height" : @170,
-                                                              @"gender" : @0,
-                                                              @"goal" : @60,
-                                                              @"unit" : @0,
-                                                              @"theme" : @"Cinnabar",
-                                                              @"reminder" : @NO,
-                                                              @"time": alarmDate,
-                                                              }];
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"WTLVersion"];
+    
+    NSDictionary *defaults = @{kWTLHeightDefaultsKey: @170.0f,
+                               kWTLGenderDefaultsKey : @(WTLGenderMale),
+                               kWTLGoalDefaultsKey : @60.0f,
+                               kWTLUnitsDefaultsKey : @(WTLUnitsMetric),
+                               kWTLThemeDefaultsKey : @"Cinnabar",
+                               kWTLReminderDefaultsKey : @NO,
+                               kWTLAlarmClockDefaultsKey: alarmDate,
+                               };
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults registerDefaults:defaults];
+    
+    // Update version
+    NSDictionary *bundleInfo = [[NSBundle mainBundle] infoDictionary];
+    NSString *version = [bundleInfo objectForKey:@"CFBundleShortVersionString"];
+    NSString *build = [bundleInfo objectForKey:(NSString *)kCFBundleVersionKey];
+    NSString *versionBuild = [NSString stringWithFormat:@"%@ (%@)", version, build];
+    if (![versionBuild isEqualToString:[userDefaults stringForKey:@"WTLVersion"]]) {
+        [userDefaults setObject:version forKey:@"WTLVersion"];
+    }
 }
 
 @end
