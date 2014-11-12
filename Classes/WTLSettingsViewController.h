@@ -22,8 +22,8 @@ typedef NS_ENUM(NSUInteger, WTLGender) {
 };
 
 typedef NS_ENUM(NSUInteger, WTLUnits) {
-    WTLUnitsMetric,
     WTLUnitsImperial,
+    WTLUnitsMetric,
 };
 
 @interface WTLSettingsViewController : UITableViewController

@@ -11,7 +11,6 @@
 #import "WTLThemesViewController.h"
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
-#import "WTLSettingsTableViewCell.h"
 #import "WTLSegmentedSettingsTableViewCell.h"
 
 NSString *const kWTLHeightDefaultsKey = @"WTLHeight";
@@ -22,7 +21,16 @@ NSString *const kWTLThemeDefaultsKey = @"WTLTheme";
 NSString *const kWTLReminderDefaultsKey = @"WTLReminder";
 NSString *const kWTLAlarmClockDefaultsKey = @"WTLTime";
 
+typedef NS_ENUM(NSUInteger, WTLDefaultsValueType) {
+    WTLDefaultsValueTypeNumber,
+    WTLDefaultsValueTypeTime,
+    WTLDefaultsValueTypeOption,
+    WTLDefaultsValueTypeText,
+};
+
 @interface WTLSettingsViewController () <UIViewControllerTransitioningDelegate>
+
+@property (nonatomic) NSArray *defaultsKeySections;
 
 @end
 
@@ -30,6 +38,60 @@ NSString *const kWTLAlarmClockDefaultsKey = @"WTLTime";
 
 static NSString *const cellIdentifier = @"cell";
 static NSString *const segmentedCellIdentifier = @"segmentedCell";
+static NSString *const kWTLDefaultsTitleKey = @"label";
+static NSString *const kWTLDefaultsValueTypeKey = @"type";
+static NSString *const kWTLDefaultsOptionsKey = @"options";
+
+#pragma mark - Class Methods
+
++ (NSDictionary *)valueMap {
+    static NSDictionary *map = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        map = @{
+                kWTLHeightDefaultsKey: @{kWTLDefaultsTitleKey: @"Height",
+                                         kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeNumber)},
+                kWTLGenderDefaultsKey: @{kWTLDefaultsTitleKey: @"Gender",
+                                         kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeOption),
+                                         kWTLDefaultsOptionsKey: @[@(WTLGenderMale), @(WTLGenderFemale)],
+                                         @(WTLGenderMale): @"Male",
+                                         @(WTLGenderFemale): @"Female"},
+                kWTLGoalDefaultsKey: @{kWTLDefaultsTitleKey: @"Goal",
+                                       kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeNumber)},
+                kWTLUnitsDefaultsKey: @{kWTLDefaultsTitleKey: @"Units",
+                                        kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeOption),
+                                        kWTLDefaultsOptionsKey: @[@(WTLUnitsImperial), @(WTLUnitsMetric)],
+                                        @(WTLUnitsMetric): @"Metric",
+                                        @(WTLUnitsImperial): @"Imperial"},
+                kWTLThemeDefaultsKey: @{kWTLDefaultsTitleKey: @"Theme",
+                                        kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeText)},
+                kWTLReminderDefaultsKey: @{kWTLDefaultsTitleKey: @"Reminder",
+                                           kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeOption),
+                                           kWTLDefaultsOptionsKey: @[@(NO), @(YES)],
+                                           @(NO): @"Off",
+                                           @(YES): @"On"},
+                kWTLAlarmClockDefaultsKey: @{kWTLDefaultsTitleKey: @"Time",
+                                             kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeTime)},
+                };
+    });
+    return map;
+}
+
+
++ (NSDictionary *)infoDictionaryForDefaultsKey:(NSString *)key {
+    return [[self valueMap] objectForKey:key];
+}
+
+
+#pragma mark - Accessors
+
+- (NSArray *)defaultsKeySections {
+    if (!_defaultsKeySections) {
+        _defaultsKeySections = @[@[kWTLGenderDefaultsKey, kWTLHeightDefaultsKey, kWTLGoalDefaultsKey, kWTLUnitsDefaultsKey],
+                                 @[kWTLThemeDefaultsKey, kWTLReminderDefaultsKey, kWTLAlarmClockDefaultsKey]];
+    }
+    return _defaultsKeySections;
+}
 
 
 #pragma mark - UIViewController
@@ -41,7 +103,7 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[WTLSettingsTableViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.tableView registerClass:[WTLSegmentedSettingsTableViewCell class] forCellReuseIdentifier:segmentedCellIdentifier];
-    
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(done:)];
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     navigationBar.translucent = NO;
@@ -64,6 +126,11 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 }
 
 
+- (void)segmentedControlValueChanged:(UISegmentedControl *)sender {
+
+}
+
+
 #pragma mark - Private Methods
 
 - (void)showViewController:(UIViewController *)viewController animated:(BOOL)aniamted {
@@ -73,127 +140,102 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 }
 
 
-- (NSString *)labelStringForDefaultsKey:(NSString *)defaultsKey {
-    static NSDictionary *map = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        map = @{
-                kWTLHeightDefaultsKey: @"Height",
-                kWTLGenderDefaultsKey: @"Gender",
-                kWTLGoalDefaultsKey: @"Goal",
-                kWTLUnitsDefaultsKey: @"Units",
-                kWTLThemeDefaultsKey: @"Theme",
-                kWTLReminderDefaultsKey: @"Reminder",
-                kWTLAlarmClockDefaultsKey: @"Time",
-                };
-    });
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForUserDefaultsKey:(NSString *)key atIndexPath:(NSIndexPath *)indexPath {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    id valueObject = [userDefaults objectForKey:key];
+    WTLSettingsTableViewCell *cell;
     
-    return [map objectForKey:defaultsKey];
+    NSDictionary *infoDictionary = [[self class] infoDictionaryForDefaultsKey:key];
+    WTLDefaultsValueType valueType = [[infoDictionary objectForKey:kWTLDefaultsValueTypeKey] integerValue];
+    if (valueType == WTLDefaultsValueTypeOption) {
+        WTLSegmentedSettingsTableViewCell *segmentedCell = [tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
+        
+        // Configure segmented control
+        NSArray *options = [infoDictionary objectForKey:kWTLDefaultsOptionsKey];
+        __block NSUInteger selectedSegmentIndex;
+        
+        [options enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [segmentedCell.segmentedControl insertSegmentWithTitle:[infoDictionary objectForKey:obj] atIndex:idx animated:NO];
+            if ([valueObject isEqual:obj]) {
+                selectedSegmentIndex = idx;
+            }
+        }];
+        segmentedCell.segmentedControl.selectedSegmentIndex = selectedSegmentIndex;
+        
+        cell = segmentedCell;
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        
+        if (valueType == WTLDefaultsValueTypeText) {
+            cell.valueLabel.text = valueObject;
+        } else if (valueType == WTLDefaultsValueTypeTime) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateStyle = NSDateFormatterNoStyle;
+            dateFormatter.timeStyle = NSDateFormatterShortStyle;
+            cell.valueLabel.text = [dateFormatter stringFromDate:valueObject];
+        } else if (valueType == WTLDefaultsValueTypeNumber) {
+            if ([key isEqualToString:kWTLHeightDefaultsKey]) {
+                cell.valueLabel.text = [NSString stringWithFormat:@"%.1f cm", [valueObject floatValue]];
+            } else if ([key isEqualToString:kWTLGoalDefaultsKey]) {
+                cell.valueLabel.text = [NSString stringWithFormat:@"%.1f kg", [valueObject floatValue]];
+            }
+        }
+    }
+    cell.titleLabel.text = [infoDictionary objectForKey:kWTLDefaultsTitleKey];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    return cell;
+}
+
+
+- (NSString *)defaultsKeyForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [[self.defaultsKeySections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 }
 
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.defaultsKeySections.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 4;
-    } else if (section == 1) {
-        return 3;
-    } else {
-        return 0;
-    }
+    return [[self.defaultsKeySections objectAtIndex:section] count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    WTLSettingsTableViewCell *cell = nil;
-    
-    // Profile
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            WTLSegmentedSettingsTableViewCell *segmentedCell = (WTLSegmentedSettingsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
-            segmentedCell.titleLabel.text = [self labelStringForDefaultsKey:kWTLGenderDefaultsKey];
-            [segmentedCell.segmentedControl insertSegmentWithTitle:@"Male" atIndex:0 animated:NO];
-            [segmentedCell.segmentedControl insertSegmentWithTitle:@"Female" atIndex:1 animated:NO];
-            segmentedCell.segmentedControl.selectedSegmentIndex = [userDefaults integerForKey:kWTLGenderDefaultsKey] == WTLGenderMale ? 0 : 1;
-            cell = segmentedCell;
-        } else if (indexPath.row == 1) {
-            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = [self labelStringForDefaultsKey:kWTLHeightDefaultsKey];
-            CGFloat height = [userDefaults floatForKey:kWTLHeightDefaultsKey];
-            cell.valueLabel.text = [NSString stringWithFormat:@"%.1fcm", height];
-        } else if (indexPath.row == 2) {
-            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = [self labelStringForDefaultsKey:kWTLGoalDefaultsKey];
-            CGFloat goal = [userDefaults floatForKey:kWTLGoalDefaultsKey];
-            cell.valueLabel.text = [NSString stringWithFormat:@"%.1fkg", goal];
-        } else if (indexPath.row == 3) {
-            WTLSegmentedSettingsTableViewCell *segmentedCell = (WTLSegmentedSettingsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
-            segmentedCell.titleLabel.text = [self labelStringForDefaultsKey:kWTLUnitsDefaultsKey];
-            [segmentedCell.segmentedControl insertSegmentWithTitle:@"Metric" atIndex:0 animated:NO];
-            [segmentedCell.segmentedControl insertSegmentWithTitle:@"Imperial" atIndex:1 animated:NO];
-            segmentedCell.segmentedControl.selectedSegmentIndex = [userDefaults integerForKey:kWTLUnitsDefaultsKey] == WTLUnitsMetric ? 0 : 1;
-            cell = segmentedCell;
-        }
-    } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = [self labelStringForDefaultsKey:kWTLThemeDefaultsKey];
-            cell.valueLabel.text = [userDefaults stringForKey:kWTLThemeDefaultsKey];
-        } else if (indexPath.row == 1) {
-            WTLSegmentedSettingsTableViewCell *segmentedCell = (WTLSegmentedSettingsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
-            segmentedCell.titleLabel.text = [self labelStringForDefaultsKey:kWTLReminderDefaultsKey];
-            [segmentedCell.segmentedControl insertSegmentWithTitle:@"Off" atIndex:0 animated:NO];
-            [segmentedCell.segmentedControl insertSegmentWithTitle:@"On" atIndex:1 animated:NO];
-            segmentedCell.segmentedControl.selectedSegmentIndex = [userDefaults boolForKey:kWTLReminderDefaultsKey] ? 1 : 0;
-            cell = segmentedCell;
-        } else if (indexPath.row == 2) {
-            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = [self labelStringForDefaultsKey:kWTLAlarmClockDefaultsKey];
-            NSDate *date = [userDefaults objectForKey:kWTLAlarmClockDefaultsKey];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            dateFormatter.dateStyle = NSDateFormatterNoStyle;
-            dateFormatter.timeStyle = NSDateFormatterShortStyle;
-            cell.valueLabel.text = [dateFormatter stringFromDate:date];
-        }
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return cell;
+    NSString *defaultsKey = [self defaultsKeyForRowAtIndexPath:indexPath];
+    return [self tableView:tableView cellForUserDefaultsKey:defaultsKey atIndexPath:indexPath];
 }
 
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        if (indexPath.row == 1) {
-            WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
-            inputViewController.initialInput = @"173.0";
-            inputViewController.unitString = @"CM";
-            [self showViewController:inputViewController animated:YES];
-        } else if (indexPath.row == 2) {
-            WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
-            inputViewController.initialInput = @"60.0";
-            inputViewController.unitString = @"KG";
-            [self showViewController:inputViewController animated:YES];
-        }
-    } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    NSString *defaultsKey = [self defaultsKeyForRowAtIndexPath:indexPath];
+    NSDictionary *infoDictionary = [[self class] infoDictionaryForDefaultsKey:defaultsKey];
+    WTLDefaultsValueType valueType = [[infoDictionary objectForKey:kWTLDefaultsValueTypeKey] integerValue];
+    if (valueType == WTLDefaultsValueTypeTime) {
+        // TODO: Set time
+    } else if (valueType == WTLDefaultsValueTypeText) {
+        if ([defaultsKey isEqualToString:kWTLThemeDefaultsKey]) {
             WTLThemesViewController *viewController = [[WTLThemesViewController alloc] init];
             [self.navigationController pushViewController:viewController animated:YES];
         }
+    } else if (valueType == WTLDefaultsValueTypeNumber) {
+        WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
+        inputViewController.initialInput = [NSString stringWithFormat:@"%.1f", [[[NSUserDefaults standardUserDefaults] objectForKey:defaultsKey] floatValue]];
+        if ([defaultsKey isEqualToString:kWTLHeightDefaultsKey]) {
+            inputViewController.unitString = @"CM";
+        } else if ([defaultsKey isEqualToString:kWTLGoalDefaultsKey]) {
+            inputViewController.unitString = @"KG";
+        }
+        [self showViewController:inputViewController animated:YES];
     }
-    
-    // Deselect it
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 
