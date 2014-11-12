@@ -26,6 +26,8 @@
 		20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C491A0E27FC0071D05D /* WTLSectionHeaderView.m */; };
 		20566C4D1A0F0C5D0071D05D /* WTLThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */; };
 		20566C501A0F9B040071D05D /* WTLThemeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */; };
+		208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */; };
+		208EA5D11A135FD200AF5084 /* WTLUnitConverterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */; };
 		20D912231A11E89D007AF596 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = 20D912221A11E89D007AF596 /* themes.json */; };
 		20D912251A12087D007AF596 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20D912241A12087D007AF596 /* Settings.bundle */; };
 		3A060596F618E2427750AB0B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451AF153B83AF3AC0D7C3F2B /* libPods.a */; };
@@ -80,6 +82,9 @@
 		20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLThemesViewController.m; sourceTree = "<group>"; };
 		20566C4E1A0F9B040071D05D /* WTLThemeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLThemeCollectionViewCell.h; sourceTree = "<group>"; };
 		20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLThemeCollectionViewCell.m; sourceTree = "<group>"; };
+		208EA5CC1A13509300AF5084 /* WTLUnitConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLUnitConverter.h; sourceTree = "<group>"; };
+		208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverter.m; sourceTree = "<group>"; };
+		208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverterTest.m; sourceTree = "<group>"; };
 		20D912221A11E89D007AF596 /* themes.json */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = themes.json; sourceTree = "<group>"; };
 		20D912241A12087D007AF596 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		451AF153B83AF3AC0D7C3F2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				20156B4419FE5C9E00142EC0 /* WeightlyTests.m */,
+				208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */,
 				20156B4219FE5C9E00142EC0 /* Resources */,
 			);
 			path = WeightlyTests;
@@ -210,6 +216,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		208EA5CF1A13509E00AF5084 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				208EA5CC1A13509300AF5084 /* WTLUnitConverter.h */,
+				208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		20DA9FC419FF4F1300CB50CB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +233,7 @@
 				20566C3E1A0DEB640071D05D /* Models */,
 				20566C3C1A0DEB340071D05D /* Views */,
 				20566C3A1A0DEB0F0071D05D /* Animations */,
+				208EA5CF1A13509E00AF5084 /* Utils */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -402,6 +418,7 @@
 				203593451A0A5E550097A1AC /* WTLPresentInputTransition.m in Sources */,
 				2035933F1A0A377F0097A1AC /* WTLHistoryViewController.m in Sources */,
 				2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */,
+				208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */,
 				20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */,
 				20566C441A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m in Sources */,
 				20566C4D1A0F0C5D0071D05D /* WTLThemesViewController.m in Sources */,
@@ -420,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				208EA5D11A135FD200AF5084 /* WTLUnitConverterTest.m in Sources */,
 				20156B4519FE5C9E00142EC0 /* WeightlyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
