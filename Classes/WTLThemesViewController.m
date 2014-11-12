@@ -7,6 +7,7 @@
 //
 
 #import "WTLThemesViewController.h"
+#import "WTLSettingsViewController.h"
 #import "WTLThemeCollectionViewCell.h"
 #import <SAMCategories/UIColor+SAMAdditions.h>
 
@@ -22,6 +23,8 @@
 @implementation WTLThemesViewController
 
 static NSString *const reuseIdentifier = @"themeCell";
+static NSString *const kWTLThemeTitleKey = @"title";
+static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
 
 @synthesize itemSize = _itemSize;
 
@@ -59,7 +62,7 @@ static NSString *const reuseIdentifier = @"themeCell";
     
     self.collectionView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     [self.collectionView registerClass:[WTLThemeCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    self.selectedTheme = [[NSUserDefaults standardUserDefaults] stringForKey:@"theme"];
+    self.selectedTheme = [[NSUserDefaults standardUserDefaults] stringForKey:kWTLThemeDefaultsKey];
 }
 
 
@@ -116,10 +119,10 @@ static NSString *const reuseIdentifier = @"themeCell";
     WTLThemeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     NSDictionary *theme = [self objectForItemAtIndexPath:indexPath];
-    NSString *title = [theme objectForKey:@"title"];
+    NSString *title = [theme objectForKey:kWTLThemeTitleKey];
     
     cell.titleLabel.text = [title uppercaseString];
-    cell.backgroundColor = [UIColor sam_colorWithHex:[theme objectForKey:@"bg-color"]];
+    cell.backgroundColor = [UIColor sam_colorWithHex:[theme objectForKey:kWTLThemeBackgroundColorKey]];
     cell.weightLabel.text = @"65.3";
     cell.bmiLabel.text = @"21.8 - NORMAL";
     
@@ -139,8 +142,8 @@ static NSString *const reuseIdentifier = @"themeCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *theme = [self objectForItemAtIndexPath:indexPath];
-    self.selectedTheme = [theme objectForKey:@"title"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.selectedTheme forKey:@"theme"];
+    self.selectedTheme = [theme objectForKey:kWTLThemeTitleKey];
+    [[NSUserDefaults standardUserDefaults] setObject:self.selectedTheme forKey:kWTLThemeDefaultsKey];
 }
 
 

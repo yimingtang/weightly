@@ -42,6 +42,8 @@ CGFloat kWTLSettingsTableViewCellFontSize = 20.0f;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
+        self.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
+        
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.valueLabel];
         

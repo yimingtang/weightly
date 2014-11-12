@@ -43,9 +43,10 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     [self.tableView registerClass:[WTLSegmentedSettingsTableViewCell class] forCellReuseIdentifier:segmentedCellIdentifier];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(done:)];
-    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    navigationBar.translucent = NO;
+    [navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [navigationBar setShadowImage:[[UIImage alloc] init]];
 }
 
 
@@ -55,11 +56,11 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 }
 
 
-
 #pragma mark - Actions
 
 - (void)done:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -69,6 +70,25 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     viewController.modalPresentationStyle = UIModalPresentationCustom;
     viewController.transitioningDelegate = self;
     [self presentViewController:viewController animated:aniamted completion:nil];
+}
+
+
+- (NSString *)labelStringForDefaultsKey:(NSString *)defaultsKey {
+    static NSDictionary *map = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        map = @{
+                kWTLHeightDefaultsKey: @"Height",
+                kWTLGenderDefaultsKey: @"Gender",
+                kWTLGoalDefaultsKey: @"Goal",
+                kWTLUnitsDefaultsKey: @"Units",
+                kWTLThemeDefaultsKey: @"Theme",
+                kWTLReminderDefaultsKey: @"Reminder",
+                kWTLAlarmClockDefaultsKey: @"Time",
+                };
+    });
+    
+    return [map objectForKey:defaultsKey];
 }
 
 
@@ -93,32 +113,31 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    WTLSettingsTableViewCell *cell = nil;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    WTLSettingsTableViewCell *cell = nil;
     
     // Profile
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             WTLSegmentedSettingsTableViewCell *segmentedCell = (WTLSegmentedSettingsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
-            segmentedCell.titleLabel.text = @"Gender";
+            segmentedCell.titleLabel.text = [self labelStringForDefaultsKey:kWTLGenderDefaultsKey];
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Male" atIndex:0 animated:NO];
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Female" atIndex:1 animated:NO];
             segmentedCell.segmentedControl.selectedSegmentIndex = [userDefaults integerForKey:kWTLGenderDefaultsKey] == WTLGenderMale ? 0 : 1;
             cell = segmentedCell;
         } else if (indexPath.row == 1) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = @"Height";
-            NSInteger height = [userDefaults integerForKey:kWTLHeightDefaultsKey];
-            cell.valueLabel.text = [NSString stringWithFormat:@"%ldcm", (long)height];
+            cell.titleLabel.text = [self labelStringForDefaultsKey:kWTLHeightDefaultsKey];
+            CGFloat height = [userDefaults floatForKey:kWTLHeightDefaultsKey];
+            cell.valueLabel.text = [NSString stringWithFormat:@"%.1fcm", height];
         } else if (indexPath.row == 2) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = @"Goal";
-            NSInteger goal = [userDefaults integerForKey:kWTLGoalDefaultsKey];
-            cell.valueLabel.text = [NSString stringWithFormat:@"%ldkg", (long)goal];
+            cell.titleLabel.text = [self labelStringForDefaultsKey:kWTLGoalDefaultsKey];;
+            CGFloat goal = [userDefaults floatForKey:kWTLGoalDefaultsKey];
+            cell.valueLabel.text = [NSString stringWithFormat:@"%.1fkg", goal];
         } else if (indexPath.row == 3) {
             WTLSegmentedSettingsTableViewCell *segmentedCell = (WTLSegmentedSettingsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
-            segmentedCell.titleLabel.text = @"Units";
+            segmentedCell.titleLabel.text = [self labelStringForDefaultsKey:kWTLUnitsDefaultsKey];;
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Metric" atIndex:0 animated:NO];
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Imperial" atIndex:1 animated:NO];
             segmentedCell.segmentedControl.selectedSegmentIndex = [userDefaults integerForKey:kWTLUnitsDefaultsKey] == WTLUnitsMetric ? 0 : 1;
@@ -127,18 +146,18 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = @"Theme";
+            cell.titleLabel.text = [self labelStringForDefaultsKey:kWTLThemeDefaultsKey];;
             cell.valueLabel.text = [userDefaults stringForKey:kWTLThemeDefaultsKey];
         } else if (indexPath.row == 1) {
             WTLSegmentedSettingsTableViewCell *segmentedCell = (WTLSegmentedSettingsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
-            segmentedCell.titleLabel.text = @"Reminder";
+            segmentedCell.titleLabel.text = [self labelStringForDefaultsKey:kWTLReminderDefaultsKey];;
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"Off" atIndex:0 animated:NO];
             [segmentedCell.segmentedControl insertSegmentWithTitle:@"On" atIndex:1 animated:NO];
             segmentedCell.segmentedControl.selectedSegmentIndex = [userDefaults boolForKey:kWTLReminderDefaultsKey] ? 1 : 0;
             cell = segmentedCell;
         } else if (indexPath.row == 2) {
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.titleLabel.text = @"Time";
+            cell.titleLabel.text = [self labelStringForDefaultsKey:kWTLAlarmClockDefaultsKey];;
             cell.valueLabel.text = @"8:00PM";
         }
     } else if (indexPath.section == 2) {
@@ -160,11 +179,6 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 
 
 #pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = tableView.backgroundColor;
-}
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
