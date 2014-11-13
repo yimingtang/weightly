@@ -6,8 +6,13 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import CoreData;
+@import Foundation;
 
-@interface WTLWeight : NSObject
+@interface WTLWeight : NSManagedObject
+
+@property (nonatomic) NSNumber *amount;
+@property (nonatomic) NSDate *timeStamp;
+@property (nonatomic) NSString *sectionIdentifier;
 
 @end
