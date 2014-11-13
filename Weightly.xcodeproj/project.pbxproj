@@ -28,6 +28,7 @@
 		20566C501A0F9B040071D05D /* WTLThemeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */; };
 		208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */; };
 		208EA5D11A135FD200AF5084 /* WTLUnitConverterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */; };
+		208EA5D41A14830A00AF5084 /* WTLWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D31A14830A00AF5084 /* WTLWeight.m */; };
 		20D912231A11E89D007AF596 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = 20D912221A11E89D007AF596 /* themes.json */; };
 		20D912251A12087D007AF596 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20D912241A12087D007AF596 /* Settings.bundle */; };
 		3A060596F618E2427750AB0B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451AF153B83AF3AC0D7C3F2B /* libPods.a */; };
@@ -85,6 +86,8 @@
 		208EA5CC1A13509300AF5084 /* WTLUnitConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLUnitConverter.h; sourceTree = "<group>"; };
 		208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverter.m; sourceTree = "<group>"; };
 		208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverterTest.m; sourceTree = "<group>"; };
+		208EA5D21A14830A00AF5084 /* WTLWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLWeight.h; sourceTree = "<group>"; };
+		208EA5D31A14830A00AF5084 /* WTLWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLWeight.m; sourceTree = "<group>"; };
 		20D912221A11E89D007AF596 /* themes.json */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = themes.json; sourceTree = "<group>"; };
 		20D912241A12087D007AF596 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		451AF153B83AF3AC0D7C3F2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +215,8 @@
 		20566C3E1A0DEB640071D05D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				208EA5D21A14830A00AF5084 /* WTLWeight.h */,
+				208EA5D31A14830A00AF5084 /* WTLWeight.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 				20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */,
 				20566C441A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m in Sources */,
 				20566C4D1A0F0C5D0071D05D /* WTLThemesViewController.m in Sources */,
+				208EA5D41A14830A00AF5084 /* WTLWeight.m in Sources */,
 				20566C501A0F9B040071D05D /* WTLThemeCollectionViewCell.m in Sources */,
 				20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */,
 				203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */,
