@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
-@import CoreData;
-@import Foundation;
+#import <SSDataKit/SSManagedObject.h>
 
-@interface WTLWeight : NSManagedObject
+@interface WTLWeight : SSManagedObject
 
 @property (nonatomic) float amount;
 @property (nonatomic) NSDate *timeStamp;

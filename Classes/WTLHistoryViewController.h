@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
-@import UIKit;
+#import <SSDataKit/SSManagedTableViewController.h>
 
-@interface WTLHistoryViewController : UITableViewController
+@interface WTLHistoryViewController : SSManagedTableViewController
 
 @end

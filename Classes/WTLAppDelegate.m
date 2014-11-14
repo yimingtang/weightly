@@ -9,6 +9,7 @@
 #import "WTLAppDelegate.h"
 #import "WTLWeightViewController.h"
 #import "WTLSettingsViewController.h"
+#import "WTLWeight.h"
 
 @implementation WTLAppDelegate
 
@@ -30,6 +31,7 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:weightViewController];
     self.window.rootViewController = navigationController;
     [self registerUserDefaults];
+    [self configureDataStack];
     [self applyStyle];
     [self.window makeKeyAndVisible];
     return YES;
@@ -111,6 +113,38 @@
     if (![versionBuild isEqualToString:[userDefaults stringForKey:@"WTLVersion"]]) {
         [userDefaults setObject:version forKey:@"WTLVersion"];
     }
+}
+
+
+- (void)configureDataStack {
+    NSDictionary *applicationInfo = [[NSBundle mainBundle] infoDictionary];
+    NSString *applicationName = [applicationInfo objectForKey:(NSString *)kCFBundleNameKey];
+    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *url = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite", applicationName]];
+    [SSManagedObject setPersistentStoreURL:url];
+    
+#ifdef DEBUG
+    [SSManagedObject setAutomaticallyResetsPersistentStore:YES];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"WTLHasLaunchOnce"]) {
+        [self prepareTestData];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WTLHasLaunchOnce"];
+    }
+#endif
+}
+
+
+- (void)prepareTestData {
+    NSCalendar *calender = [NSCalendar currentCalendar];
+    NSDate *date = [calender dateBySettingHour:0 minute:0 second:0 ofDate:[NSDate date] options:kNilOptions];
+    
+    WTLWeight *weight = nil;
+    for (NSInteger i = 365; i > 0; i--) {
+        weight = [[WTLWeight alloc] initWithContext:[WTLWeight mainQueueContext]];
+        weight.amount = 63.5f;
+        weight.userGenerated = NO;
+        weight.timeStamp = [calender dateByAddingUnit:NSDayCalendarUnit value:(-i) toDate:date options:kNilOptions];
+    }
+    [[WTLWeight mainQueueContext] save:nil];
 }
 
 @end

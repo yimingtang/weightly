@@ -24,10 +24,15 @@
 @dynamic primitiveTimeStamp;
 @dynamic primitiveSectionIdentifier;
 
-#pragma mark - Class Methods
+#pragma mark - SSManagedObject
 
 + (NSString *)entityName {
     return @"Weight";
+}
+
+
++ (NSArray *)defaultSortDescriptors {
+    return @[[NSSortDescriptor sortDescriptorWithKey:@"timeStamp" ascending:NO]];
 }
 
 
