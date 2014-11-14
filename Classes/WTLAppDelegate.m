@@ -8,7 +8,7 @@
 
 #import "WTLAppDelegate.h"
 #import "WTLWeightViewController.h"
-#import "WTLSettingsViewController.h"
+#import "WTLUserDefaultsDataSource.h"
 #import "WTLWeight.h"
 
 @implementation WTLAppDelegate
@@ -95,9 +95,9 @@
     NSDate *alarmDate = [calendar dateFromComponents:components];
     
     NSDictionary *defaults = @{kWTLHeightDefaultsKey: @170.0f,
-                               kWTLGenderDefaultsKey : @(WTLGenderMale),
+                               kWTLGenderDefaultsKey : @(WTLGenderTypeMale),
                                kWTLGoalDefaultsKey : @60.0f,
-                               kWTLUnitsDefaultsKey : @(WTLUnitsMetric),
+                               kWTLUnitsDefaultsKey : @(WTLUnitsTypeMetric),
                                kWTLThemeDefaultsKey : @"Cinnabar",
                                kWTLReminderDefaultsKey : @NO,
                                kWTLAlarmClockDefaultsKey: alarmDate,

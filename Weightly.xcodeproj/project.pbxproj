@@ -26,6 +26,7 @@
 		20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C491A0E27FC0071D05D /* WTLSectionHeaderView.m */; };
 		20566C4D1A0F0C5D0071D05D /* WTLThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */; };
 		20566C501A0F9B040071D05D /* WTLThemeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */; };
+		205CFFA61A16150B002F26D2 /* WTLUserDefaultsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */; };
 		208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */; };
 		208EA5D11A135FD200AF5084 /* WTLUnitConverterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */; };
 		208EA5D41A14830A00AF5084 /* WTLWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D31A14830A00AF5084 /* WTLWeight.m */; };
@@ -84,6 +85,8 @@
 		20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLThemesViewController.m; sourceTree = "<group>"; };
 		20566C4E1A0F9B040071D05D /* WTLThemeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLThemeCollectionViewCell.h; sourceTree = "<group>"; };
 		20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLThemeCollectionViewCell.m; sourceTree = "<group>"; };
+		205CFFA41A16150B002F26D2 /* WTLUserDefaultsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLUserDefaultsDataSource.h; sourceTree = "<group>"; };
+		205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUserDefaultsDataSource.m; sourceTree = "<group>"; };
 		208EA5CC1A13509300AF5084 /* WTLUnitConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLUnitConverter.h; sourceTree = "<group>"; };
 		208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverter.m; sourceTree = "<group>"; };
 		208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverterTest.m; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 			children = (
 				208EA5D21A14830A00AF5084 /* WTLWeight.h */,
 				208EA5D31A14830A00AF5084 /* WTLWeight.m */,
+				205CFFA41A16150B002F26D2 /* WTLUserDefaultsDataSource.h */,
+				205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				208EA5F71A149EA500AF5084 /* Weightly.xcdatamodeld in Sources */,
 				2035933F1A0A377F0097A1AC /* WTLHistoryViewController.m in Sources */,
 				2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */,
+				205CFFA61A16150B002F26D2 /* WTLUserDefaultsDataSource.m in Sources */,
 				208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */,
 				20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */,
 				20566C441A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m in Sources */,

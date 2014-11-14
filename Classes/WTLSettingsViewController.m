@@ -12,76 +12,16 @@
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
 #import "WTLSegmentedSettingsTableViewCell.h"
-
-NSString *const kWTLHeightDefaultsKey = @"WTLHeight";
-NSString *const kWTLGenderDefaultsKey = @"WTLGender";
-NSString *const kWTLGoalDefaultsKey = @"WTLGoal";
-NSString *const kWTLUnitsDefaultsKey = @"WTLUnits";
-NSString *const kWTLThemeDefaultsKey = @"WTLTheme";
-NSString *const kWTLReminderDefaultsKey = @"WTLReminder";
-NSString *const kWTLAlarmClockDefaultsKey = @"WTLTime";
-
-typedef NS_ENUM(NSUInteger, WTLDefaultsValueType) {
-    WTLDefaultsValueTypeNumber,
-    WTLDefaultsValueTypeTime,
-    WTLDefaultsValueTypeOption,
-    WTLDefaultsValueTypeText,
-};
+#import "WTLUserDefaultsDataSource.h"
 
 @interface WTLSettingsViewController () <UIViewControllerTransitioningDelegate>
-
 @property (nonatomic) NSArray *defaultsKeySections;
-
 @end
 
 @implementation WTLSettingsViewController
 
 static NSString *const cellIdentifier = @"cell";
 static NSString *const segmentedCellIdentifier = @"segmentedCell";
-static NSString *const kWTLDefaultsTitleKey = @"label";
-static NSString *const kWTLDefaultsValueTypeKey = @"type";
-static NSString *const kWTLDefaultsOptionsKey = @"options";
-
-#pragma mark - Class Methods
-
-+ (NSDictionary *)valueMap {
-    static NSDictionary *map = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        map = @{
-                kWTLHeightDefaultsKey: @{kWTLDefaultsTitleKey: @"Height",
-                                         kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeNumber)},
-                kWTLGenderDefaultsKey: @{kWTLDefaultsTitleKey: @"Gender",
-                                         kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeOption),
-                                         kWTLDefaultsOptionsKey: @[@(WTLGenderMale), @(WTLGenderFemale)],
-                                         @(WTLGenderMale): @"Male",
-                                         @(WTLGenderFemale): @"Female"},
-                kWTLGoalDefaultsKey: @{kWTLDefaultsTitleKey: @"Goal",
-                                       kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeNumber)},
-                kWTLUnitsDefaultsKey: @{kWTLDefaultsTitleKey: @"Units",
-                                        kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeOption),
-                                        kWTLDefaultsOptionsKey: @[@(WTLUnitsImperial), @(WTLUnitsMetric)],
-                                        @(WTLUnitsMetric): @"Metric",
-                                        @(WTLUnitsImperial): @"Imperial"},
-                kWTLThemeDefaultsKey: @{kWTLDefaultsTitleKey: @"Theme",
-                                        kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeText)},
-                kWTLReminderDefaultsKey: @{kWTLDefaultsTitleKey: @"Reminder",
-                                           kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeOption),
-                                           kWTLDefaultsOptionsKey: @[@(NO), @(YES)],
-                                           @(NO): @"Off",
-                                           @(YES): @"On"},
-                kWTLAlarmClockDefaultsKey: @{kWTLDefaultsTitleKey: @"Time",
-                                             kWTLDefaultsValueTypeKey: @(WTLDefaultsValueTypeTime)},
-                };
-    });
-    return map;
-}
-
-
-+ (NSDictionary *)infoDictionaryForDefaultsKey:(NSString *)key {
-    return [[self valueMap] objectForKey:key];
-}
-
 
 #pragma mark - Accessors
 
@@ -122,7 +62,7 @@ static NSString *const kWTLDefaultsOptionsKey = @"options";
 
 - (void)done:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [WTLUserDefaultsDataSource saveUserDefaults];
 }
 
 
@@ -141,17 +81,17 @@ static NSString *const kWTLDefaultsOptionsKey = @"options";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForUserDefaultsKey:(NSString *)key atIndexPath:(NSIndexPath *)indexPath {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    id valueObject = [userDefaults objectForKey:key];
+    id valueObject = [WTLUserDefaultsDataSource valueObjectForDefaultsKey:key];
     WTLSettingsTableViewCell *cell;
     
-    NSDictionary *infoDictionary = [[self class] infoDictionaryForDefaultsKey:key];
-    WTLDefaultsValueType valueType = [[infoDictionary objectForKey:kWTLDefaultsValueTypeKey] integerValue];
+    NSDictionary *infoDictionary = [WTLUserDefaultsDataSource infoDictionaryForDefaultsKey:key];
+    WTLDefaultsValueType valueType = [WTLUserDefaultsDataSource valueTypeForDefaultsInfo:infoDictionary];
+    
     if (valueType == WTLDefaultsValueTypeOption) {
         WTLSegmentedSettingsTableViewCell *segmentedCell = [tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
         
         // Configure segmented control
-        NSArray *options = [infoDictionary objectForKey:kWTLDefaultsOptionsKey];
+        NSArray *options = [WTLUserDefaultsDataSource objectForInfoKey:kWTLDefaultsInfoOptionsKey fromDefaultsInfo:infoDictionary];
         __block NSUInteger selectedSegmentIndex;
         
         [options enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -169,9 +109,13 @@ static NSString *const kWTLDefaultsOptionsKey = @"options";
         if (valueType == WTLDefaultsValueTypeText) {
             cell.valueLabel.text = valueObject;
         } else if (valueType == WTLDefaultsValueTypeTime) {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            dateFormatter.dateStyle = NSDateFormatterNoStyle;
-            dateFormatter.timeStyle = NSDateFormatterShortStyle;
+            static NSDateFormatter *dateFormatter;
+            if (!dateFormatter) {
+                dateFormatter = [[NSDateFormatter alloc] init];
+                dateFormatter.dateStyle = NSDateFormatterNoStyle;
+                dateFormatter.timeStyle = NSDateFormatterShortStyle;
+            }
+            
             cell.valueLabel.text = [dateFormatter stringFromDate:valueObject];
         } else if (valueType == WTLDefaultsValueTypeNumber) {
             if ([key isEqualToString:kWTLHeightDefaultsKey]) {
@@ -181,7 +125,7 @@ static NSString *const kWTLDefaultsOptionsKey = @"options";
             }
         }
     }
-    cell.titleLabel.text = [infoDictionary objectForKey:kWTLDefaultsTitleKey];
+    cell.titleLabel.text = [infoDictionary objectForKey:kWTLDefaultsInfoTitleKey];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;
@@ -217,8 +161,9 @@ static NSString *const kWTLDefaultsOptionsKey = @"options";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     NSString *defaultsKey = [self defaultsKeyForRowAtIndexPath:indexPath];
-    NSDictionary *infoDictionary = [[self class] infoDictionaryForDefaultsKey:defaultsKey];
-    WTLDefaultsValueType valueType = [[infoDictionary objectForKey:kWTLDefaultsValueTypeKey] integerValue];
+    NSDictionary *infoDictionary = [WTLUserDefaultsDataSource infoDictionaryForDefaultsKey:defaultsKey];
+    WTLDefaultsValueType valueType = [WTLUserDefaultsDataSource valueTypeForDefaultsInfo:infoDictionary];
+    
     if (valueType == WTLDefaultsValueTypeTime) {
         // TODO: Set time
     } else if (valueType == WTLDefaultsValueTypeText) {
@@ -228,7 +173,7 @@ static NSString *const kWTLDefaultsOptionsKey = @"options";
         }
     } else if (valueType == WTLDefaultsValueTypeNumber) {
         WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
-        inputViewController.initialInput = [NSString stringWithFormat:@"%.1f", [[[NSUserDefaults standardUserDefaults] objectForKey:defaultsKey] floatValue]];
+        inputViewController.initialInput = [NSString stringWithFormat:@"%.1f", [[WTLUserDefaultsDataSource valueObjectForDefaultsKey:defaultsKey] floatValue]];
         if ([defaultsKey isEqualToString:kWTLHeightDefaultsKey]) {
             inputViewController.unitString = @"CM";
         } else if ([defaultsKey isEqualToString:kWTLGoalDefaultsKey]) {

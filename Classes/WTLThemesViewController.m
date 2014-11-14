@@ -7,7 +7,7 @@
 //
 
 #import "WTLThemesViewController.h"
-#import "WTLSettingsViewController.h"
+#import "WTLUserDefaultsDataSource.h"
 #import "WTLThemeCollectionViewCell.h"
 #import <SAMCategories/UIColor+SAMAdditions.h>
 
