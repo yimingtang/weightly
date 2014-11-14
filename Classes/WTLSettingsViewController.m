@@ -12,6 +12,7 @@
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
 #import "WTLSegmentedSettingsTableViewCell.h"
+#import "WTLSegmentedControl.h"
 #import "WTLUserDefaultsDataSource.h"
 
 @interface WTLSettingsViewController () <UIViewControllerTransitioningDelegate>
@@ -66,8 +67,14 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 }
 
 
-- (void)segmentedControlValueChanged:(UISegmentedControl *)sender {
-
+- (void)segmentedControlValueChanged:(WTLSegmentedControl *)segmentedControl {
+    // I refuse to use tag because I have to define some constants
+    // When the number of controls grows, so does that of tags.
+    UITableViewCell *cell = segmentedControl.cell;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSString *key = [self defaultsKeyForRowAtIndexPath:indexPath];
+    NSArray *options = [WTLUserDefaultsDataSource objectForInfoKey:kWTLDefaultsInfoOptionsKey fromDefaultsInfoWithDefaultsKey:key];
+    [WTLUserDefaultsDataSource setValueObject:[options objectAtIndex:segmentedControl.selectedSegmentIndex] forDefaultsKey:key];
 }
 
 
@@ -93,7 +100,6 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
         // Configure segmented control
         NSArray *options = [WTLUserDefaultsDataSource objectForInfoKey:kWTLDefaultsInfoOptionsKey fromDefaultsInfo:infoDictionary];
         __block NSUInteger selectedSegmentIndex;
-        
         [options enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [segmentedCell.segmentedControl insertSegmentWithTitle:[infoDictionary objectForKey:obj] atIndex:idx animated:NO];
             if ([valueObject isEqual:obj]) {
@@ -101,6 +107,7 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
             }
         }];
         segmentedCell.segmentedControl.selectedSegmentIndex = selectedSegmentIndex;
+        [segmentedCell.segmentedControl addTarget:self action:@selector(segmentedControlValueChanged:) forControlEvents:UIControlEventValueChanged];
         
         cell = segmentedCell;
     } else {

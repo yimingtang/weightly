@@ -51,6 +51,7 @@ typedef NS_ENUM(NSUInteger, WTLDefaultsValueType) {
 + (WTLDefaultsValueType)valueTypeForDefaultsKey:(NSString *)key;
 
 + (id)valueObjectForDefaultsKey:(NSString *)key;
++ (void)setValueObject:(id)object forDefaultsKey:(NSString *)key;
 
 
 #pragma mark - Manipulation

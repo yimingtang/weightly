@@ -8,8 +8,10 @@
 
 #import "WTLSettingsTableViewCell.h"
 
+@class WTLSegmentedControl;
+
 @interface WTLSegmentedSettingsTableViewCell : WTLSettingsTableViewCell
 
-@property (nonatomic, readonly) UISegmentedControl *segmentedControl;
+@property (nonatomic, readonly) WTLSegmentedControl *segmentedControl;
 
 @end

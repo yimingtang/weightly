@@ -91,6 +91,11 @@ NSString *const kWTLDefaultsInfoOptionsKey = @"options";
 }
 
 
++ (void)setValueObject:(id)object forDefaultsKey:(NSString *)key {
+    [[NSUserDefaults standardUserDefaults] setObject:object forKey:key];
+}
+
+
 #pragma mark - Manipulation
 
 + (void)saveUserDefaults {

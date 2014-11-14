@@ -7,6 +7,7 @@
 //
 
 #import "WTLSegmentedSettingsTableViewCell.h"
+#import "WTLSegmentedControl.h"
 #import <Masonry.h>
 
 @implementation WTLSegmentedSettingsTableViewCell
@@ -15,17 +16,10 @@
 
 @synthesize segmentedControl = _segmentedControl;
 
-- (UISegmentedControl *)segmentedControl {
+- (WTLSegmentedControl *)segmentedControl {
     if (!_segmentedControl) {
-        _segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
-        // Remove borders and highlighted background
-        [_segmentedControl setTintColor:[UIColor clearColor]];
-        [_segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithWhite:1.0f alpha:0.5f],
-                                                    NSFontAttributeName : [UIFont fontWithName:@"Avenir-Light" size:kWTLSettingsTableViewCellFontSize]
-                                                    }
-                                         forState:UIControlStateNormal];
-        [_segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}
-                                         forState:UIControlStateSelected];
+        _segmentedControl = [[WTLSegmentedControl alloc] initWithFrame:CGRectZero];
+        _segmentedControl.cell = self;
     }
     return _segmentedControl;
 }
