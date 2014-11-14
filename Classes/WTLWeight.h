@@ -11,8 +11,9 @@
 
 @interface WTLWeight : NSManagedObject
 
-@property (nonatomic) NSNumber *amount;
+@property (nonatomic) float amount;
 @property (nonatomic) NSDate *timeStamp;
 @property (nonatomic) NSString *sectionIdentifier;
+@property (nonatomic) BOOL userGenerated;
 
 @end

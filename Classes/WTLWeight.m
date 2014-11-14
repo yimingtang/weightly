@@ -19,9 +19,19 @@
 
 @dynamic amount;
 @dynamic timeStamp;
-@dynamic primitiveTimeStamp;
+@dynamic userGenerated;
 @dynamic sectionIdentifier;
+@dynamic primitiveTimeStamp;
 @dynamic primitiveSectionIdentifier;
+
+#pragma mark - Class Methods
+
++ (NSString *)entityName {
+    return @"Weight";
+}
+
+
+#pragma mark - Accessors
 
 - (NSString *)sectionIdentifier {
     // Create and cache the section identifier on demand.
