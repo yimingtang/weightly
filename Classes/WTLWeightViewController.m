@@ -199,6 +199,8 @@
     // This will replace the attribute if it exists
     [mutableAttributedString addAttributes:[[self class] unitLabelAttributes] range:NSMakeRange(4, 2)];
     self.weightLabel.attributedText = mutableAttributedString;
+    self.segmentedControl.selectedSegmentIndex = WTLLineGraphTimePeriodOneWeek;
+    self.lineGraphModelController.timePeriod = WTLLineGraphTimePeriodOneWeek;
 }
 
 
@@ -220,7 +222,7 @@
 
 
 - (void)showHistory:(id)sender {
-    WTLHistoryViewController *viewController = [[WTLHistoryViewController alloc] initWithStyle:UITableViewStylePlain];
+    WTLHistoryViewController *viewController = [[WTLHistoryViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

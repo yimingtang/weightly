@@ -122,9 +122,10 @@
     NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     NSURL *url = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite", applicationName]];
     [SSManagedObject setPersistentStoreURL:url];
-    
+    [SSManagedObject mainQueueContext];
 #ifdef DEBUG
     [SSManagedObject setAutomaticallyResetsPersistentStore:YES];
+    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"WTLHasLaunchOnce"]) {
         [self prepareTestData];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WTLHasLaunchOnce"];
@@ -137,10 +138,15 @@
     NSCalendar *calender = [NSCalendar currentCalendar];
     NSDate *date = [calender dateBySettingHour:0 minute:0 second:0 ofDate:[NSDate date] options:kNilOptions];
     
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        srand48(time(0));
+    });
+    
     WTLWeight *weight = nil;
     for (NSInteger i = 365; i > 0; i--) {
         weight = [[WTLWeight alloc] initWithContext:[WTLWeight mainQueueContext]];
-        weight.amount = 63.5f;
+        weight.amount = 60 + 5 * drand48();
         weight.userGenerated = NO;
         weight.timeStamp = [calender dateByAddingUnit:NSDayCalendarUnit value:(-i) toDate:date options:kNilOptions];
     }
