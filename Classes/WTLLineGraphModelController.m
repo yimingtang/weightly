@@ -52,9 +52,10 @@
 
 - (instancetype)init {
     if ((self = [super init])) {
-        _useChangeAnimations = NO;
+        _useChangeAnimations = YES;
         _timePeriod = WTLLineGraphTimePeriodOneWeek;
         _mutableDataArray = [NSMutableArray arrayWithCapacity:365/7];
+        _ignoreChange = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextWillReset:) name:kSSManagedObjectWillResetNotificationName object:nil];
     }
     return self;
@@ -82,6 +83,37 @@
     fetchRequest.fetchLimit = 365; // Only fetch one year of records
     fetchRequest.returnsObjectsAsFaults = NO;
     return fetchRequest;
+}
+
+
+#pragma mark - Public
+
+- (void)reloadData {
+    NSUInteger sampleSize = [self sampleSizeForTimePeriod:self.timePeriod];
+    NSUInteger totalNumber = [self numberOfDaysForTimePeriod:self.timePeriod];
+    NSArray *fetchedObjects = self.fetchedResultsController.fetchedObjects;
+    // Should validate
+    if (fetchedObjects.count < totalNumber) {
+        totalNumber = fetchedObjects.count;
+    }
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(fetchedObjects.count - totalNumber, totalNumber)];
+    
+    [self.mutableDataArray removeAllObjects];
+    __block CGFloat tmp = 0;
+    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:kNilOptions usingBlock:^(WTLWeight *weight, NSUInteger idx, BOOL *stop) {
+        tmp += weight.amount;
+        if ((idx + 1) % sampleSize == 0) {
+            [self.mutableDataArray addObject:@(tmp / sampleSize)];
+            tmp = 0;
+        } else if (idx == totalNumber - 1){
+            [self.mutableDataArray addObject:@(tmp / ((idx + 1) % sampleSize))];
+        }
+    }];
+}
+
+
+- (WTLWeight *)latestWeight {
+    return self.fetchedResultsController.fetchedObjects.lastObject;
 }
 
 
@@ -127,22 +159,7 @@
 
 - (void)setTimePeriod:(WTLLineGraphTimePeriod)timePeriod {
     _timePeriod = timePeriod;
-    
-    NSUInteger sampleSize = [self sampleSizeForTimePeriod:timePeriod];
-    NSUInteger totalNumber = [self numberOfDaysForTimePeriod:timePeriod];
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, totalNumber)];
-    
-    [self.mutableDataArray removeAllObjects];
-    __block CGFloat tmp = 0;
-    [self.fetchedResultsController.fetchedObjects enumerateObjectsAtIndexes:indexSet options:kNilOptions usingBlock:^(WTLWeight *weight, NSUInteger idx, BOOL *stop) {
-        tmp += weight.amount;
-        if ((idx + 1) % sampleSize == 0) {
-            [self.mutableDataArray addObject:@(tmp / sampleSize)];
-            tmp = 0;
-        } else if (idx == totalNumber - 1){
-            [self.mutableDataArray addObject:@(tmp / ((idx + 1) % sampleSize))];
-        }
-    }];
+    [self reloadData];
 }
 
 
@@ -165,8 +182,40 @@
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    if (self.ignoreChange) {
+        return;
+    }
+    // TODO:
+}
 
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    if (self.ignoreChange) {
+        return;
+    }
+    // TODO:
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    if (self.ignoreChange) {
+        return;
+    }
+    // TODO:
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if (self.ignoreChange) {
+        return;
+    }
+    
+    // Reload data
+    [self reloadData];
+    if ([self.delegate respondsToSelector:@selector(modelControllerDidReloadData:)]) {
+        [self.delegate modelControllerDidReloadData:self];
+    }
 }
 
 @end

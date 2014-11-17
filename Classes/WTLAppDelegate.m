@@ -44,7 +44,7 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    
+    [[SSManagedObject mainQueueContext] save:nil];
 }
 
 
@@ -59,7 +59,7 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    
+    [[SSManagedObject mainQueueContext] save:nil];
 }
 
 

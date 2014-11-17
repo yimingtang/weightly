@@ -5,7 +5,8 @@
 //  Created by Yiming Tang on 10/27/14.
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
-
+#import <BEMSimpleLineGraphView.h>
+#import <Masonry.h>
 #import "WTLWeightViewController.h"
 #import "WTLLineGraphModelController.h"
 #import "WTLInputViewController.h"
@@ -13,10 +14,9 @@
 #import "WTLHistoryViewController.h"
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
-#import <BEMSimpleLineGraphView.h>
-#import <Masonry.h>
+#import "WTLWeight.h"
 
-@interface WTLWeightViewController () <UIViewControllerTransitioningDelegate>
+@interface WTLWeightViewController () <UIViewControllerTransitioningDelegate, WTLInputViewControllerDelegate, WTLLineGraphModelControllerDelegate>
 
 @property (nonatomic, readonly) WTLLineGraphModelController *lineGraphModelController;
 
@@ -61,6 +61,7 @@
 - (WTLLineGraphModelController *)lineGraphModelController {
     if (!_lineGraphModelController) {
         _lineGraphModelController = [[WTLLineGraphModelController alloc] init];
+        _lineGraphModelController.delegate = self;
     }
     return _lineGraphModelController;
 }
@@ -119,13 +120,13 @@
 - (BEMSimpleLineGraphView *)lineGraphView {
     if (!_lineGraphView) {
         _lineGraphView = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(0, 60, 320, 250)];
-        _lineGraphView.delegate = self;
         _lineGraphView.dataSource = self.lineGraphModelController;
         _lineGraphView.colorTop = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
         _lineGraphView.colorBottom = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
         _lineGraphView.colorLine = [UIColor whiteColor];
         _lineGraphView.widthLine = 2.0;
         _lineGraphView.enableTouchReport = YES;
+        _lineGraphView.enablePopUpReport = YES;
         _lineGraphView.enableBezierCurve = YES;
         _lineGraphView.animationGraphStyle = BEMLineAnimationDraw;
     }
@@ -139,6 +140,23 @@
         [_segmentedControl addTarget:self action:@selector(updateLineChart:) forControlEvents:UIControlEventValueChanged];
     }
     return _segmentedControl;
+}
+
+
+- (void)setWeight:(WTLWeight *)weight {
+    void *context = (__bridge void *)self;
+    if (_weight) {
+        [_weight removeObserver:self forKeyPath:@"amount" context:context];
+    }
+    
+    _weight = weight;
+    
+    if (!_weight) {
+        return;
+    }
+    
+    [_weight addObserver:self forKeyPath:@"amount" options:NSKeyValueObservingOptionNew context:context];
+    [self updateWeightLabelStringWithAmount:_weight.amount];
 }
 
 
@@ -195,10 +213,7 @@
         make.height.lessThanOrEqualTo(@90.0f);
     }];
     
-    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:@"65.4KG" attributes:[[self class] weightLabelAttributes]];
-    // This will replace the attribute if it exists
-    [mutableAttributedString addAttributes:[[self class] unitLabelAttributes] range:NSMakeRange(4, 2)];
-    self.weightLabel.attributedText = mutableAttributedString;
+    self.weight = [self.lineGraphModelController latestWeight];
     self.segmentedControl.selectedSegmentIndex = WTLLineGraphTimePeriodOneWeek;
     self.lineGraphModelController.timePeriod = WTLLineGraphTimePeriodOneWeek;
 }
@@ -230,9 +245,10 @@
 - (void)showWeightInput:(id)sender {
     WTLInputViewController *viewController = [[WTLInputViewController alloc] init];
     viewController.unitString = @"KG";
-    viewController.initialInput = @"65.3";
+    viewController.initialInput = [NSString stringWithFormat:@"%.1f", self.weight.amount];
     viewController.modalPresentationStyle = UIModalPresentationCustom;
     viewController.transitioningDelegate = self;
+    viewController.delegate = self;
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
@@ -256,6 +272,14 @@
 
 
 #pragma mark - Private
+
+- (void)updateWeightLabelStringWithAmount:(CGFloat)amount {
+    NSString *weightString = [NSString stringWithFormat:@"%.1fKG", amount];
+    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:weightString attributes:[[self class] weightLabelAttributes]];
+    [mutableAttributedString addAttributes:[[self class] unitLabelAttributes] range:NSMakeRange(weightString.length - 2, 2)];
+    self.weightLabel.attributedText = mutableAttributedString;
+}
+
 
 - (void)hideControls:(BOOL)animated {
     void (^change)(void) = ^{
@@ -301,7 +325,41 @@
 }
 
 
-#pragma mark - BEMSimpleLineGraphDelegate
+#pragma mark - WTLInputViewControllerDelegate
 
+- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result {
+    // TODO: Should validate the value
+    self.weight.amount = [result floatValue];
+    [self.weight.managedObjectContext save:nil];
+}
+
+
+#pragma mark - WTLLineGraphModelControllerDelegate
+
+- (void)modelControllerDidReloadData:(WTLLineGraphModelController *)controller {
+    WTLLineGraphTimePeriod timePeriod = controller.timePeriod;
+    if (timePeriod == self.segmentedControl.selectedSegmentIndex) {
+        [self.lineGraphView reloadGraph];
+    }
+}
+
+
+- (void)modelController:(WTLLineGraphModelController *)controller didChangeLatestWeightObject:(WTLWeight *)weight {
+    self.weight = weight;
+}
+
+
+#pragma mark - NSKeyValueObserving
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (context != (__bridge void *)self) {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        return;
+    }
+    
+    if ([keyPath isEqualToString:@"amount"]) {
+        [self updateWeightLabelStringWithAmount:[[change objectForKey:NSKeyValueChangeNewKey] floatValue]];
+    }
+}
 
 @end

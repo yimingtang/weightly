@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
-#import <BEMSimpleLineGraphView.h>
 
-@interface WTLWeightViewController : UIViewController <BEMSimpleLineGraphDelegate>
+@class WTLWeight;
+@class BEMSimpleLineGraphView;
+
+@interface WTLWeightViewController : UIViewController
 
 @property (nonatomic, readonly) UIButton *settingsButton;
 @property (nonatomic, readonly) UILabel *weightLabel;
@@ -16,6 +18,8 @@
 @property (nonatomic, readonly) UIButton *historyButton;
 @property (nonatomic, readonly) BEMSimpleLineGraphView *lineGraphView;
 @property (nonatomic, readonly) UISegmentedControl *segmentedControl;
+@property (nonatomic) WTLWeight *weight;
+
 
 - (void)updateLineChart:(id)sender;
 - (void)hideOrShowControls:(id)sender;
