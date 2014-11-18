@@ -127,7 +127,7 @@
         _lineGraphView.widthLine = 2.0;
         _lineGraphView.enableTouchReport = YES;
         _lineGraphView.enablePopUpReport = YES;
-        _lineGraphView.enableBezierCurve = YES;
+        _lineGraphView.enableBezierCurve = NO;
         _lineGraphView.animationGraphStyle = BEMLineAnimationDraw;
     }
     return _lineGraphView;
