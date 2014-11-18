@@ -97,23 +97,26 @@
 
 - (void)reloadData {
     NSUInteger sampleSize = [self sampleSizeForTimePeriod:self.timePeriod];
-    NSUInteger totalNumber = [self numberOfDaysForTimePeriod:self.timePeriod];
+    NSUInteger totalCount = [self numberOfDaysForTimePeriod:self.timePeriod];
     NSArray *fetchedObjects = self.fetchedResultsController.fetchedObjects;
     // Should validate
-    if (fetchedObjects.count < totalNumber) {
-        totalNumber = fetchedObjects.count;
+    if (fetchedObjects.count < totalCount) {
+        totalCount = fetchedObjects.count;
     }
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(fetchedObjects.count - totalNumber, totalNumber)];
+    NSInteger baseIndex = fetchedObjects.count - totalCount;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(baseIndex, totalCount)];
     
     [self.mutableDataArray removeAllObjects];
     __block CGFloat tmp = 0;
-    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:kNilOptions usingBlock:^(WTLWeight *weight, NSUInteger idx, BOOL *stop) {
+    __block NSUInteger relativeIndex = 0;
+    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:kNilOptions usingBlock:^(WTLWeight *weight, NSUInteger index, BOOL *stop) {
         tmp += weight.amount;
-        if ((idx + 1) % sampleSize == 0) {
+        relativeIndex = index - baseIndex;
+        if ((relativeIndex + 1) % sampleSize == 0) {
             [self.mutableDataArray addObject:@(tmp / sampleSize)];
             tmp = 0;
-        } else if (idx == totalNumber - 1){
-            [self.mutableDataArray addObject:@(tmp / ((idx + 1) % sampleSize))];
+        } else if (relativeIndex == totalCount - 1){
+            [self.mutableDataArray addObject:@(tmp / ((relativeIndex + 1) % sampleSize))];
         }
     }];
     
