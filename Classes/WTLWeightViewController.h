@@ -21,7 +21,7 @@
 @property (nonatomic) WTLWeight *weight;
 
 
-- (void)updateLineChart:(id)sender;
+- (void)segmentedControlDidChange:(id)sender;
 - (void)hideOrShowControls:(id)sender;
 - (void)showHistory:(id)sender;
 - (void)showWeightInput:(id)sender;

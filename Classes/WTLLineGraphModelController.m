@@ -43,6 +43,13 @@
 }
 
 
+- (void)setTimePeriod:(WTLLineGraphTimePeriod)timePeriod {
+    _timePeriod = timePeriod;
+    self.useChangeAnimations = YES;
+    [self reloadData];
+}
+
+
 #pragma mark - NSObject
 
 - (void)dealloc {
@@ -52,25 +59,25 @@
 
 - (instancetype)init {
     if ((self = [super init])) {
-        _useChangeAnimations = YES;
         _timePeriod = WTLLineGraphTimePeriodOneWeek;
-        _mutableDataArray = [NSMutableArray arrayWithCapacity:365/7];
         _ignoreChange = NO;
+        _mutableDataArray = [NSMutableArray arrayWithCapacity:365/7];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextWillReset:) name:kSSManagedObjectWillResetNotificationName object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextWillReset:) name:kSSManagedObjectWillResetNotificationName object:nil];
     }
     return self;
 }
 
 
-#pragma mark - Classbacks
+#pragma mark - Callbacks
 
 - (void)willCreateFetchedResultsController {
-    
+    // Subclasses may override this method
 }
 
 
 - (void)didCreateFetchedResultsController {
-    
+    // Subclasses may override this method
 }
 
 
@@ -109,6 +116,10 @@
             [self.mutableDataArray addObject:@(tmp / ((idx + 1) % sampleSize))];
         }
     }];
+    
+    if ([self.delegate respondsToSelector:@selector(modelControllerDidReloadData:)]) {
+        [self.delegate modelControllerDidReloadData:self];
+    }
 }
 
 
@@ -157,12 +168,6 @@
 }
 
 
-- (void)setTimePeriod:(WTLLineGraphTimePeriod)timePeriod {
-    _timePeriod = timePeriod;
-    [self reloadData];
-}
-
-
 - (void)managedObjectContextWillReset:(NSNotification *)notification {
     self.fetchedResultsController = nil;
 }
@@ -182,19 +187,29 @@
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    if (self.ignoreChange) {
-        return;
-    }
-    // TODO:
-}
-
-
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     if (self.ignoreChange) {
         return;
     }
-    // TODO:
+    
+    // Reload data if necessary
+    // We only care about objects in selected time period
+    NSUInteger numberOfDays = [self numberOfDaysForTimePeriod:self.timePeriod];
+    NSUInteger lowerBound = controller.fetchedObjects.count - numberOfDays;
+    if (indexPath.row < lowerBound && newIndexPath.row < lowerBound) {
+        return;
+    }
+    
+    if (type == NSFetchedResultsChangeInsert) {
+        if (newIndexPath.row == controller.fetchedObjects.count - 1) {
+            if ([self.delegate respondsToSelector:@selector(modelController:didChangeLatestWeightObject:)]) {
+                [self.delegate modelController:self didChangeLatestWeightObject:anObject];
+            }
+        }
+    }
+    NSLog(@"Did Change Object: %@ type:%ld, index: %@, newIndex: %@", anObject, type, indexPath, newIndexPath);
+    self.useChangeAnimations = NO;
+    [self reloadData];
 }
 
 
@@ -202,20 +217,9 @@
     if (self.ignoreChange) {
         return;
     }
-    // TODO:
-}
-
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if (self.ignoreChange) {
-        return;
-    }
-    
-    // Reload data
+    NSLog(@"Did Change Section: %@, type: %ld, index: %ld", sectionInfo, type, sectionIndex);
+    self.useChangeAnimations = NO;
     [self reloadData];
-    if ([self.delegate respondsToSelector:@selector(modelControllerDidReloadData:)]) {
-        [self.delegate modelControllerDidReloadData:self];
-    }
 }
 
 @end

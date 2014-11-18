@@ -137,7 +137,7 @@
 - (UISegmentedControl *)segmentedControl {
     if (!_segmentedControl) {
         _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"7 days", @"1 month", @"3 months", @"1 year"]];
-        [_segmentedControl addTarget:self action:@selector(updateLineChart:) forControlEvents:UIControlEventValueChanged];
+        [_segmentedControl addTarget:self action:@selector(segmentedControlDidChange:) forControlEvents:UIControlEventValueChanged];
     }
     return _segmentedControl;
 }
@@ -221,9 +221,8 @@
 
 #pragma mark - Actions
 
-- (void)updateLineChart:(id)sender {
+- (void)segmentedControlDidChange:(id)sender {
     self.lineGraphModelController.timePeriod = self.segmentedControl.selectedSegmentIndex;
-    [self.lineGraphView reloadGraph];
 }
 
 
@@ -329,7 +328,12 @@
 
 - (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result {
     // TODO: Should validate the value
-    self.weight.amount = [result floatValue];
+    CGFloat newAmount = [result floatValue];
+    if (self.weight.amount == newAmount) {
+        return;
+    }
+    
+    self.weight.amount = newAmount;
     [self.weight.managedObjectContext save:nil];
 }
 
@@ -337,10 +341,8 @@
 #pragma mark - WTLLineGraphModelControllerDelegate
 
 - (void)modelControllerDidReloadData:(WTLLineGraphModelController *)controller {
-    WTLLineGraphTimePeriod timePeriod = controller.timePeriod;
-    if (timePeriod == self.segmentedControl.selectedSegmentIndex) {
-        [self.lineGraphView reloadGraph];
-    }
+    self.lineGraphView.animationGraphEntranceTime = controller.useChangeAnimations ? 1.5 : 0;
+    [self.lineGraphView reloadGraph];
 }
 
 

@@ -20,9 +20,9 @@ typedef NS_ENUM(NSUInteger, WTLLineGraphTimePeriod) {
 
 @interface WTLLineGraphModelController : NSObject <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
-@property (nonatomic) WTLLineGraphTimePeriod timePeriod;
 @property (nonatomic) BOOL ignoreChange;
 @property (nonatomic) BOOL useChangeAnimations;
+@property (nonatomic) WTLLineGraphTimePeriod timePeriod;
 @property (nonatomic, weak) id<WTLLineGraphModelControllerDelegate> delegate;
 
 - (void)reloadData;
