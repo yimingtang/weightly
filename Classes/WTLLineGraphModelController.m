@@ -13,6 +13,8 @@
 
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic) NSMutableArray *mutableDataArray;
+@property (nonatomic) BOOL didChangeLatestWeight;
+@property (nonatomic) BOOL shouldReloadData;
 
 @end
 
@@ -203,16 +205,12 @@
         return;
     }
     
-    if (type == NSFetchedResultsChangeInsert) {
-        if (newIndexPath.row == controller.fetchedObjects.count - 1) {
-            if ([self.delegate respondsToSelector:@selector(modelController:didChangeLatestWeightObject:)]) {
-                [self.delegate modelController:self didChangeLatestWeightObject:anObject];
-            }
-        }
+    if (type == NSFetchedResultsChangeInsert && newIndexPath.row == controller.fetchedObjects.count - 1) {
+        self.didChangeLatestWeight = YES;
     }
+    self.shouldReloadData = YES;
+    
     NSLog(@"Did Change Object: %@ type:%ld, index: %@, newIndex: %@", anObject, type, indexPath, newIndexPath);
-    self.useChangeAnimations = NO;
-    [self reloadData];
 }
 
 
@@ -220,9 +218,25 @@
     if (self.ignoreChange) {
         return;
     }
+    self.shouldReloadData = YES;
+    
     NSLog(@"Did Change Section: %@, type: %ld, index: %ld", sectionInfo, type, sectionIndex);
-    self.useChangeAnimations = NO;
-    [self reloadData];
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if (self.didChangeLatestWeight) {
+        if ([self.delegate respondsToSelector:@selector(modelController:didChangeLatestWeightObject:)]) {
+            [self.delegate modelController:self didChangeLatestWeightObject:[self latestWeight]];
+        }
+        self.didChangeLatestWeight = NO;
+    }
+    
+    if (self.shouldReloadData) {
+        self.useChangeAnimations = NO;
+        [self reloadData];
+        self.shouldReloadData = NO;
+    }
 }
 
 @end
