@@ -34,6 +34,8 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
     self.navigationItem.title = @"All Records";
     
+    self.useChangeAnimations = NO;
+    
     self.tableView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     self.tableView.rowHeight = 50.0f;
     self.tableView.sectionHeaderHeight = 45.0f;
@@ -204,7 +206,6 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
         obj.amount = weight.amount + offset * (idx + 1);
     }];
     
-    
     NSPredicate *higherPredicate = [NSPredicate predicateWithFormat:@"timeStamp > %@", weight.timeStamp];
     NSArray *higherObjects = [allObjects filteredArrayUsingPredicate:higherPredicate];
     
@@ -241,6 +242,5 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     return [[WTLDismissInputTransition alloc] init];
 }
-
 
 @end
