@@ -341,14 +341,13 @@
 #pragma mark - WTLInputViewControllerDelegate
 
 - (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result {
-    // TODO: Should validate the value
     CGFloat newAmount = [result floatValue];
     if (self.weight.amount == newAmount) {
         return;
     }
     
     self.weight.amount = newAmount;
-    [self.weight.managedObjectContext save:nil];
+    self.weight.userGenerated = YES;
 }
 
 

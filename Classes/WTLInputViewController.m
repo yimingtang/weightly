@@ -76,10 +76,10 @@
 #pragma mark - Actions
 
 - (void)save:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
     if ([self.delegate respondsToSelector:@selector(inputViewController:didFinishEditingWithResult:)]) {
         [self.delegate inputViewController:self didFinishEditingWithResult:self.textField.text];
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

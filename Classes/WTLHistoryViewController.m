@@ -88,7 +88,7 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.dateLabel.text = [dateFormatter stringFromDate:weight.timeStamp];
     cell.titleLabel.text = [NSString stringWithFormat:@"%.1fkg", weight.amount];
-    cell.minor = weight.userGenerated;
+    cell.minor = !weight.userGenerated;
 }
 
 
@@ -176,6 +176,58 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     }
     
     weight.amount = newAmount;
+    weight.userGenerated = YES;
+    
+    NSArray *allObjects = self.fetchedResultsController.fetchedObjects;
+    
+    NSPredicate *lowerPredicate = [NSPredicate predicateWithFormat:@"timeStamp < %@", weight.timeStamp];
+    NSArray *lowerObjects = [allObjects filteredArrayUsingPredicate:lowerPredicate];
+    __block NSUInteger lowerBound = lowerObjects.count;
+    [lowerObjects enumerateObjectsUsingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
+        if (obj.userGenerated) {
+            lowerBound = idx;
+            *stop = YES;
+        }
+    }];
+    
+    CGFloat offset = 0;
+    if (lowerBound == lowerObjects.count) {
+        offset = 0;
+        lowerBound = lowerObjects.count - 1;
+    } else {
+        WTLWeight *lowerBoundWeight = [lowerObjects objectAtIndex:lowerBound];
+        offset = (lowerBoundWeight.amount - weight.amount) / (lowerBound + 1);
+    }
+    
+    self.ignoreChange = YES;
+    [lowerObjects enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, lowerBound + 1)] options:kNilOptions usingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
+        obj.amount = weight.amount + offset * (idx + 1);
+    }];
+    
+    
+    NSPredicate *higherPredicate = [NSPredicate predicateWithFormat:@"timeStamp > %@", weight.timeStamp];
+    NSArray *higherObjects = [allObjects filteredArrayUsingPredicate:higherPredicate];
+    
+    __block NSUInteger higherBound = -1;
+    [higherObjects enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
+        if (obj.userGenerated) {
+            higherBound = idx;
+            *stop = YES;
+        }
+    }];
+    
+    if (higherBound == -1) {
+        offset = 0;
+        higherBound = 0;
+    } else {
+        WTLWeight *higherBoundWeight = [higherObjects objectAtIndex:higherBound];
+        offset = (higherBoundWeight.amount - weight.amount) / (higherObjects.count - higherBound);
+    }
+    
+    [higherObjects enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(higherBound, higherObjects.count - higherBound)] options:kNilOptions usingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
+        obj.amount = weight.amount + offset * (higherObjects.count - idx);
+    }];
+    self.ignoreChange = NO;
 }
 
 
