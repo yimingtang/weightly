@@ -7,9 +7,18 @@
 //
 
 #import "WTLHistoryViewController.h"
+#import "WTLInputViewController.h"
 #import "WTLWeightTableViewCell.h"
 #import "WTLSectionHeaderView.h"
+#import "WTLPresentInputTransition.h"
+#import "WTLDismissInputTransition.h"
 #import "WTLWeight.h"
+
+@interface WTLHistoryViewController () <UIViewControllerTransitioningDelegate, WTLInputViewControllerDelegate>
+
+@property (nonatomic) NSIndexPath *selectedIndexPath;
+
+@end
 
 @implementation WTLHistoryViewController
 
@@ -76,8 +85,10 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     });
     
     WTLWeight *weight = [self objectForViewIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.dateLabel.text = [dateFormatter stringFromDate:weight.timeStamp];
     cell.titleLabel.text = [NSString stringWithFormat:@"%.1fkg", weight.amount];
+    cell.minor = weight.userGenerated;
 }
 
 
@@ -92,14 +103,15 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    static NSDateFormatter *dateFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setCalendar:[NSCalendar currentCalendar]];
+        NSString *formatTemplate = [NSDateFormatter dateFormatFromTemplate:@"MMMM YYYY" options:kNilOptions locale:[NSLocale currentLocale]];
+        [dateFormatter setDateFormat:formatTemplate];
+    });
     
-    static NSDateFormatter *formatter = nil;
-    if (!formatter) {
-        formatter = [[NSDateFormatter alloc] init];
-        [formatter setCalendar:[NSCalendar currentCalendar]];
-        NSString *formatTemplate = [NSDateFormatter dateFormatFromTemplate:@"MMMM YYYY" options:0 locale:[NSLocale currentLocale]];
-        [formatter setDateFormat:formatTemplate];
-    }
     NSInteger numericSection = [[sectionInfo name] integerValue];
     NSInteger year = numericSection / 1000;
     NSInteger month = numericSection - (year * 1000);
@@ -109,7 +121,7 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     dateComponents.month = month;
     NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
     
-    NSString *titleString = [formatter stringFromDate:date];
+    NSString *titleString = [dateFormatter stringFromDate:date];
     
     WTLSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"sectionHeader"];
     headerView.titleLabel.text = [titleString uppercaseString];
@@ -135,5 +147,48 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     return nil;
 }
+
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    self.selectedIndexPath = indexPath;
+    WTLWeight *weight = [self objectForViewIndexPath:indexPath];
+    WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
+    inputViewController.initialInput = [NSString stringWithFormat:@"%.1f", weight.amount];
+    inputViewController.unitString = @"KG";
+    inputViewController.modalPresentationStyle = UIModalPresentationCustom;
+    inputViewController.transitioningDelegate = self;
+    inputViewController.delegate = self;
+    [self presentViewController:inputViewController animated:YES completion:nil];
+}
+
+
+#pragma mark - WTLInputViewControllerDelegate
+
+- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result {
+    WTLWeight *weight = [self objectForViewIndexPath:self.selectedIndexPath];
+    CGFloat newAmount = [result floatValue];
+    if (weight.amount == newAmount) {
+        return;
+    }
+    
+    weight.amount = newAmount;
+}
+
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return [[WTLPresentInputTransition alloc] init];
+}
+
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    return [[WTLDismissInputTransition alloc] init];
+}
+
 
 @end

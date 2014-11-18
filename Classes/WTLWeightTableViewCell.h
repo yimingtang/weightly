@@ -12,5 +12,6 @@
 
 @property (nonatomic, readonly) UILabel *dateLabel;
 @property (nonatomic, readonly) UILabel *titleLabel;
+@property (nonatomic) BOOL minor;
 
 @end

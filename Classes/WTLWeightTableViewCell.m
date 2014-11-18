@@ -59,10 +59,17 @@
         _circleView = [[UIView alloc] init];
         _circleView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
         _circleView.layer.borderWidth = 1.0f;
-        _circleView.layer.borderColor = [UIColor colorWithWhite:1.0f alpha:0.75f].CGColor;
         _circleView.layer.cornerRadius = 8.0f;
     }
     return _circleView;
+}
+
+
+- (void)setMinor:(BOOL)minor {
+    _minor = minor;
+    
+    self.titleLabel.textColor = minor ? self.dateLabel.textColor : [UIColor whiteColor];
+    self.circleView.layer.borderColor = minor ? [UIColor colorWithWhite:1.0f alpha:0.4f].CGColor : [UIColor colorWithWhite:1.0f alpha:0.75f].CGColor;
 }
 
 

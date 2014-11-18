@@ -219,6 +219,20 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.lineGraphModelController.ignoreChange = NO;
+    [self.lineGraphModelController reloadData];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.lineGraphModelController.ignoreChange = YES;
+    self.lineGraphModelController.useChangeAnimations = NO;
+}
+
+
 #pragma mark - Actions
 
 - (void)segmentedControlDidChange:(id)sender {
