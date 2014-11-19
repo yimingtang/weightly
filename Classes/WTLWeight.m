@@ -159,10 +159,11 @@
     // Compare two date
     // iOS 7
     // http://stackoverflow.com/questions/2331129/how-to-determine-if-an-nsdate-is-today
-    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:[NSDate date]];
+    NSDateComponents *dateComponents = [calendar components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
     NSDate *today = [calendar dateFromComponents:dateComponents];
-    dateComponents = [calendar components:NSCalendarUnitEra| NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:latestWeight.timeStamp];
+    dateComponents = [calendar components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:latestWeight.timeStamp];
     NSDate *otherDay = [calendar dateFromComponents:dateComponents];
+    
     if ([otherDay isEqualToDate:today]) {
         return;
     }

@@ -9,7 +9,7 @@
 #import "WTLAppDelegate.h"
 #import "WTLWeightViewController.h"
 #import "WTLUserDefaultsDataSource.h"
-#import "WTLWeight.h"
+#import "WTLDataStore.h"
 
 @implementation WTLAppDelegate
 
@@ -31,7 +31,7 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:weightViewController];
     self.window.rootViewController = navigationController;
     [self registerUserDefaults];
-    [self configureDataStack];
+    [self setupDataStack];
     [self applyStyle];
     [self.window makeKeyAndVisible];
     return YES;
@@ -116,57 +116,13 @@
 }
 
 
-- (void)configureDataStack {
-    NSDictionary *applicationInfo = [[NSBundle mainBundle] infoDictionary];
-    NSString *applicationName = [applicationInfo objectForKey:(NSString *)kCFBundleNameKey];
-    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSURL *url = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite", applicationName]];
-    [SSManagedObject setPersistentStoreURL:url];
-    [WTLWeight generateRecentWeightsIfNecessary];
-#ifdef DEBUG
-    [SSManagedObject setAutomaticallyResetsPersistentStore:YES];
-    
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"WTLHasLaunchOnce"]) {
-        [self prepareTestData];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WTLHasLaunchOnce"];
-    }
-#endif
-}
-
-
-- (void)prepareTestData {
-    NSCalendar *calender = [NSCalendar currentCalendar];
-    NSDate *date = [calender dateBySettingHour:0 minute:0 second:0 ofDate:[NSDate date] options:kNilOptions];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        srand48(time(0));
-    });
-    
-    WTLWeight *weight = nil;
-    for (NSInteger i = 365; i > 0; i--) {
-        weight = [[WTLWeight alloc] initWithContext:[WTLWeight mainQueueContext]];
-        weight.amount = 60 + 5 * drand48();
-        weight.userGenerated = NO;
-        weight.timeStamp = [calender dateByAddingUnit:NSDayCalendarUnit value:(-i) toDate:date options:kNilOptions];
-    }
-    [[WTLWeight mainQueueContext] save:nil];
+- (void)setupDataStack {
+    [WTLDataStore setupDataStack];
 }
 
 
 - (void)saveContext {
-    if (![SSManagedObject hasMainQueueContext]) {
-        return;
-    }
-    
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = [SSManagedObject mainQueueContext];
-    if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
+    [WTLDataStore saveMainQueueContext];
 }
 
 @end

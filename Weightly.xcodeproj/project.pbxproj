@@ -28,6 +28,7 @@
 		20566C501A0F9B040071D05D /* WTLThemeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */; };
 		205CFFA61A16150B002F26D2 /* WTLUserDefaultsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */; };
 		205CFFA91A1622C3002F26D2 /* WTLSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 205CFFA81A1622C3002F26D2 /* WTLSegmentedControl.m */; };
+		208C25331A1C919800383A21 /* WTLDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C25321A1C919800383A21 /* WTLDataStore.m */; };
 		208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */; };
 		208EA5D11A135FD200AF5084 /* WTLUnitConverterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */; };
 		208EA5D41A14830A00AF5084 /* WTLWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D31A14830A00AF5084 /* WTLWeight.m */; };
@@ -90,6 +91,8 @@
 		205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUserDefaultsDataSource.m; sourceTree = "<group>"; };
 		205CFFA71A1622C3002F26D2 /* WTLSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSegmentedControl.h; sourceTree = "<group>"; };
 		205CFFA81A1622C3002F26D2 /* WTLSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSegmentedControl.m; sourceTree = "<group>"; };
+		208C25311A1C919800383A21 /* WTLDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLDataStore.h; sourceTree = "<group>"; };
+		208C25321A1C919800383A21 /* WTLDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDataStore.m; sourceTree = "<group>"; };
 		208EA5CC1A13509300AF5084 /* WTLUnitConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLUnitConverter.h; sourceTree = "<group>"; };
 		208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverter.m; sourceTree = "<group>"; };
 		208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverterTest.m; sourceTree = "<group>"; };
@@ -229,6 +232,8 @@
 				208EA5D31A14830A00AF5084 /* WTLWeight.m */,
 				205CFFA41A16150B002F26D2 /* WTLUserDefaultsDataSource.h */,
 				205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */,
+				208C25311A1C919800383A21 /* WTLDataStore.h */,
+				208C25321A1C919800383A21 /* WTLDataStore.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20566C411A0DEE9F0071D05D /* WTLSettingsTableViewCell.m in Sources */,
+				208C25331A1C919800383A21 /* WTLDataStore.m in Sources */,
 				204931EA1A08CE090075F43B /* WTLLineGraphModelController.m in Sources */,
 				203593451A0A5E550097A1AC /* WTLPresentInputTransition.m in Sources */,
 				208EA5F71A149EA500AF5084 /* Weightly.xcdatamodeld in Sources */,
