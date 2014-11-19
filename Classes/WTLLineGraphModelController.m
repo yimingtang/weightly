@@ -125,6 +125,7 @@
     if ([self.delegate respondsToSelector:@selector(modelControllerDidReloadData:)]) {
         [self.delegate modelControllerDidReloadData:self];
     }
+    NSLog(@"Did Reload Line Graph Data");
 }
 
 
