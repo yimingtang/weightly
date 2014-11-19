@@ -251,7 +251,8 @@
 
 - (void)showHistory:(id)sender {
     WTLHistoryViewController *viewController = [[WTLHistoryViewController alloc] init];
-    [self.navigationController pushViewController:viewController animated:YES];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 

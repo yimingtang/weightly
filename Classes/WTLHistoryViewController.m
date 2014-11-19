@@ -32,7 +32,8 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
-    self.navigationItem.title = @"All Records";
+    self.navigationItem.title = @"History";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(done:)];
     
     self.useChangeAnimations = NO;
     
@@ -91,6 +92,13 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     cell.dateLabel.text = [dateFormatter stringFromDate:weight.timeStamp];
     cell.titleLabel.text = [NSString stringWithFormat:@"%.1fkg", weight.amount];
     cell.minor = !weight.userGenerated;
+}
+
+
+#pragma mark - Actions
+
+- (void)done:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
