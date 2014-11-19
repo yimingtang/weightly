@@ -44,7 +44,7 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [[SSManagedObject mainQueueContext] save:nil];
+    [self saveContext];
 }
 
 
@@ -59,7 +59,7 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[SSManagedObject mainQueueContext] save:nil];
+    [self saveContext];
 }
 
 
@@ -122,7 +122,7 @@
     NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     NSURL *url = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite", applicationName]];
     [SSManagedObject setPersistentStoreURL:url];
-    [SSManagedObject mainQueueContext];
+    [WTLWeight generateRecentWeightsIfNecessary];
 #ifdef DEBUG
     [SSManagedObject setAutomaticallyResetsPersistentStore:YES];
     
@@ -151,6 +151,22 @@
         weight.timeStamp = [calender dateByAddingUnit:NSDayCalendarUnit value:(-i) toDate:date options:kNilOptions];
     }
     [[WTLWeight mainQueueContext] save:nil];
+}
+
+
+- (void)saveContext {
+    if (![SSManagedObject hasMainQueueContext]) {
+        return;
+    }
+    
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = [SSManagedObject mainQueueContext];
+    if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
 }
 
 @end

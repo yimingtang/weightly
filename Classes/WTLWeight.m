@@ -139,7 +139,44 @@
 
 
 + (void)generateRecentWeightsIfNecessary {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    fetchRequest.entity = [self entity];
+    fetchRequest.sortDescriptors = [self defaultSortDescriptors];
+    fetchRequest.returnsObjectsAsFaults = NO;
+    fetchRequest.fetchLimit = 1;
+    NSError *error = nil;
+    NSArray *fetchedObjects = [[self mainQueueContext] executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil || error) {
+        NSLog(@"Error: didn't fetch any weight objects");
+        NSLog(@"Error: %@", error);
+        // TODO:
+        return;
+    }
     
+    WTLWeight *latestWeight = fetchedObjects.firstObject;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    // Compare two date
+    // iOS 7
+    // http://stackoverflow.com/questions/2331129/how-to-determine-if-an-nsdate-is-today
+    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:[NSDate date]];
+    NSDate *today = [calendar dateFromComponents:dateComponents];
+    dateComponents = [calendar components:NSCalendarUnitEra| NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:latestWeight.timeStamp];
+    NSDate *otherDay = [calendar dateFromComponents:dateComponents];
+    if ([otherDay isEqualToDate:today]) {
+        return;
+    }
+    
+    // Add weight records
+    NSDateComponents *dayComponents = [[NSDateComponents alloc] init];
+    dateComponents = [calendar components:NSCalendarUnitDay fromDate:otherDay toDate:today options:kNilOptions];
+    for (NSInteger i = 0; i < dateComponents.day; i++) {
+        WTLWeight *weight = [[self alloc] initWithContext:[self mainQueueContext]];
+        weight.amount = latestWeight.amount;
+        weight.userGenerated = NO;
+        dayComponents.day = i + 1;
+        weight.timeStamp = [calendar dateByAddingComponents:dayComponents toDate:otherDay options:kNilOptions];
+    }
 }
 
 

@@ -364,6 +364,7 @@
 
 
 - (void)modelController:(WTLLineGraphModelController *)controller didChangeLatestWeightObject:(WTLWeight *)weight {
+    NSLog(@"modelController:didChangeLatestWeightObject:");
     self.weight = weight;
 }
 
