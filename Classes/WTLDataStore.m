@@ -28,12 +28,13 @@
 + (void)setupDataStack {
     [self configureDataStack];
 
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"WTLHasLaunchOnce"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WTLHasLaunchOnce"];
-        [self prepareTestData];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([userDefaults boolForKey:@"WTLHasLaunchOnce"] == NO) {
+        [userDefaults setBool:YES forKey:@"WTLHasLaunchOnce"];
+        [WTLWeight generateInitialWeights];
     }
-
     [WTLWeight generateRecentWeightsIfNecessary];
+    
     [self saveMainQueueContext];
 }
 
@@ -49,33 +50,8 @@
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+        // abort();
     }
-}
-
-
-#pragma mark - Private Methods
-
-+ (void)prepareTestData {
-    NSCalendar *calender = [NSCalendar currentCalendar];
-    NSDateComponents *dateComponents = [calender components:(NSCalendarUnitEra| NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
-    NSDate *today = [calender dateFromComponents:dateComponents];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        srand48(time(0));
-    });
-    
-    NSDateComponents *dayComponents = [[NSDateComponents alloc] init];
-    WTLWeight *weight = nil;
-    for (NSInteger i = 0; i < 365; i++) {
-        weight = [[WTLWeight alloc] initWithContext:[WTLWeight mainQueueContext]];
-        weight.amount = 60 + 5 * drand48();
-        weight.userGenerated = YES;
-        dayComponents.day = -i;
-        weight.timeStamp = [calender dateByAddingComponents:dayComponents toDate:today options:kNilOptions];
-    }
-    [self saveMainQueueContext];
 }
 
 @end

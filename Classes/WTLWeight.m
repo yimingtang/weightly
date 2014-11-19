@@ -181,6 +181,27 @@
 }
 
 
++ (void)generateInitialWeights {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        srand48(time(0));
+    });
+    
+    NSCalendar *calender = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [calender components:(NSCalendarUnitEra| NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
+    NSDate *today = [calender dateFromComponents:dateComponents];
+    NSDateComponents *dayComponents = [[NSDateComponents alloc] init];
+    WTLWeight *weight = nil;
+    for (NSInteger i = 0; i < 365; i++) {
+        weight = [[self alloc] initWithContext:[self mainQueueContext]];
+        weight.amount = 60 + 5 * drand48();
+        weight.userGenerated = YES;
+        dayComponents.day = -i;
+        weight.timeStamp = [calender dateByAddingComponents:dayComponents toDate:today options:kNilOptions];
+    }
+}
+
+
 #pragma mark - Key path dependencies
 
 + (NSSet *)keyPathsForValuesAffectingSectionIdentifier

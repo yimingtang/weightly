@@ -228,12 +228,12 @@
 		20566C3E1A0DEB640071D05D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				208EA5D21A14830A00AF5084 /* WTLWeight.h */,
-				208EA5D31A14830A00AF5084 /* WTLWeight.m */,
-				205CFFA41A16150B002F26D2 /* WTLUserDefaultsDataSource.h */,
-				205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */,
 				208C25311A1C919800383A21 /* WTLDataStore.h */,
 				208C25321A1C919800383A21 /* WTLDataStore.m */,
+				205CFFA41A16150B002F26D2 /* WTLUserDefaultsDataSource.h */,
+				205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */,
+				208EA5D21A14830A00AF5084 /* WTLWeight.h */,
+				208EA5D31A14830A00AF5084 /* WTLWeight.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
