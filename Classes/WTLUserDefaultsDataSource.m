@@ -23,9 +23,9 @@ NSString *const kWTLDefaultsInfoOptionsKey = @"options";
 
 @implementation WTLUserDefaultsDataSource
 
-#pragma mark - Access User Defaults
+#pragma mark - Class Methods
 
-+ (NSDictionary *)valueMap {
++ (NSDictionary *)sharedValueMap {
     static NSDictionary *map = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -59,47 +59,60 @@ NSString *const kWTLDefaultsInfoOptionsKey = @"options";
 }
 
 
-+ (NSDictionary *)infoDictionaryForDefaultsKey:(NSString *)key {
-    return [[self valueMap] objectForKey:key];
+#pragma mark - NSObject
+
+- (instancetype)init {
+    if ((self = [super init])) {
+        _valueMap = [[self class] sharedValueMap];
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+    }
+    return self;
 }
 
 
-+ (id)objectForInfoKey:(NSString *)key fromDefaultsInfo:(NSDictionary *)info {
+#pragma mark - Accessors
+
+- (NSDictionary *)infoDictionaryForDefaultsKey:(NSString *)key {
+    return [self.valueMap objectForKey:key];
+}
+
+
+- (id)objectForInfoKey:(NSString *)key fromDefaultsInfo:(NSDictionary *)info {
     return [info objectForKey:key];
 }
 
 
-+ (id)objectForInfoKey:(NSString *)key fromDefaultsInfoWithDefaultsKey:(NSString *)defaultsKey {
+- (id)objectForInfoKey:(NSString *)key fromDefaultsInfoWithDefaultsKey:(NSString *)defaultsKey {
     NSDictionary *info = [self infoDictionaryForDefaultsKey:defaultsKey];
     return [self objectForInfoKey:key fromDefaultsInfo:info];
 }
 
 
-+ (WTLDefaultsValueType)valueTypeForDefaultsInfo:(NSDictionary *)info {
+- (WTLDefaultsValueType)valueTypeForDefaultsInfo:(NSDictionary *)info {
     return [[info objectForKey:kWTLDefaultsInfoValueTypeKey] integerValue];
 }
 
 
-+ (WTLDefaultsValueType)valueTypeForDefaultsKey:(NSString *)key {
+- (WTLDefaultsValueType)valueTypeForDefaultsKey:(NSString *)key {
     NSDictionary *info = [self infoDictionaryForDefaultsKey:key];
     return [self valueTypeForDefaultsInfo:info];
 }
 
 
-+ (id)valueObjectForDefaultsKey:(NSString *)key {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+- (id)valueObjectForDefaultsKey:(NSString *)key {
+    return [self.userDefaults objectForKey:key];
 }
 
 
-+ (void)setValueObject:(id)object forDefaultsKey:(NSString *)key {
-    [[NSUserDefaults standardUserDefaults] setObject:object forKey:key];
+- (void)setValueObject:(id)object forDefaultsKey:(NSString *)key {
+    [self.userDefaults setObject:object forKey:key];
 }
 
 
 #pragma mark - Manipulation
 
-+ (void)saveUserDefaults {
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (void)saveUserDefaults {
+    [self.userDefaults synchronize];
 }
 
 @end

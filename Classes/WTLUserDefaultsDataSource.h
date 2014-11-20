@@ -41,21 +41,23 @@ typedef NS_ENUM(NSUInteger, WTLDefaultsValueType) {
 
 @interface WTLUserDefaultsDataSource : NSObject
 
+@property (nonatomic, readonly) NSDictionary *valueMap;
+@property (nonatomic, readonly) NSUserDefaults *userDefaults;
+
 #pragma mark - Access User Defaults
 
-+ (NSDictionary *)valueMap;
-+ (NSDictionary *)infoDictionaryForDefaultsKey:(NSString *)key;
-+ (id)objectForInfoKey:(NSString *)key fromDefaultsInfo:(NSDictionary *)info;
-+ (id)objectForInfoKey:(NSString *)key fromDefaultsInfoWithDefaultsKey:(NSString *)defaultsKey;
-+ (WTLDefaultsValueType)valueTypeForDefaultsInfo:(NSDictionary *)info;
-+ (WTLDefaultsValueType)valueTypeForDefaultsKey:(NSString *)key;
+- (NSDictionary *)infoDictionaryForDefaultsKey:(NSString *)key;
+- (id)objectForInfoKey:(NSString *)key fromDefaultsInfo:(NSDictionary *)info;
+- (id)objectForInfoKey:(NSString *)key fromDefaultsInfoWithDefaultsKey:(NSString *)defaultsKey;
+- (WTLDefaultsValueType)valueTypeForDefaultsInfo:(NSDictionary *)info;
+- (WTLDefaultsValueType)valueTypeForDefaultsKey:(NSString *)key;
 
-+ (id)valueObjectForDefaultsKey:(NSString *)key;
-+ (void)setValueObject:(id)object forDefaultsKey:(NSString *)key;
+- (id)valueObjectForDefaultsKey:(NSString *)key;
+- (void)setValueObject:(id)object forDefaultsKey:(NSString *)key;
 
 
 #pragma mark - Manipulation
 
-+ (void)saveUserDefaults;
+- (void)saveUserDefaults;
 
 @end

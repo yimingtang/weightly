@@ -17,6 +17,7 @@
 
 @interface WTLSettingsViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic) NSArray *defaultsKeySections;
+@property (nonatomic) WTLUserDefaultsDataSource *userDefaultsDataSource;
 @end
 
 @implementation WTLSettingsViewController
@@ -32,6 +33,14 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
                                  @[kWTLThemeDefaultsKey, kWTLReminderDefaultsKey, kWTLAlarmClockDefaultsKey]];
     }
     return _defaultsKeySections;
+}
+
+
+- (WTLUserDefaultsDataSource *)userDefaultsDataSource {
+    if (!_userDefaultsDataSource) {
+        _userDefaultsDataSource = [[WTLUserDefaultsDataSource alloc] init];
+    }
+    return _userDefaultsDataSource;
 }
 
 
@@ -63,7 +72,7 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 
 - (void)done:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [WTLUserDefaultsDataSource saveUserDefaults];
+    [self.userDefaultsDataSource saveUserDefaults];
 }
 
 
@@ -73,8 +82,8 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     UITableViewCell *cell = segmentedControl.cell;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     NSString *key = [self defaultsKeyForRowAtIndexPath:indexPath];
-    NSArray *options = [WTLUserDefaultsDataSource objectForInfoKey:kWTLDefaultsInfoOptionsKey fromDefaultsInfoWithDefaultsKey:key];
-    [WTLUserDefaultsDataSource setValueObject:[options objectAtIndex:segmentedControl.selectedSegmentIndex] forDefaultsKey:key];
+    NSArray *options = [self.userDefaultsDataSource objectForInfoKey:kWTLDefaultsInfoOptionsKey fromDefaultsInfoWithDefaultsKey:key];
+    [self.userDefaultsDataSource setValueObject:[options objectAtIndex:segmentedControl.selectedSegmentIndex] forDefaultsKey:key];
 }
 
 
@@ -88,17 +97,17 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForUserDefaultsKey:(NSString *)key atIndexPath:(NSIndexPath *)indexPath {
-    id valueObject = [WTLUserDefaultsDataSource valueObjectForDefaultsKey:key];
+    id valueObject = [self.userDefaultsDataSource valueObjectForDefaultsKey:key];
     WTLSettingsTableViewCell *cell;
     
-    NSDictionary *infoDictionary = [WTLUserDefaultsDataSource infoDictionaryForDefaultsKey:key];
-    WTLDefaultsValueType valueType = [WTLUserDefaultsDataSource valueTypeForDefaultsInfo:infoDictionary];
+    NSDictionary *infoDictionary = [self.userDefaultsDataSource infoDictionaryForDefaultsKey:key];
+    WTLDefaultsValueType valueType = [self.userDefaultsDataSource valueTypeForDefaultsInfo:infoDictionary];
     
     if (valueType == WTLDefaultsValueTypeOption) {
         WTLSegmentedSettingsTableViewCell *segmentedCell = [tableView dequeueReusableCellWithIdentifier:segmentedCellIdentifier forIndexPath:indexPath];
         
         // Configure segmented control
-        NSArray *options = [WTLUserDefaultsDataSource objectForInfoKey:kWTLDefaultsInfoOptionsKey fromDefaultsInfo:infoDictionary];
+        NSArray *options = [self.userDefaultsDataSource objectForInfoKey:kWTLDefaultsInfoOptionsKey fromDefaultsInfo:infoDictionary];
         __block NSUInteger selectedSegmentIndex;
         [options enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [segmentedCell.segmentedControl insertSegmentWithTitle:[infoDictionary objectForKey:obj] atIndex:idx animated:NO];
@@ -168,8 +177,8 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     NSString *defaultsKey = [self defaultsKeyForRowAtIndexPath:indexPath];
-    NSDictionary *infoDictionary = [WTLUserDefaultsDataSource infoDictionaryForDefaultsKey:defaultsKey];
-    WTLDefaultsValueType valueType = [WTLUserDefaultsDataSource valueTypeForDefaultsInfo:infoDictionary];
+    NSDictionary *infoDictionary = [self.userDefaultsDataSource infoDictionaryForDefaultsKey:defaultsKey];
+    WTLDefaultsValueType valueType = [self.userDefaultsDataSource valueTypeForDefaultsInfo:infoDictionary];
     
     if (valueType == WTLDefaultsValueTypeTime) {
         // TODO: Set time
@@ -180,7 +189,7 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
         }
     } else if (valueType == WTLDefaultsValueTypeNumber) {
         WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
-        inputViewController.initialInput = [NSString stringWithFormat:@"%.1f", [[WTLUserDefaultsDataSource valueObjectForDefaultsKey:defaultsKey] floatValue]];
+        inputViewController.initialInput = [NSString stringWithFormat:@"%.1f", [[self.userDefaultsDataSource valueObjectForDefaultsKey:defaultsKey] floatValue]];
         if ([defaultsKey isEqualToString:kWTLHeightDefaultsKey]) {
             inputViewController.unitString = @"CM";
         } else if ([defaultsKey isEqualToString:kWTLGoalDefaultsKey]) {
