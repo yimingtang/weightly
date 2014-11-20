@@ -10,4 +10,23 @@
 
 @implementation WTLUnitConverter
 
+- (float)convertMassFromKgToLb:(float)amount {
+    return 0;
+}
+
+
+- (float)convertMassFromLbToKg:(float)amount {
+    return 0;
+}
+
+
+- (float)convertLengthFromCmToInch:(float)length {
+    return 0;
+}
+
+
+- (float)convertLengthFromInchToCm:(float)length {
+    return 0;
+}
+
 @end

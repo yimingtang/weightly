@@ -10,4 +10,9 @@
 
 @interface WTLUnitConverter : NSObject
 
+- (float)convertMassFromKgToLb:(float)amount;
+- (float)convertMassFromLbToKg:(float)amount;
+- (float)convertLengthFromCmToInch:(float)length;
+- (float)convertLengthFromInchToCm:(float)length;
+
 @end
