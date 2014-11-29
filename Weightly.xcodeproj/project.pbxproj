@@ -14,6 +14,9 @@
 		20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */; };
 		20156B3619FE5C9E00142EC0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20156B3519FE5C9E00142EC0 /* Images.xcassets */; };
 		20156B3919FE5C9E00142EC0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20156B3719FE5C9E00142EC0 /* LaunchScreen.xib */; };
+		201D23281A29E3E5002C2F8E /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201D23271A29E3E5002C2F8E /* NotificationCenter.framework */; };
+		201D232E1A29E3E5002C2F8E /* WTLTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 201D232D1A29E3E5002C2F8E /* WTLTodayViewController.m */; };
+		201D23331A29E3E5002C2F8E /* Weightly Today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 201D23261A29E3E5002C2F8E /* Weightly Today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2035933C1A0A373C0097A1AC /* WTLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035933B1A0A373C0097A1AC /* WTLSettingsViewController.m */; };
 		2035933F1A0A377F0097A1AC /* WTLHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035933E1A0A377F0097A1AC /* WTLHistoryViewController.m */; };
 		203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203593411A0A57560097A1AC /* WTLInputViewController.m */; };
@@ -34,8 +37,34 @@
 		20BC6AA31A29D8E300834502 /* UIColor+Weightly.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BC6AA21A29D8E300834502 /* UIColor+Weightly.m */; };
 		20D912231A11E89D007AF596 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = 20D912221A11E89D007AF596 /* themes.json */; };
 		20D912251A12087D007AF596 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20D912241A12087D007AF596 /* Settings.bundle */; };
+		20FC76D61A29E8D1005719D3 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FC76D51A29E8D1005719D3 /* HealthKit.framework */; };
+		20FC76D81A29E8E9005719D3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FC76D71A29E8E9005719D3 /* StoreKit.framework */; };
 		3A060596F618E2427750AB0B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451AF153B83AF3AC0D7C3F2B /* libPods.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		201D23311A29E3E5002C2F8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20156B1D19FE5C9E00142EC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 201D23251A29E3E5002C2F8E;
+			remoteInfo = "Weightly Today";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		201D23371A29E3E5002C2F8E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				201D23331A29E3E5002C2F8E /* Weightly Today.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2011B3AB1A0B6293000DD457 /* WTLDismissInputTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLDismissInputTransition.h; sourceTree = "<group>"; };
@@ -51,6 +80,11 @@
 		20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTLWeightViewController.m; sourceTree = "<group>"; };
 		20156B3519FE5C9E00142EC0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		20156B3819FE5C9E00142EC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		201D23261A29E3E5002C2F8E /* Weightly Today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Weightly Today.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		201D23271A29E3E5002C2F8E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		201D232B1A29E3E5002C2F8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		201D232C1A29E3E5002C2F8E /* WTLTodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTLTodayViewController.h; sourceTree = "<group>"; };
+		201D232D1A29E3E5002C2F8E /* WTLTodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTLTodayViewController.m; sourceTree = "<group>"; };
 		2035933A1A0A373C0097A1AC /* WTLSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSettingsViewController.h; sourceTree = "<group>"; };
 		2035933B1A0A373C0097A1AC /* WTLSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSettingsViewController.m; sourceTree = "<group>"; };
 		2035933D1A0A377F0097A1AC /* WTLHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLHistoryViewController.h; sourceTree = "<group>"; };
@@ -89,6 +123,10 @@
 		20BC6AA21A29D8E300834502 /* UIColor+Weightly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Weightly.m"; sourceTree = "<group>"; };
 		20D912221A11E89D007AF596 /* themes.json */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = themes.json; sourceTree = "<group>"; };
 		20D912241A12087D007AF596 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		20FC76D41A29E8B6005719D3 /* Weightly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Weightly.entitlements; sourceTree = "<group>"; };
+		20FC76D51A29E8D1005719D3 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		20FC76D71A29E8E9005719D3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		20FC76D91A29EA91005719D3 /* Weightly Today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Weightly Today.entitlements"; sourceTree = "<group>"; };
 		451AF153B83AF3AC0D7C3F2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		784F9B486AC5AF793682D6C2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BCD0B65CCD2C66B7F42AC5B5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,7 +137,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20FC76D81A29E8E9005719D3 /* StoreKit.framework in Frameworks */,
 				3A060596F618E2427750AB0B /* libPods.a in Frameworks */,
+				20FC76D61A29E8D1005719D3 /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		201D23231A29E3E5002C2F8E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				201D23281A29E3E5002C2F8E /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				20BC6AA41A29DDA600834502 /* Weightly */,
-				20BC6AA51A29DDD900834502 /* Weightly Today */,
+				201D23291A29E3E5002C2F8E /* Weightly Today */,
 				20BC6A9E1A29D33600834502 /* WeightlyKit */,
 				20156B2619FE5C9E00142EC0 /* Products */,
 				884C5F01C1EF6329E674EFA6 /* Pods */,
@@ -122,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				20156B2519FE5C9E00142EC0 /* Weightly.app */,
+				201D23261A29E3E5002C2F8E /* Weightly Today.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -208,6 +257,33 @@
 			name = Util;
 			sourceTree = "<group>";
 		};
+		201D23291A29E3E5002C2F8E /* Weightly Today */ = {
+			isa = PBXGroup;
+			children = (
+				201D23391A29E4E1002C2F8E /* Resources */,
+				201D23381A29E4D1002C2F8E /* Classes */,
+			);
+			path = "Weightly Today";
+			sourceTree = SOURCE_ROOT;
+		};
+		201D23381A29E4D1002C2F8E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				201D232C1A29E3E5002C2F8E /* WTLTodayViewController.h */,
+				201D232D1A29E3E5002C2F8E /* WTLTodayViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		201D23391A29E4E1002C2F8E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				20FC76D91A29EA91005719D3 /* Weightly Today.entitlements */,
+				201D232B1A29E3E5002C2F8E /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		20BC6A9E1A29D33600834502 /* WeightlyKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,13 +312,6 @@
 			path = Weightly;
 			sourceTree = "<group>";
 		};
-		20BC6AA51A29DDD900834502 /* Weightly Today */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Weightly Today";
-			sourceTree = "<group>";
-		};
 		20DA9FC419FF4F1300CB50CB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +337,7 @@
 		20DA9FC619FF4F3200CB50CB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				20FC76D41A29E8B6005719D3 /* Weightly.entitlements */,
 				20156B3719FE5C9E00142EC0 /* LaunchScreen.xib */,
 				20156B3519FE5C9E00142EC0 /* Images.xcassets */,
 				20156B2919FE5C9E00142EC0 /* Info.plist */,
@@ -289,7 +359,10 @@
 		B4B6E29601F409052B634EE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				20FC76D71A29E8E9005719D3 /* StoreKit.framework */,
+				20FC76D51A29E8D1005719D3 /* HealthKit.framework */,
 				451AF153B83AF3AC0D7C3F2B /* libPods.a */,
+				201D23271A29E3E5002C2F8E /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -306,15 +379,34 @@
 				20156B2219FE5C9E00142EC0 /* Frameworks */,
 				20156B2319FE5C9E00142EC0 /* Resources */,
 				D1CE5948DC14EA97DCF31CCB /* Copy Pods Resources */,
+				201D23371A29E3E5002C2F8E /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				201D23321A29E3E5002C2F8E /* PBXTargetDependency */,
 			);
 			name = Weightly;
 			productName = Weightly;
 			productReference = 20156B2519FE5C9E00142EC0 /* Weightly.app */;
 			productType = "com.apple.product-type.application";
+		};
+		201D23251A29E3E5002C2F8E /* Weightly Today */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 201D23341A29E3E5002C2F8E /* Build configuration list for PBXNativeTarget "Weightly Today" */;
+			buildPhases = (
+				201D23221A29E3E5002C2F8E /* Sources */,
+				201D23231A29E3E5002C2F8E /* Frameworks */,
+				201D23241A29E3E5002C2F8E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Weightly Today";
+			productName = "Weightly Today";
+			productReference = 201D23261A29E3E5002C2F8E /* Weightly Today.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -329,6 +421,32 @@
 					20156B2419FE5C9E00142EC0 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = L2G83P2797;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					201D23251A29E3E5002C2F8E = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = L2G83P2797;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -346,6 +464,7 @@
 			projectRoot = "";
 			targets = (
 				20156B2419FE5C9E00142EC0 /* Weightly */,
+				201D23251A29E3E5002C2F8E /* Weightly Today */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +478,13 @@
 				20156B3919FE5C9E00142EC0 /* LaunchScreen.xib in Resources */,
 				20D912231A11E89D007AF596 /* themes.json in Resources */,
 				20156B3619FE5C9E00142EC0 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		201D23241A29E3E5002C2F8E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,7 +554,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		201D23221A29E3E5002C2F8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				201D232E1A29E3E5002C2F8E /* WTLTodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		201D23321A29E3E5002C2F8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 201D23251A29E3E5002C2F8E /* Weightly Today */;
+			targetProxy = 201D23311A29E3E5002C2F8E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		20156B3719FE5C9E00142EC0 /* LaunchScreen.xib */ = {
@@ -524,6 +666,7 @@
 			baseConfigurationReference = 784F9B486AC5AF793682D6C2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Weightly/Resources/Weightly.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Weightly/Resources/Info.plist";
@@ -538,12 +681,49 @@
 			baseConfigurationReference = BCD0B65CCD2C66B7F42AC5B5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Weightly/Resources/Weightly.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Weightly/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		201D23351A29E3E5002C2F8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Weightly Today/Resources/Weightly Today.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Weightly Today/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		201D23361A29E3E5002C2F8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Weightly Today/Resources/Weightly Today.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/Weightly Today/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -564,6 +744,15 @@
 			buildConfigurations = (
 				20156B4919FE5C9E00142EC0 /* Debug */,
 				20156B4A19FE5C9E00142EC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		201D23341A29E3E5002C2F8E /* Build configuration list for PBXNativeTarget "Weightly Today" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				201D23351A29E3E5002C2F8E /* Debug */,
+				201D23361A29E3E5002C2F8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
