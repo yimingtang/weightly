@@ -50,8 +50,6 @@
 		20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTLWeightViewController.m; sourceTree = "<group>"; };
 		20156B3519FE5C9E00142EC0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		20156B3819FE5C9E00142EC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		20156B4319FE5C9E00142EC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20156B4419FE5C9E00142EC0 /* WeightlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeightlyTests.m; sourceTree = "<group>"; };
 		2035933A1A0A373C0097A1AC /* WTLSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSettingsViewController.h; sourceTree = "<group>"; };
 		2035933B1A0A373C0097A1AC /* WTLSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSettingsViewController.m; sourceTree = "<group>"; };
 		2035933D1A0A377F0097A1AC /* WTLHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLHistoryViewController.h; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 		208C25321A1C919800383A21 /* WTLDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDataStore.m; sourceTree = "<group>"; };
 		208EA5CC1A13509300AF5084 /* WTLUnitConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLUnitConverter.h; sourceTree = "<group>"; };
 		208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverter.m; sourceTree = "<group>"; };
-		208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverterTest.m; sourceTree = "<group>"; };
 		208EA5D21A14830A00AF5084 /* WTLWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLWeight.h; sourceTree = "<group>"; };
 		208EA5D31A14830A00AF5084 /* WTLWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLWeight.m; sourceTree = "<group>"; };
 		208EA5F61A149EA500AF5084 /* Weightly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weightly.xcdatamodel; sourceTree = "<group>"; };
@@ -111,7 +108,6 @@
 				20DA9FC419FF4F1300CB50CB /* Classes */,
 				20DA9FC519FF4F1F00CB50CB /* Other Sources */,
 				20DA9FC619FF4F3200CB50CB /* Resources */,
-				20156B4119FE5C9E00142EC0 /* WeightlyTests */,
 				20156B2619FE5C9E00142EC0 /* Products */,
 				884C5F01C1EF6329E674EFA6 /* Pods */,
 				B4B6E29601F409052B634EE2 /* Frameworks */,
@@ -124,24 +120,6 @@
 				20156B2519FE5C9E00142EC0 /* Weightly.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		20156B4119FE5C9E00142EC0 /* WeightlyTests */ = {
-			isa = PBXGroup;
-			children = (
-				20156B4419FE5C9E00142EC0 /* WeightlyTests.m */,
-				208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */,
-				20156B4219FE5C9E00142EC0 /* Resources */,
-			);
-			path = WeightlyTests;
-			sourceTree = "<group>";
-		};
-		20156B4219FE5C9E00142EC0 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				20156B4319FE5C9E00142EC0 /* Info.plist */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		20566C3A1A0DEB0F0071D05D /* Animations */ = {
@@ -506,9 +484,12 @@
 			baseConfigurationReference = 784F9B486AC5AF793682D6C2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -517,9 +498,12 @@
 			baseConfigurationReference = BCD0B65CCD2C66B7F42AC5B5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
