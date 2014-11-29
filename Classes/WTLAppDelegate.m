@@ -10,36 +10,107 @@
 #import "WTLWeightViewController.h"
 #import "WTLUserDefaultsDataSource.h"
 #import "WTLDataStore.h"
+#import "UIColor+Weightly.h"
 
 @implementation WTLAppDelegate
+
+@synthesize window = _window;
 
 #pragma mark - Accessors
 
 - (UIWindow *)window {
     if (!_window) {
         _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        _window.backgroundColor = [UIColor whiteColor];
+        _window.backgroundColor = [UIColor blackColor];
+        _window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[WTLWeightViewController alloc] init]];
     }
     return _window;
+}
+
+
+#pragma mark - Private Methods
+
+- (void)configureAnalytics {
+#ifndef DEBUG
+    // TODO:
+#endif
+}
+
+
+- (void)configureAppearance {
+    self.window.tintColor = [UIColor colorWithWhite:1.0f alpha:0.8f];
+    
+    UINavigationBar *navigationBar = [UINavigationBar appearance];
+    [navigationBar setTintColor:[UIColor whiteColor]];
+    [navigationBar setBarTintColor:[UIColor wtl_redColor]];
+    [navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Avenir-Heavy" size:22.0f],
+                                            NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [navigationBar setTitleVerticalPositionAdjustment:3.0f forBarMetrics:UIBarMetricsDefault];
+    
+    // UISegmented Control
+    UISegmentedControl *segmentedControl = [UISegmentedControl appearance];
+    [segmentedControl setTintColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
+    NSDictionary *segmentedControlTextAttributes = @{NSForegroundColorAttributeName : [UIColor wtl_redColor]};
+    [segmentedControl setTitleTextAttributes:segmentedControlTextAttributes forState:UIControlStateSelected];
+}
+
+
+- (void)configureDefaults {
+    // Initialize alarm clock. 8:00 AM.
+    // Use APIs for iOS 7 and ealier
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *today = [NSDate date];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:today];
+    [components setHour:8];
+    [components setMinute:0];
+    [components setSecond:0];
+    NSDate *alarmDate = [calendar dateFromComponents:components];
+    
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    [standardUserDefaults registerDefaults:@{kWTLHeightDefaultsKey: @170.0f,
+                                             kWTLGenderDefaultsKey: @(WTLGenderTypeMale),
+                                             kWTLGoalDefaultsKey: @60.0f,
+                                             kWTLUnitsDefaultsKey: @(WTLUnitsTypeMetric),
+                                             kWTLThemeDefaultsKey: @"Cinnabar",
+                                             kWTLReminderDefaultsKey: @NO,
+                                             kWTLAlarmClockDefaultsKey: alarmDate
+                                             }];
+}
+
+
+- (void)configureDataStack {
+    [WTLDataStore setupDataStack];
+}
+
+
+- (void)saveContext {
+    [WTLDataStore saveMainQueueContext];
 }
 
 
 #pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    WTLWeightViewController *weightViewController = [[WTLWeightViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:weightViewController];
-    self.window.rootViewController = navigationController;
-    [self registerUserDefaults];
-    [self setupDataStack];
-    [self applyStyle];
+    [self configureAnalytics];
+    [self configureDataStack];
+    [self configureDefaults];
+    [self configureAppearance];
+    
     [self.window makeKeyAndVisible];
+    
+    // Update version string
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary *bundleInfo = [[NSBundle mainBundle] infoDictionary];
+        NSString *shortVersion = [bundleInfo objectForKey:@"CFBundleShortVersionString"];
+        NSString *version = [bundleInfo objectForKey:(NSString *)kCFBundleVersionKey];
+        NSString *versionString = [NSString stringWithFormat:@"%@ (%@)", shortVersion, version];
+        NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
+        if (![versionString isEqualToString:[standardDefaults stringForKey:@"WTLVersion"]]) {
+            [standardDefaults setObject:version forKey:@"WTLVersion"];
+            [standardDefaults synchronize];
+        }
+    });
     return YES;
-}
-
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-
 }
 
 
@@ -48,81 +119,9 @@
 }
 
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-   
-}
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    
-}
-
-
 - (void)applicationWillTerminate:(UIApplication *)application {
     [self saveContext];
 }
 
-
-#pragma mark - Private Methods
-
-- (void)applyStyle {
-    self.window.tintColor = [UIColor colorWithWhite:1.0f alpha:0.8f];
-    
-    // Navigation Bar
-    UINavigationBar *navigationBar = [UINavigationBar appearance];
-    [navigationBar setTintColor:[UIColor whiteColor]];
-    [navigationBar setBarTintColor:[UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f]];
-    [navigationBar setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Avenir" size:22.0f],
-                                            NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    [navigationBar setTitleVerticalPositionAdjustment:3.0f forBarMetrics:UIBarMetricsDefault];
-    
-    // UISegmented Control
-    UISegmentedControl *segmentedControl = [UISegmentedControl appearance];
-    [segmentedControl setTintColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
-    NSDictionary *segmentedControlTextAttributes = @{NSForegroundColorAttributeName : [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f]};
-    [segmentedControl setTitleTextAttributes:segmentedControlTextAttributes forState:UIControlStateSelected];
-}
-
-
-- (void)registerUserDefaults {
-    // Initialize alarm clock
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *date = [NSDate date];
-    NSDateComponents *components = [calendar components:NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
-    [components setHour:8];
-    [components setMinute:0];
-    [components setSecond:0];
-    NSDate *alarmDate = [calendar dateFromComponents:components];
-    
-    NSDictionary *defaults = @{kWTLHeightDefaultsKey: @170.0f,
-                               kWTLGenderDefaultsKey : @(WTLGenderTypeMale),
-                               kWTLGoalDefaultsKey : @60.0f,
-                               kWTLUnitsDefaultsKey : @(WTLUnitsTypeMetric),
-                               kWTLThemeDefaultsKey : @"Cinnabar",
-                               kWTLReminderDefaultsKey : @NO,
-                               kWTLAlarmClockDefaultsKey: alarmDate,
-                               };
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults registerDefaults:defaults];
-    
-    // Update version
-    NSDictionary *bundleInfo = [[NSBundle mainBundle] infoDictionary];
-    NSString *version = [bundleInfo objectForKey:@"CFBundleShortVersionString"];
-    NSString *build = [bundleInfo objectForKey:(NSString *)kCFBundleVersionKey];
-    NSString *versionBuild = [NSString stringWithFormat:@"%@ (%@)", version, build];
-    if (![versionBuild isEqualToString:[userDefaults stringForKey:@"WTLVersion"]]) {
-        [userDefaults setObject:version forKey:@"WTLVersion"];
-    }
-}
-
-
-- (void)setupDataStack {
-    [WTLDataStore setupDataStack];
-}
-
-
-- (void)saveContext {
-    [WTLDataStore saveMainQueueContext];
-}
 
 @end

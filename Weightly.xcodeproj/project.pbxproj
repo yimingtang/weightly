@@ -31,6 +31,7 @@
 		208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */; };
 		208EA5D41A14830A00AF5084 /* WTLWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D31A14830A00AF5084 /* WTLWeight.m */; };
 		208EA5F71A149EA500AF5084 /* Weightly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5F51A149EA500AF5084 /* Weightly.xcdatamodeld */; };
+		20BC6AA31A29D8E300834502 /* UIColor+Weightly.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BC6AA21A29D8E300834502 /* UIColor+Weightly.m */; };
 		20D912231A11E89D007AF596 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = 20D912221A11E89D007AF596 /* themes.json */; };
 		20D912251A12087D007AF596 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20D912241A12087D007AF596 /* Settings.bundle */; };
 		3A060596F618E2427750AB0B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451AF153B83AF3AC0D7C3F2B /* libPods.a */; };
@@ -83,6 +84,9 @@
 		208EA5D21A14830A00AF5084 /* WTLWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLWeight.h; sourceTree = "<group>"; };
 		208EA5D31A14830A00AF5084 /* WTLWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLWeight.m; sourceTree = "<group>"; };
 		208EA5F61A149EA500AF5084 /* Weightly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weightly.xcdatamodel; sourceTree = "<group>"; };
+		20BC6AA01A29D41900834502 /* WeightlyKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeightlyKit.h; sourceTree = "<group>"; };
+		20BC6AA11A29D8E300834502 /* UIColor+Weightly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Weightly.h"; sourceTree = "<group>"; };
+		20BC6AA21A29D8E300834502 /* UIColor+Weightly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Weightly.m"; sourceTree = "<group>"; };
 		20D912221A11E89D007AF596 /* themes.json */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = themes.json; sourceTree = "<group>"; };
 		20D912241A12087D007AF596 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		451AF153B83AF3AC0D7C3F2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +109,7 @@
 		20156B1C19FE5C9E00142EC0 = {
 			isa = PBXGroup;
 			children = (
+				20BC6A9E1A29D33600834502 /* WeightlyKit */,
 				20DA9FC419FF4F1300CB50CB /* Classes */,
 				20DA9FC519FF4F1F00CB50CB /* Other Sources */,
 				20DA9FC619FF4F3200CB50CB /* Resources */,
@@ -202,6 +207,24 @@
 				208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		20BC6A9E1A29D33600834502 /* WeightlyKit */ = {
+			isa = PBXGroup;
+			children = (
+				20BC6A9F1A29D3A800834502 /* Classes */,
+			);
+			path = WeightlyKit;
+			sourceTree = "<group>";
+		};
+		20BC6A9F1A29D3A800834502 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				20BC6AA01A29D41900834502 /* WeightlyKit.h */,
+				20BC6AA11A29D8E300834502 /* UIColor+Weightly.h */,
+				20BC6AA21A29D8E300834502 /* UIColor+Weightly.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		20DA9FC419FF4F1300CB50CB /* Classes */ = {
@@ -370,6 +393,7 @@
 				208EA5F71A149EA500AF5084 /* Weightly.xcdatamodeld in Sources */,
 				2035933F1A0A377F0097A1AC /* WTLHistoryViewController.m in Sources */,
 				2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */,
+				20BC6AA31A29D8E300834502 /* UIColor+Weightly.m in Sources */,
 				205CFFA61A16150B002F26D2 /* WTLUserDefaultsDataSource.m in Sources */,
 				208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */,
 				20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */,
