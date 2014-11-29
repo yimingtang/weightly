@@ -109,10 +109,9 @@
 		20156B1C19FE5C9E00142EC0 = {
 			isa = PBXGroup;
 			children = (
+				20BC6AA41A29DDA600834502 /* Weightly */,
+				20BC6AA51A29DDD900834502 /* Weightly Today */,
 				20BC6A9E1A29D33600834502 /* WeightlyKit */,
-				20DA9FC419FF4F1300CB50CB /* Classes */,
-				20DA9FC519FF4F1F00CB50CB /* Other Sources */,
-				20DA9FC619FF4F3200CB50CB /* Resources */,
 				20156B2619FE5C9E00142EC0 /* Products */,
 				884C5F01C1EF6329E674EFA6 /* Pods */,
 				B4B6E29601F409052B634EE2 /* Frameworks */,
@@ -127,18 +126,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		20566C3A1A0DEB0F0071D05D /* Animations */ = {
+		201D231C1A29E0E3002C2F8E /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				2011B3AB1A0B6293000DD457 /* WTLDismissInputTransition.h */,
-				2011B3AC1A0B6293000DD457 /* WTLDismissInputTransition.m */,
-				203593431A0A5E550097A1AC /* WTLPresentInputTransition.h */,
-				203593441A0A5E550097A1AC /* WTLPresentInputTransition.m */,
+				20156B2C19FE5C9E00142EC0 /* WTLAppDelegate.h */,
+				20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */,
 			);
-			name = Animations;
+			name = Application;
 			sourceTree = "<group>";
 		};
-		20566C3B1A0DEB1F0071D05D /* View Controllers */ = {
+		201D231D1A29E101002C2F8E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				2035933D1A0A377F0097A1AC /* WTLHistoryViewController.h */,
@@ -157,7 +154,20 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		20566C3C1A0DEB340071D05D /* Views */ = {
+		201D231E1A29E139002C2F8E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				208C25311A1C919800383A21 /* WTLDataStore.h */,
+				208C25321A1C919800383A21 /* WTLDataStore.m */,
+				205CFFA41A16150B002F26D2 /* WTLUserDefaultsDataSource.h */,
+				205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */,
+				208EA5D21A14830A00AF5084 /* WTLWeight.h */,
+				208EA5D31A14830A00AF5084 /* WTLWeight.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		201D231F1A29E16A002C2F8E /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				20566C481A0E27FC0071D05D /* WTLSectionHeaderView.h */,
@@ -178,35 +188,24 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		20566C3D1A0DEB520071D05D /* Application */ = {
+		201D23201A29E188002C2F8E /* Transitions */ = {
 			isa = PBXGroup;
 			children = (
-				20156B2C19FE5C9E00142EC0 /* WTLAppDelegate.h */,
-				20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */,
+				2011B3AB1A0B6293000DD457 /* WTLDismissInputTransition.h */,
+				2011B3AC1A0B6293000DD457 /* WTLDismissInputTransition.m */,
+				203593431A0A5E550097A1AC /* WTLPresentInputTransition.h */,
+				203593441A0A5E550097A1AC /* WTLPresentInputTransition.m */,
 			);
-			name = Application;
+			name = Transitions;
 			sourceTree = "<group>";
 		};
-		20566C3E1A0DEB640071D05D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				208C25311A1C919800383A21 /* WTLDataStore.h */,
-				208C25321A1C919800383A21 /* WTLDataStore.m */,
-				205CFFA41A16150B002F26D2 /* WTLUserDefaultsDataSource.h */,
-				205CFFA51A16150B002F26D2 /* WTLUserDefaultsDataSource.m */,
-				208EA5D21A14830A00AF5084 /* WTLWeight.h */,
-				208EA5D31A14830A00AF5084 /* WTLWeight.m */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		208EA5CF1A13509E00AF5084 /* Utils */ = {
+		201D23211A29E1B2002C2F8E /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				208EA5CC1A13509300AF5084 /* WTLUnitConverter.h */,
 				208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */,
 			);
-			name = Utils;
+			name = Util;
 			sourceTree = "<group>";
 		};
 		20BC6A9E1A29D33600834502 /* WeightlyKit */ = {
@@ -227,15 +226,32 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		20BC6AA41A29DDA600834502 /* Weightly */ = {
+			isa = PBXGroup;
+			children = (
+				20DA9FC419FF4F1300CB50CB /* Classes */,
+				20DA9FC519FF4F1F00CB50CB /* Other Sources */,
+				20DA9FC619FF4F3200CB50CB /* Resources */,
+			);
+			path = Weightly;
+			sourceTree = "<group>";
+		};
+		20BC6AA51A29DDD900834502 /* Weightly Today */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Weightly Today";
+			sourceTree = "<group>";
+		};
 		20DA9FC419FF4F1300CB50CB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				20566C3D1A0DEB520071D05D /* Application */,
-				20566C3B1A0DEB1F0071D05D /* View Controllers */,
-				20566C3E1A0DEB640071D05D /* Models */,
-				20566C3C1A0DEB340071D05D /* Views */,
-				20566C3A1A0DEB0F0071D05D /* Animations */,
-				208EA5CF1A13509E00AF5084 /* Utils */,
+				201D231C1A29E0E3002C2F8E /* Application */,
+				201D231E1A29E139002C2F8E /* Models */,
+				201D23201A29E188002C2F8E /* Transitions */,
+				201D23211A29E1B2002C2F8E /* Util */,
+				201D231D1A29E101002C2F8E /* View Controllers */,
+				201D231F1A29E16A002C2F8E /* Views */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -510,7 +526,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Weightly/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -524,7 +540,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Weightly/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
