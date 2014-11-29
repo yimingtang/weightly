@@ -14,7 +14,6 @@
 		20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */; };
 		20156B3619FE5C9E00142EC0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20156B3519FE5C9E00142EC0 /* Images.xcassets */; };
 		20156B3919FE5C9E00142EC0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20156B3719FE5C9E00142EC0 /* LaunchScreen.xib */; };
-		20156B4519FE5C9E00142EC0 /* WeightlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B4419FE5C9E00142EC0 /* WeightlyTests.m */; };
 		2035933C1A0A373C0097A1AC /* WTLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035933B1A0A373C0097A1AC /* WTLSettingsViewController.m */; };
 		2035933F1A0A377F0097A1AC /* WTLHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2035933E1A0A377F0097A1AC /* WTLHistoryViewController.m */; };
 		203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203593411A0A57560097A1AC /* WTLInputViewController.m */; };
@@ -30,23 +29,12 @@
 		205CFFA91A1622C3002F26D2 /* WTLSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 205CFFA81A1622C3002F26D2 /* WTLSegmentedControl.m */; };
 		208C25331A1C919800383A21 /* WTLDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C25321A1C919800383A21 /* WTLDataStore.m */; };
 		208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */; };
-		208EA5D11A135FD200AF5084 /* WTLUnitConverterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D01A135FD200AF5084 /* WTLUnitConverterTest.m */; };
 		208EA5D41A14830A00AF5084 /* WTLWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D31A14830A00AF5084 /* WTLWeight.m */; };
 		208EA5F71A149EA500AF5084 /* Weightly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5F51A149EA500AF5084 /* Weightly.xcdatamodeld */; };
 		20D912231A11E89D007AF596 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = 20D912221A11E89D007AF596 /* themes.json */; };
 		20D912251A12087D007AF596 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20D912241A12087D007AF596 /* Settings.bundle */; };
 		3A060596F618E2427750AB0B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451AF153B83AF3AC0D7C3F2B /* libPods.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		20156B3F19FE5C9E00142EC0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 20156B1D19FE5C9E00142EC0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 20156B2419FE5C9E00142EC0;
-			remoteInfo = Weightly;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2011B3AB1A0B6293000DD457 /* WTLDismissInputTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLDismissInputTransition.h; sourceTree = "<group>"; };
@@ -62,7 +50,6 @@
 		20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTLWeightViewController.m; sourceTree = "<group>"; };
 		20156B3519FE5C9E00142EC0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		20156B3819FE5C9E00142EC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		20156B3E19FE5C9E00142EC0 /* WeightlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeightlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20156B4319FE5C9E00142EC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20156B4419FE5C9E00142EC0 /* WeightlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeightlyTests.m; sourceTree = "<group>"; };
 		2035933A1A0A373C0097A1AC /* WTLSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSettingsViewController.h; sourceTree = "<group>"; };
@@ -115,13 +102,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		20156B3B19FE5C9E00142EC0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -142,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				20156B2519FE5C9E00142EC0 /* Weightly.app */,
-				20156B3E19FE5C9E00142EC0 /* WeightlyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -320,24 +299,6 @@
 			productReference = 20156B2519FE5C9E00142EC0 /* Weightly.app */;
 			productType = "com.apple.product-type.application";
 		};
-		20156B3D19FE5C9E00142EC0 /* WeightlyTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 20156B4B19FE5C9E00142EC0 /* Build configuration list for PBXNativeTarget "WeightlyTests" */;
-			buildPhases = (
-				20156B3A19FE5C9E00142EC0 /* Sources */,
-				20156B3B19FE5C9E00142EC0 /* Frameworks */,
-				20156B3C19FE5C9E00142EC0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				20156B4019FE5C9E00142EC0 /* PBXTargetDependency */,
-			);
-			name = WeightlyTests;
-			productName = WeightlyTests;
-			productReference = 20156B3E19FE5C9E00142EC0 /* WeightlyTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -351,10 +312,6 @@
 					20156B2419FE5C9E00142EC0 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = L2G83P2797;
-					};
-					20156B3D19FE5C9E00142EC0 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = 20156B2419FE5C9E00142EC0;
 					};
 				};
 			};
@@ -372,7 +329,6 @@
 			projectRoot = "";
 			targets = (
 				20156B2419FE5C9E00142EC0 /* Weightly */,
-				20156B3D19FE5C9E00142EC0 /* WeightlyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -386,13 +342,6 @@
 				20156B3919FE5C9E00142EC0 /* LaunchScreen.xib in Resources */,
 				20D912231A11E89D007AF596 /* themes.json in Resources */,
 				20156B3619FE5C9E00142EC0 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		20156B3C19FE5C9E00142EC0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,24 +410,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		20156B3A19FE5C9E00142EC0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				208EA5D11A135FD200AF5084 /* WTLUnitConverterTest.m in Sources */,
-				20156B4519FE5C9E00142EC0 /* WeightlyTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		20156B4019FE5C9E00142EC0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 20156B2419FE5C9E00142EC0 /* Weightly */;
-			targetProxy = 20156B3F19FE5C9E00142EC0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		20156B3719FE5C9E00142EC0 /* LaunchScreen.xib */ = {
@@ -509,7 +441,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -527,10 +459,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = "-Weverything";
 			};
 			name = Debug;
 		};
@@ -551,7 +483,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -563,10 +494,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				WARNING_CFLAGS = "-Weverything";
 			};
 			name = Release;
 		};
@@ -592,40 +523,6 @@
 			};
 			name = Release;
 		};
-		20156B4C19FE5C9E00142EC0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/WeightlyTests/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weightly.app/Weightly";
-			};
-			name = Debug;
-		};
-		20156B4D19FE5C9E00142EC0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/WeightlyTests/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weightly.app/Weightly";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -643,15 +540,6 @@
 			buildConfigurations = (
 				20156B4919FE5C9E00142EC0 /* Debug */,
 				20156B4A19FE5C9E00142EC0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		20156B4B19FE5C9E00142EC0 /* Build configuration list for PBXNativeTarget "WeightlyTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				20156B4C19FE5C9E00142EC0 /* Debug */,
-				20156B4D19FE5C9E00142EC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
