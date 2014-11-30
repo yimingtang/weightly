@@ -8,8 +8,9 @@
 
 #import "WTLAppDelegate.h"
 #import "WTLWeightViewController.h"
-#import "WTLUserDefaultsDataSource.h"
-#import "WTLDataStore.h"
+#import "WTLPersistentDataStore.h"
+#import "WTLPreferences.h"
+#import "WTLDefines.h"
 #import "UIColor+Weightly.h"
 
 @implementation WTLAppDelegate
@@ -64,27 +65,27 @@
     [components setHour:8];
     [components setMinute:0];
     [components setSecond:0];
-    NSDate *alarmDate = [calendar dateFromComponents:components];
+    NSDate *reminderTime = [calendar dateFromComponents:components];
     
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    [standardUserDefaults registerDefaults:@{kWTLHeightDefaultsKey: @170.0f,
-                                             kWTLGenderDefaultsKey: @(WTLGenderTypeMale),
-                                             kWTLGoalDefaultsKey: @60.0f,
-                                             kWTLUnitsDefaultsKey: @(WTLUnitsTypeMetric),
-                                             kWTLThemeDefaultsKey: @"Cinnabar",
-                                             kWTLReminderDefaultsKey: @NO,
-                                             kWTLAlarmClockDefaultsKey: alarmDate
+    [standardUserDefaults registerDefaults:@{kWTLHeightKey: @170.0f,
+                                             kWTLGenderKey: @(WTLGenderTypeMale),
+                                             kWTLGoalWeightKey: @60.0f,
+                                             kWTLUnitsKey: @(WTLUnitsTypeMetric),
+                                             kWTLThemeKey: @"Cinnabar",
+                                             kWTLEnableReminderKey: @NO,
+                                             kWTLReminderTimeKey: reminderTime
                                              }];
 }
 
 
-- (void)configureDataStack {
-    [WTLDataStore setupDataStack];
+- (void)configurePersistentDataStore {
+    [[WTLPersistentDataStore sharedPersistentDataStore] setupCoreDataStack];
 }
 
 
 - (void)saveContext {
-    [WTLDataStore saveMainQueueContext];
+    [[WTLPersistentDataStore sharedPersistentDataStore] saveContext];
 }
 
 
@@ -92,8 +93,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self configureAnalytics];
-    [self configureDataStack];
     [self configureDefaults];
+    [self configurePersistentDataStore];
     [self configureAppearance];
     
     [self.window makeKeyAndVisible];

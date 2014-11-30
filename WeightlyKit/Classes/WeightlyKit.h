@@ -6,4 +6,10 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
+#import "WTLDefines.h"
+#import "WTLWeight.h"
+#import "WTLPreferences.h"
+#import "WTLPersistentDataStore.h"
+
 #import "UIColor+Weightly.h"
+#import "NSUserDefaults+Weightly.h"

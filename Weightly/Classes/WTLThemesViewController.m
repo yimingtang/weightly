@@ -7,7 +7,8 @@
 //
 
 #import "WTLThemesViewController.h"
-#import "WTLUserDefaultsDataSource.h"
+#import "WTLPreferences.h"
+#import "WTLDefines.h"
 #import "WTLThemeCollectionViewCell.h"
 #import <SAMCategories/UIColor+SAMAdditions.h>
 
@@ -61,7 +62,7 @@ static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
     
     self.collectionView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
     [self.collectionView registerClass:[WTLThemeCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    self.selectedTheme = [[NSUserDefaults standardUserDefaults] stringForKey:kWTLThemeDefaultsKey];
+    self.selectedTheme = [[NSUserDefaults standardUserDefaults] stringForKey:kWTLThemeKey];
 }
 
 
@@ -142,7 +143,7 @@ static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *theme = [self objectForItemAtIndexPath:indexPath];
     self.selectedTheme = [theme objectForKey:kWTLThemeTitleKey];
-    [[NSUserDefaults standardUserDefaults] setObject:self.selectedTheme forKey:kWTLThemeDefaultsKey];
+    [[NSUserDefaults standardUserDefaults] setObject:self.selectedTheme forKey:kWTLThemeKey];
 }
 
 
