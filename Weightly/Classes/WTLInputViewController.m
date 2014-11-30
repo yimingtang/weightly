@@ -52,7 +52,7 @@
     [self.view addSubview:self.textField];
     
     self.textField.text = self.initialInput;
-    self.textField.unitLabel.text = self.unitString;
+    self.textField.suffixLabel.text = self.unitString;
     
     [self resetViewConstraints];
     [self.view layoutIfNeeded];
@@ -117,7 +117,7 @@
         make.width.equalTo(self.view).multipliedBy(0.85f);
     }];
     
-    [UIView animateWithDuration:1.0 delay:0 usingSpringWithDamping:0.65f initialSpringVelocity:0.75f options:0 animations:^{
+    [UIView animateWithDuration:0.8 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:1 options:0 animations:^{
         [self.view layoutIfNeeded];
     } completion:nil];
 }
@@ -128,7 +128,7 @@
     
     // duration = keyboard animation duration
     // option = keyboard animation curve. not documented
-    [UIView animateWithDuration:0.3 delay:0 options:(7 << 16) animations:^{
+    [UIView animateWithDuration:0.3 delay:0 options:kNilOptions animations:^{
         [self.view layoutIfNeeded];
     } completion:nil];
 }

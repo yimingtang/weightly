@@ -221,13 +221,6 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		201D231E1A29E139002C2F8E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 		201D231F1A29E16A002C2F8E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,7 +332,6 @@
 			isa = PBXGroup;
 			children = (
 				201D231C1A29E0E3002C2F8E /* Application */,
-				201D231E1A29E139002C2F8E /* Models */,
 				201D23201A29E188002C2F8E /* Transitions */,
 				201D23211A29E1B2002C2F8E /* Util */,
 				201D231D1A29E101002C2F8E /* View Controllers */,

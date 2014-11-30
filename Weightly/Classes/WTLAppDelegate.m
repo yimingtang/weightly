@@ -68,14 +68,19 @@
     NSDate *reminderTime = [calendar dateFromComponents:components];
     
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    [standardUserDefaults registerDefaults:@{kWTLHeightKey: @170.0f,
-                                             kWTLGenderKey: @(WTLGenderTypeMale),
-                                             kWTLGoalWeightKey: @60.0f,
-                                             kWTLUnitsKey: @(WTLUnitsTypeMetric),
-                                             kWTLThemeKey: @"Cinnabar",
+    [standardUserDefaults registerDefaults:@{kWTLThemeKey: @"Cinnabar",
                                              kWTLEnableReminderKey: @NO,
                                              kWTLReminderTimeKey: reminderTime
                                              }];
+    
+    WTLPreferences *preferences = [WTLPreferences sharedPreferences];
+    [preferences registerDefaults:@{kWTLHeightKey: @170.0f,
+                                    kWTLGenderKey: @(WTLGenderTypeMale),
+                                    kWTLUnitsKey: @(WTLUnitsTypeMetric),
+                                    kWTLGoalWeightKey: @60.0f,
+                                    kWTLCurrentWeightKey: @70.0f,
+                                    }];
+    [preferences synchronize];
 }
 
 
@@ -106,10 +111,8 @@
         NSString *version = [bundleInfo objectForKey:(NSString *)kCFBundleVersionKey];
         NSString *versionString = [NSString stringWithFormat:@"%@ (%@)", shortVersion, version];
         NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
-        if (![versionString isEqualToString:[standardDefaults stringForKey:@"WTLVersion"]]) {
-            [standardDefaults setObject:version forKey:@"WTLVersion"];
-            [standardDefaults synchronize];
-        }
+        [standardDefaults setObject:versionString forKey:@"WTLVersion"];
+        [standardDefaults synchronize];
     });
     return YES;
 }

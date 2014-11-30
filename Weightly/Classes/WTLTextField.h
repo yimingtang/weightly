@@ -10,8 +10,8 @@
 
 @interface WTLTextField : UITextField
 
-@property (nonatomic, readonly) UILabel *unitLabel;
+@property (nonatomic, readonly) UILabel *suffixLabel;
 @property (nonatomic) UIEdgeInsets textEdgeInsets;
-@property (nonatomic) UIEdgeInsets unitLabelEdgeInsets;
+@property (nonatomic) UIEdgeInsets suffixLabelEdgeInsets;
 
 @end

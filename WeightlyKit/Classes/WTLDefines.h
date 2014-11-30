@@ -22,6 +22,7 @@ extern NSString *const kWTLThemeKey;
 extern NSString *const kWTLEnableReminderKey;
 extern NSString *const kWTLReminderTimeKey;
 extern NSString *const kWTLHasLaunchOnceKey;
+extern NSString *const kWTLCurrentWeightKey;
 
 
 /*

@@ -27,10 +27,10 @@
 
 - (id)objectForKey:(NSString *)key {
     id value = [[self defaultsStore] objectForKey:key];
-    if (!value) {
-        value = self.defaults[key];
+    if (value) {
+        return value;
     }
-    return value;
+    return self.defaults[key];
 }
 
 
@@ -47,9 +47,17 @@
 
 
 - (void)synchronize {
+    NSUserDefaults *defaultsStore = [self defaultsStore];
+    [self.defaults enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if (![defaultsStore objectForKey:key]) {
+            [self setObject:obj forKey:key];
+        }
+    }];
+    
+    [defaultsStore synchronize];
     [[self iCloudStore] synchronize];
-    [[self defaultsStore] synchronize];
 }
+
 
 #pragma mark - Singleton
 

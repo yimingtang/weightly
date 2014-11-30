@@ -12,15 +12,17 @@
 
 #pragma mark - Accessors
 
-@synthesize unitLabel = _unitLabel;
+@synthesize suffixLabel = _suffixLabel;
+@synthesize textEdgeInsets = _textEdgeInsets;
+@synthesize suffixLabelEdgeInsets = _suffixLabelEdgeInsets;
 
-- (UILabel *)unitLabel {
-    if (!_unitLabel) {
-        _unitLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _unitLabel.textColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
-        _unitLabel.font = [UIFont fontWithName:@"Avenir-Light" size:30.0f];
+- (UILabel *)suffixLabel {
+    if (!_suffixLabel) {
+        _suffixLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _suffixLabel.textColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
+        _suffixLabel.font = self.font;
     }
-    return _unitLabel;
+    return _suffixLabel;
 }
 
 
@@ -55,26 +57,27 @@
 
 
 - (CGRect)rightViewRectForBounds:(CGRect)bounds {
-    CGSize labelSize = [self.unitLabel sizeThatFits:bounds.size];
-    return CGRectMake(bounds.size.width - labelSize.width - self.unitLabelEdgeInsets.right, self.unitLabelEdgeInsets.top, labelSize.width, labelSize.height);
+    CGSize labelSize = [self.suffixLabel sizeThatFits:bounds.size];
+    return CGRectMake(bounds.size.width - labelSize.width - self.suffixLabelEdgeInsets.right, self.suffixLabelEdgeInsets.top, labelSize.width, labelSize.height);
 }
 
 
 #pragma mark - Private
 
 - (void)initialize {
-    self.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
-    self.textAlignment = NSTextAlignmentCenter;
-    self.textColor = [UIColor whiteColor];
-    self.font = [UIFont fontWithName:@"Avenir" size:30.0f];
-    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"0" attributes:
-                                  @{NSForegroundColorAttributeName : [UIColor colorWithWhite:1.0f alpha:0.5f]}];
     self.keyboardType = UIKeyboardTypeDecimalPad;
-    self.layer.cornerRadius = 5.0f;
-    self.rightView = self.unitLabel;
+    self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.1f];
+    self.textColor = [UIColor whiteColor];
+    self.textAlignment = NSTextAlignmentCenter;
+    self.font = [UIFont fontWithName:@"Avenir-Light" size:30.0];
+    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"0" attributes:
+                                  @{NSForegroundColorAttributeName : [UIColor colorWithWhite:1.0 alpha:0.3f]}];
+    self.layer.cornerRadius = 5.0;
+    
+    self.rightView = self.suffixLabel;
     self.rightViewMode = UITextFieldViewModeAlways;
-    self.textEdgeInsets = UIEdgeInsetsMake(8.0f, 16.0f, 8.0f, 16.0f);
-    self.unitLabelEdgeInsets = UIEdgeInsetsMake(8.0f, 0.0f, 8.0f, 16.0f);
+    self.textEdgeInsets = UIEdgeInsetsMake(8.0, 16.0, 8.0, 16.0);
+    self.suffixLabelEdgeInsets = UIEdgeInsetsMake(8.0, 0.0, 8.0, 16.0);
 }
 
 @end
