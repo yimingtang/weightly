@@ -258,8 +258,8 @@
 
 - (void)showWeightInput:(id)sender {
     WTLInputViewController *viewController = [[WTLInputViewController alloc] init];
-    viewController.unitString = @"KG";
-    viewController.initialInput = [NSString stringWithFormat:@"%.1f", self.weight.amount];
+    viewController.suffixString = @"KG";
+    viewController.inputString = [NSString stringWithFormat:@"%.1f", self.weight.amount];
     viewController.modalPresentationStyle = UIModalPresentationCustom;
     viewController.transitioningDelegate = self;
     viewController.delegate = self;

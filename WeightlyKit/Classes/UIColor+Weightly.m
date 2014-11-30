@@ -11,7 +11,7 @@
 @implementation UIColor (Weightly)
 
 + (instancetype)wtl_redColor {
-    return [self colorWithRed:0.906 green:0.298 blue:0.235 alpha:1.0f];
+    return [self colorWithRed:0.906 green:0.298 blue:0.235 alpha:1.0];
 }
 
 @end

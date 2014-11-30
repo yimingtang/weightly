@@ -196,11 +196,11 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
         }
     } else if (valueType == WTLDefaultsValueTypeNumber) {
         WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
-        inputViewController.initialInput = [NSString stringWithFormat:@"%.1f", [[self.preferences objectForKey:defaultsKey] floatValue]];
+        inputViewController.inputString = [NSString stringWithFormat:@"%.1f", [[self.preferences objectForKey:defaultsKey] floatValue]];
         if ([defaultsKey isEqualToString:kWTLHeightKey]) {
-            inputViewController.unitString = @"CM";
+            inputViewController.suffixString = @"CM";
         } else if ([defaultsKey isEqualToString:kWTLGoalWeightKey]) {
-            inputViewController.unitString = @"KG";
+            inputViewController.suffixString = @"KG";
         }
         [self showViewController:inputViewController animated:YES];
     }

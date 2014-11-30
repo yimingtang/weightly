@@ -8,7 +8,14 @@
 
 #import "WTLInputViewController.h"
 #import "WTLTextField.h"
-#import <Masonry.h>
+#import "UIColor+Weightly.h"
+
+#import <Masonry/Masonry.h>
+
+@interface WTLInputViewController ()
+@property (nonatomic, readonly) WTLTextField *textField;
+@property (nonatomic, readonly) UIButton *doneButton;
+@end
 
 @implementation WTLInputViewController
 
@@ -16,6 +23,7 @@
 
 @synthesize textField = _textField;
 @synthesize doneButton = _doneButton;
+@synthesize delegate = _delegate;
 
 - (WTLTextField *)textField {
     if (!_textField) {
@@ -27,16 +35,16 @@
 
 - (UIButton *)doneButton {
     if (!_doneButton) {
-        _doneButton = [[UIButton alloc] initWithFrame:CGRectZero];
+        _doneButton = [[UIButton alloc] init];
         _doneButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16.0f];
-        [_doneButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateNormal];
-        [_doneButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.8f] forState:UIControlStateHighlighted];
+        [_doneButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5f] forState:UIControlStateNormal];
+        [_doneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [_doneButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
         [_doneButton setTitle:@"Done" forState:UIControlStateNormal];
-        _doneButton.contentEdgeInsets = UIEdgeInsetsMake(8.0f, 10.0f, 8.0f, 10.0f);
-        _doneButton.layer.cornerRadius = 4.0f;
-        _doneButton.layer.borderColor = [[UIColor colorWithWhite:1.0f alpha:0.5f] CGColor];
-        _doneButton.layer.borderWidth = 1.0f;
+        _doneButton.contentEdgeInsets = UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0);
+        _doneButton.layer.cornerRadius = 5.0;
+        _doneButton.layer.borderWidth = 1.0;
+        _doneButton.layer.borderColor = [[UIColor colorWithWhite:1.0 alpha:0.5f] CGColor];
     }
     return _doneButton;
 }
@@ -46,13 +54,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
-    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]];
+    self.view.backgroundColor = [UIColor wtl_redColor];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    [self.view addGestureRecognizer:tapGesture];
+    
     [self.view addSubview:self.doneButton];
     [self.view addSubview:self.textField];
-    
-    self.textField.text = self.initialInput;
-    self.textField.suffixLabel.text = self.unitString;
+    self.textField.text = self.inputString;
+    self.textField.suffixLabel.text = self.suffixString;
     
     [self resetViewConstraints];
     [self.view layoutIfNeeded];
@@ -77,13 +87,14 @@
 
 - (void)save:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
     if ([self.delegate respondsToSelector:@selector(inputViewController:didFinishEditingWithResult:)]) {
         [self.delegate inputViewController:self didFinishEditingWithResult:self.textField.text];
     }
 }
 
 
-- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer {
+- (void)handleTapGesture:(UIGestureRecognizer *)gestureRecognizer {
     [self save:nil];
 }
 
@@ -92,7 +103,7 @@
 
 - (void)resetViewConstraints {
     [self.doneButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
+        make.right.equalTo(self.view.mas_right).with.offset(-20.0);
         make.bottom.equalTo(self.view.mas_top);
     }];
     [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -104,16 +115,16 @@
 
 
 - (void)animateViewsIn {
-    CGFloat offsetY = [UIApplication sharedApplication].statusBarHidden ? 0 : 20.0f;
+    CGFloat offsetY = [UIApplication sharedApplication].statusBarHidden ? 0 : 20.0;
     
     [self.doneButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
-        make.top.equalTo(self.view.mas_top).with.offset(12.0f + offsetY);
+        make.right.equalTo(self.view.mas_right).with.offset(-20.0);
+        make.top.equalTo(self.view.mas_top).with.offset(12.0 + offsetY);
     }];
     
     [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.centerY.equalTo(self.view.mas_bottom).dividedBy(3.0f);
+        make.centerY.equalTo(self.view.mas_bottom).dividedBy(3.0);
         make.width.equalTo(self.view).multipliedBy(0.85f);
     }];
     
