@@ -126,7 +126,7 @@
         string = @"";
     }
     
-    return [self.validator validateValue:(strtof([string cStringUsingEncoding:NSASCIIStringEncoding], nil))];
+    return [self.validator validateValue:(strtof([string cStringUsingEncoding:NSASCIIStringEncoding], NULL))];
 }
 
 

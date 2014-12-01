@@ -12,12 +12,14 @@
 #import "WTLSectionHeaderView.h"
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
+#import "WTLUnitConverter.h"
 #import "WTLWeight.h"
+#import "WTLNumberValidator.h"
+#import "WTLDayNumberFormatter.h"
+#import "UIColor+Weightly.h"
 
 @interface WTLHistoryViewController () <UIViewControllerTransitioningDelegate, WTLInputViewControllerDelegate>
-
 @property (nonatomic) NSIndexPath *selectedIndexPath;
-
 @end
 
 @implementation WTLHistoryViewController
@@ -42,25 +44,12 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     
     self.useChangeAnimations = NO;
     
-    self.tableView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
-    self.tableView.rowHeight = 50.0f;
-    self.tableView.sectionHeaderHeight = 45.0f;
+    self.tableView.backgroundColor = [UIColor wtl_redColor];
+    self.tableView.rowHeight = 50.0;
+    self.tableView.sectionHeaderHeight = 45.0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[WTLWeightTableViewCell class] forCellReuseIdentifier:cellReuseIdentifier];
     [self.tableView registerClass:[WTLSectionHeaderView class] forHeaderFooterViewReuseIdentifier:sectionHeaderReuseIdentifier];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 
@@ -76,28 +65,24 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
 }
 
 
-- (NSString *)cacheName {
-    return nil;
-}
-
-
 #pragma mark - SSManagedTableViewController
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    static NSDateFormatter *dateFormatter = nil;
+    static WTLDayNumberFormatter *dayNumberFormatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setCalendar:[NSCalendar currentCalendar]];
-        [dateFormatter setDateFormat:@"dd"];
+        dayNumberFormatter = [[WTLDayNumberFormatter alloc] init];
     });
     
     WTLWeightTableViewCell *weightCell = (WTLWeightTableViewCell *)cell;
     WTLWeight *weight = [self objectForViewIndexPath:indexPath];
     weightCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    weightCell.dateLabel.text = [dateFormatter stringFromDate:weight.timeStamp];
-    weightCell.titleLabel.text = [NSString stringWithFormat:@"%.1fkg", weight.amount];
+    weightCell.titleLabel.text = [[WTLUnitConverter sharedConverter] targetDisplayStringForMetricMass:weight.amount];
     weightCell.minor = !weight.userGenerated;
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSInteger day = [calendar component:NSCalendarUnitDay fromDate:weight.timeStamp];
+    weightCell.dateLabel.text = [dayNumberFormatter stringFromNumber:@(day)];
 }
 
 
@@ -139,7 +124,7 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     
     NSString *titleString = [dateFormatter stringFromDate:date];
     
-    WTLSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"sectionHeader"];
+    WTLSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:sectionHeaderReuseIdentifier];
     headerView.titleLabel.text = [titleString uppercaseString];
     
     return headerView;
@@ -172,21 +157,25 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     
     self.selectedIndexPath = indexPath;
     WTLWeight *weight = [self objectForViewIndexPath:indexPath];
+    
     WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
-    inputViewController.inputString = [NSString stringWithFormat:@"%.1f", weight.amount];
-    inputViewController.suffixString = @"KG";
     inputViewController.modalPresentationStyle = UIModalPresentationCustom;
     inputViewController.transitioningDelegate = self;
+    inputViewController.inputString = [@(weight.amount) stringValue];
+    inputViewController.suffixString = [[[WTLUnitConverter sharedConverter] targetMassUnitSymbol] uppercaseString];
     inputViewController.delegate = self;
+    inputViewController.validator = [[WTLNumberValidator alloc] initWithMinimumValue:0.0 maximumValue:1500.0];
     [self presentViewController:inputViewController animated:YES completion:nil];
 }
 
 
 #pragma mark - WTLInputViewControllerDelegate
 
-- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result {
+- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithText:(NSString *)text {
     WTLWeight *weight = [self objectForViewIndexPath:self.selectedIndexPath];
-    CGFloat newAmount = [result floatValue];
+    NSString *string = text ? text : @"";
+    
+    CGFloat newAmount = strtof([string cStringUsingEncoding:NSASCIIStringEncoding], NULL);
     if (weight.amount - newAmount == 0.0) {
         return;
     }

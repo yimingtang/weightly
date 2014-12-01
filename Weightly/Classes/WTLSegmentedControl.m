@@ -17,8 +17,7 @@
 #pragma mark - UIView
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
+    if ((self = [super initWithFrame:frame])) {
         [self initialize];
     }
     return self;
@@ -26,8 +25,7 @@
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
+    if ((self = [super initWithCoder:aDecoder])) {
         [self initialize];
     }
     return self;
@@ -37,8 +35,7 @@
 #pragma mark - UISegmentedControl
 
 - (instancetype)initWithItems:(NSArray *)items {
-    self = [super initWithItems:items];
-    if (self) {
+    if ((self = [super initWithItems:items])) {
         [self initialize];
     }
     return self;
@@ -50,8 +47,8 @@
 - (void)initialize {
     // Remove borders and highlighted background
     [self setTintColor:[UIColor clearColor]];
-    [self setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1.0f alpha:0.5f],
-                                   NSFontAttributeName: [UIFont fontWithName:@"Avenir-Light" size:20.0f]}
+    [self setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1.0 alpha:0.5f],
+                                   NSFontAttributeName: [UIFont fontWithName:@"Avenir-Light" size:20.0]}
                         forState:UIControlStateNormal];
     [self setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}
                         forState:UIControlStateSelected];

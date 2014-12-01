@@ -204,7 +204,7 @@
     viewController.modalPresentationStyle = UIModalPresentationCustom;
     viewController.transitioningDelegate = self;
     viewController.delegate = self;
-    viewController.suffixString = [[WTLUnitConverter sharedConverter] targetMassUnitSymbol];
+    viewController.suffixString = [[[WTLUnitConverter sharedConverter] targetMassUnitSymbol] uppercaseString];
     viewController.inputString = self.weight.amount == 0.0f ? nil : [@(self.weight.amount) stringValue];
     viewController.validator = [[WTLNumberValidator alloc] initWithMinimumValue:0.0 maximumValue:1500.0];
     
@@ -305,7 +305,7 @@
 
 - (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithText:(NSString *)text {
     NSString *string = text ? text : @"";
-    float newAmount = strtof([string cStringUsingEncoding:NSASCIIStringEncoding], nil);
+    float newAmount = strtof([string cStringUsingEncoding:NSASCIIStringEncoding], NULL);
     
     if (self.weight.amount - newAmount == 0.0f) {
         return;

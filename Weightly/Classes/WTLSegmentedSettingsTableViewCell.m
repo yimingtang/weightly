@@ -8,6 +8,7 @@
 
 #import "WTLSegmentedSettingsTableViewCell.h"
 #import "WTLSegmentedControl.h"
+
 #import <Masonry.h>
 
 @implementation WTLSegmentedSettingsTableViewCell
@@ -35,9 +36,10 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
         [self.contentView addSubview:self.segmentedControl];
+        
         [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.contentView);
-            make.right.equalTo(self.contentView).with.offset(-25.0f);
+            make.right.equalTo(self.contentView).with.offset(-25.0);
         }];
     }
     return self;

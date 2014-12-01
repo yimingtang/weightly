@@ -7,12 +7,11 @@
 //
 
 #import "WTLThemeCollectionViewCell.h"
+
 #import <Masonry.h>
 
 @interface WTLThemeCollectionViewCell ()
-
 @property (nonatomic) UIImageView *checkmarkImageView;
-
 @end
 
 @implementation WTLThemeCollectionViewCell
@@ -28,7 +27,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor whiteColor];
-        _titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:18.0f];
+        _titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:18.0];
     }
     return _titleLabel;
 }
@@ -38,7 +37,7 @@
     if (!_weightLabel) {
         _weightLabel = [[UILabel alloc] init];
         _weightLabel.textColor = [UIColor whiteColor];
-        _weightLabel.font = [UIFont fontWithName:@"Avenir" size:42.0f];
+        _weightLabel.font = [UIFont fontWithName:@"Avenir" size:42.0];
     }
     return _weightLabel;
 }
@@ -47,8 +46,8 @@
 - (UILabel *)bmiLabel {
     if (!_bmiLabel) {
         _bmiLabel = [[UILabel alloc] init];
-        _bmiLabel.textColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
-        _bmiLabel.font = [UIFont fontWithName:@"Avenir-Light" size:12.0f];
+        _bmiLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.5f];
+        _bmiLabel.font = [UIFont fontWithName:@"Avenir-Light" size:12.0];
     }
     return _bmiLabel;
 }
@@ -72,25 +71,7 @@
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.checkmarkImageView];
         
-        [self.bmiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.contentView);
-            make.top.equalTo(self.contentView.mas_centerY);
-        }];
-        
-        [self.weightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.contentView);
-            make.bottom.equalTo(self.bmiLabel.mas_top);
-        }];
-        
-        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.contentView);
-            make.top.equalTo(self.contentView.mas_bottom).multipliedBy(0.75f);
-        }];
-        
-        [self.checkmarkImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView).with.offset(12.0f);
-            make.right.equalTo(self.contentView).with.offset(-12.0f);
-        }];
+        [self setupViewConstraints];
     }
     return self;
 }
@@ -100,6 +81,31 @@
     [super setSelected:selected];
     
     self.checkmarkImageView.hidden = !selected;
+}
+
+
+#pragma mark - Private
+
+- (void)setupViewConstraints {
+    [self.bmiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.contentView);
+        make.top.equalTo(self.contentView.mas_centerY);
+    }];
+    
+    [self.weightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.contentView);
+        make.bottom.equalTo(self.bmiLabel.mas_top);
+    }];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.contentView);
+        make.top.equalTo(self.contentView.mas_bottom).multipliedBy(0.75f);
+    }];
+    
+    [self.checkmarkImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).with.offset(12.0);
+        make.right.equalTo(self.contentView).with.offset(-12.0);
+    }];
 }
 
 @end

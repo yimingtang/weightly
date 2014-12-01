@@ -7,6 +7,7 @@
 //
 
 #import "WTLSectionHeaderView.h"
+
 #import <Masonry.h>
 
 @interface WTLSectionHeaderView ()
@@ -24,7 +25,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor whiteColor];
-        _titleLabel.font = [UIFont fontWithName:@"Avenir" size:20.0f];
+        _titleLabel.font = [UIFont fontWithName:@"Avenir" size:20.0];
     }
     return _titleLabel;
 }
@@ -33,7 +34,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [[UIView alloc] init];
-        _lineView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.4f];
+        _lineView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.4f];
     }
     return _lineView;
 }
@@ -44,24 +45,31 @@
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithReuseIdentifier:reuseIdentifier])) {
         UIView *backgroundView = [[UIView alloc] init];
-        backgroundView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:0.95f];
+        backgroundView.backgroundColor = [UIColor colorWithRed:0.906f green:0.298f blue:0.235f alpha:0.9f];
         self.backgroundView = backgroundView;
         
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.lineView];
         
-        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView).with.offset(20.0f);
-            make.centerY.equalTo(self.contentView);
-        }];
-        
-        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.contentView);
-            make.width.equalTo(self.contentView);
-            make.height.equalTo(@1);
-        }];
+        [self setupViewConstraints];
     }
     return self;
+}
+
+
+#pragma mark - Private
+
+- (void)setupViewConstraints {
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).with.offset(20.0);
+        make.centerY.equalTo(self.contentView);
+    }];
+    
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.contentView);
+        make.width.equalTo(self.contentView);
+        make.height.equalTo(@1);
+    }];
 }
 
 @end
