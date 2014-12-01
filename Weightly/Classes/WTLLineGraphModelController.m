@@ -21,6 +21,13 @@
 @implementation WTLLineGraphModelController
 
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize mutableDataArray = _mutableDataArray;
+@synthesize didChangeLatestWeight = _didChangeLatestWeight;
+@synthesize shouldReloadData = _shouldReloadData;
+@synthesize ignoreChange = _ignoreChange;
+@synthesize useChangeAnimations = _useChangeAnimations;
+@synthesize timePeriod = _timePeriod;
+@synthesize delegate = _delegate;
 
 #pragma mark - Accessors
 
@@ -111,7 +118,7 @@
     [self.mutableDataArray removeAllObjects];
     __block CGFloat tmp = 0;
     __block NSUInteger relativeIndex = 0;
-    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:kNilOptions usingBlock:^(WTLWeight *weight, NSUInteger index, BOOL *stop) {
+    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:(NSEnumerationOptions)kNilOptions usingBlock:^(WTLWeight *weight, NSUInteger index, BOOL *stop) {
         tmp += weight.amount;
         relativeIndex = index - baseIndex;
         if ((relativeIndex + 1) % sampleSize == 0) {
@@ -200,13 +207,13 @@
     
     // Reload data if necessary
     // We only care about objects in selected time period
-    NSUInteger numberOfDays = [self numberOfDaysForTimePeriod:self.timePeriod];
-    NSUInteger lowerBound = controller.fetchedObjects.count - numberOfDays;
+    NSInteger numberOfDays = [self numberOfDaysForTimePeriod:self.timePeriod];
+    NSInteger lowerBound = controller.fetchedObjects.count - numberOfDays;
     if (indexPath.row < lowerBound && newIndexPath.row < lowerBound) {
         return;
     }
     
-    if (type == NSFetchedResultsChangeInsert && newIndexPath.row == controller.fetchedObjects.count - 1) {
+    if (type == NSFetchedResultsChangeInsert && newIndexPath.row == (NSInteger)controller.fetchedObjects.count - 1) {
         self.didChangeLatestWeight = YES;
     }
     self.shouldReloadData = YES;

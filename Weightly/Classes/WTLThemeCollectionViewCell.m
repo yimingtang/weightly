@@ -22,6 +22,7 @@
 @synthesize titleLabel = _titleLabel;
 @synthesize weightLabel = _weightLabel;
 @synthesize bmiLabel = _bmiLabel;
+@synthesize checkmarkImageView = _checkmarkImageView;
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {

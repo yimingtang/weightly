@@ -49,7 +49,7 @@
         // Create the section identifier as a string representing the number (year * 1000) + month;
         // this way they will be correctly ordered chronologically regardless of the actual name of the month.
         NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:self.timeStamp];
+        NSDateComponents *components = [calendar components:(NSCalendarUnit)(NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:self.timeStamp];
         tmp = [NSString stringWithFormat:@"%ld", (components.year * 1000 + components.month)];
         [self setPrimitiveSectionIdentifier:tmp];
     }
@@ -109,7 +109,7 @@
     }
     
     indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(baseIndex + 1, index - baseIndex)];
-    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:kNilOptions usingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
+    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:(NSEnumerationOptions)kNilOptions usingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
         obj.amount = weight.amount + offset * (idx - baseIndex);
     }];
     
@@ -132,7 +132,7 @@
     }
     
     indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, baseIndex - index)];
-    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:kNilOptions usingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
+    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:(NSEnumerationOptions)kNilOptions usingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
         obj.amount = weight.amount - offset * (baseIndex - idx);
     }];
 }
@@ -159,9 +159,9 @@
     // Compare two date
     // iOS 7
     // http://stackoverflow.com/questions/2331129/how-to-determine-if-an-nsdate-is-today
-    NSDateComponents *dateComponents = [calendar components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
+    NSDateComponents *dateComponents = [calendar components:(NSCalendarUnit)(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
     NSDate *today = [calendar dateFromComponents:dateComponents];
-    dateComponents = [calendar components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:latestWeight.timeStamp];
+    dateComponents = [calendar components:(NSCalendarUnit)(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:latestWeight.timeStamp];
     NSDate *otherDay = [calendar dateFromComponents:dateComponents];
     
     if ([otherDay isEqualToDate:today]) {
@@ -170,13 +170,13 @@
     
     // Add weight records
     NSDateComponents *dayComponents = [[NSDateComponents alloc] init];
-    dateComponents = [calendar components:NSCalendarUnitDay fromDate:otherDay toDate:today options:kNilOptions];
+    dateComponents = [calendar components:NSCalendarUnitDay fromDate:otherDay toDate:today options:(NSCalendarOptions)kNilOptions];
     for (NSInteger i = 0; i < dateComponents.day; i++) {
         WTLWeight *weight = [[self alloc] initWithContext:[self mainQueueContext]];
         weight.amount = latestWeight.amount;
         weight.userGenerated = NO;
         dayComponents.day = i + 1;
-        weight.timeStamp = [calendar dateByAddingComponents:dayComponents toDate:otherDay options:kNilOptions];
+        weight.timeStamp = [calendar dateByAddingComponents:dayComponents toDate:otherDay options:(NSCalendarOptions)kNilOptions];
     }
 }
 
@@ -188,7 +188,7 @@
     });
     
     NSCalendar *calender = [NSCalendar currentCalendar];
-    NSDateComponents *dateComponents = [calender components:(NSCalendarUnitEra| NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
+    NSDateComponents *dateComponents = [calender components:(NSCalendarUnit)(NSCalendarUnitEra| NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
     NSDate *today = [calender dateFromComponents:dateComponents];
     NSDateComponents *dayComponents = [[NSDateComponents alloc] init];
     WTLWeight *weight = nil;
@@ -197,7 +197,7 @@
         weight.amount = 60 + 5 * drand48();
         weight.userGenerated = YES;
         dayComponents.day = -i;
-        weight.timeStamp = [calender dateByAddingComponents:dayComponents toDate:today options:kNilOptions];
+        weight.timeStamp = [calender dateByAddingComponents:dayComponents toDate:today options:(NSCalendarOptions)kNilOptions];
     }
 }
 

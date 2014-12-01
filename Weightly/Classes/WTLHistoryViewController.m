@@ -25,6 +25,11 @@
 static NSString *const cellReuseIdentifier = @"cell";
 static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
 
+#pragma mark - Accessors
+
+@synthesize selectedIndexPath = _selectedIndexPath;
+
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
@@ -78,7 +83,7 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
 
 #pragma mark - SSManagedTableViewController
 
-- (void)configureCell:(WTLWeightTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     static NSDateFormatter *dateFormatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -87,11 +92,12 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
         [dateFormatter setDateFormat:@"dd"];
     });
     
+    WTLWeightTableViewCell *weightCell = (WTLWeightTableViewCell *)cell;
     WTLWeight *weight = [self objectForViewIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.dateLabel.text = [dateFormatter stringFromDate:weight.timeStamp];
-    cell.titleLabel.text = [NSString stringWithFormat:@"%.1fkg", weight.amount];
-    cell.minor = !weight.userGenerated;
+    weightCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    weightCell.dateLabel.text = [dateFormatter stringFromDate:weight.timeStamp];
+    weightCell.titleLabel.text = [NSString stringWithFormat:@"%.1fkg", weight.amount];
+    weightCell.minor = !weight.userGenerated;
 }
 
 
@@ -181,7 +187,7 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
 - (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result {
     WTLWeight *weight = [self objectForViewIndexPath:self.selectedIndexPath];
     CGFloat newAmount = [result floatValue];
-    if (weight.amount == newAmount) {
+    if (weight.amount - newAmount == 0.0) {
         return;
     }
     

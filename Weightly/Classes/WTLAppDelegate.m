@@ -61,7 +61,7 @@
     // Use APIs for iOS 7 and ealier
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *today = [NSDate date];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:today];
+    NSDateComponents *components = [calendar components:(NSCalendarUnit)(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:today];
     [components setHour:8];
     [components setMinute:0];
     [components setSecond:0];

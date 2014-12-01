@@ -10,6 +10,10 @@
 
 @implementation WTLSegmentedControl
 
+#pragma mark - Accessors
+
+@synthesize cell = _cell;
+
 #pragma mark - UIView
 
 - (instancetype)initWithFrame:(CGRect)frame {

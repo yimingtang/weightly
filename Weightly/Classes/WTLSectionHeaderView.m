@@ -18,6 +18,7 @@
 #pragma mark - Accessors
 
 @synthesize titleLabel = _titleLabel;
+@synthesize lineView = _lineView;
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {

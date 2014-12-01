@@ -19,6 +19,10 @@
 
 @implementation WTLWeightTableViewCell
 
+@synthesize lineView = _lineView;
+@synthesize circleView = _circleView;
+@synthesize minor = _minor;
+
 #pragma mark - Accessors
 
 @synthesize titleLabel = _titleLabel;

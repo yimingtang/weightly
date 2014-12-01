@@ -27,6 +27,7 @@
 @synthesize delegate = _delegate;
 @synthesize inputString = _inputString;
 @synthesize suffixString = _suffixString;
+@synthesize validator = _validator;
 
 - (WTLTextField *)textField {
     if (!_textField) {

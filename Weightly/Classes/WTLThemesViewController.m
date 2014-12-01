@@ -27,6 +27,9 @@ static NSString *const kWTLThemeTitleKey = @"title";
 static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
 
 @synthesize itemSize = _itemSize;
+@synthesize selectedTheme = _selectedTheme;
+@synthesize needsUpdateItemSize = _needsUpdateItemSize;
+@synthesize themes = _themes;
 
 - (instancetype)init {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -48,7 +51,7 @@ static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
     if (!_themes) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"themes" ofType:@"json"];
         NSData *data = [NSData dataWithContentsOfFile:path];
-        _themes = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        _themes = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)kNilOptions error:nil];
     }
     return _themes;
 }
