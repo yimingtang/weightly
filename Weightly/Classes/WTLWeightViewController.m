@@ -5,8 +5,7 @@
 //  Created by Yiming Tang on 10/27/14.
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
-#import <BEMSimpleLineGraphView.h>
-#import <Masonry.h>
+
 #import "WTLWeightViewController.h"
 #import "WTLLineGraphModelController.h"
 #import "WTLInputViewController.h"
@@ -15,61 +14,42 @@
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
 #import "WTLWeight.h"
+#import "WTLWeightView.h"
+#import "WTLDefines.h"
+#import "UIColor+Weightly.h"
+#import "WTLUnitConverter.h"
+
+#import <Masonry/Masonry.h>
+#import <BEMSimpleLineGraph/BEMSimpleLineGraphView.h>
 
 @interface WTLWeightViewController () <UIViewControllerTransitioningDelegate, WTLInputViewControllerDelegate, WTLLineGraphModelControllerDelegate>
+@property (nonatomic, readonly) UIButton *settingsButton;
+@property (nonatomic, readonly) WTLWeightView *weightView;
+@property (nonatomic, readonly) UIButton *historyButton;
+@property (nonatomic, readonly) BEMSimpleLineGraphView *lineGraphView;
+@property (nonatomic, readonly) UISegmentedControl *segmentedControl;
+@property (nonatomic) BOOL controlsHidden;
 
+@property (nonatomic) WTLWeight *weight;
 @property (nonatomic, readonly) WTLLineGraphModelController *lineGraphModelController;
-
 @end
 
 @implementation WTLWeightViewController
 
-
-#pragma mark - Class Methods
-
-+ (NSDictionary *)weightLabelAttributes {
-    static NSDictionary *_weightLabelAttributes = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _weightLabelAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Avenir" size:88.0f]};
-    });
-    
-    return _weightLabelAttributes;
-}
-
-
-+ (NSDictionary *)unitLabelAttributes {
-    static NSDictionary *_unitLabelAttributes = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _unitLabelAttributes = @{NSFontAttributeName : [UIFont fontWithName:@"Avenir" size:20.0f]};
-    });
-    
-    return _unitLabelAttributes;
-}
-
 #pragma mark - Accessors
 
-@synthesize lineGraphModelController = _lineGraphModelController;
-@synthesize weightLabel = _weightLabel;
-@synthesize bmiLabel = _bmiLabel;
+@synthesize settingsButton = _settingsButton;
+@synthesize weightView = _weightView;
 @synthesize historyButton = _historyButton;
 @synthesize lineGraphView = _lineGraphView;
 @synthesize segmentedControl = _segmentedControl;
-@synthesize settingsButton = _settingsButton;
-
-- (WTLLineGraphModelController *)lineGraphModelController {
-    if (!_lineGraphModelController) {
-        _lineGraphModelController = [[WTLLineGraphModelController alloc] init];
-        _lineGraphModelController.delegate = self;
-    }
-    return _lineGraphModelController;
-}
-
+@synthesize lineGraphModelController = _lineGraphModelController;
+@synthesize weight = _weight;
+@synthesize controlsHidden = _controlsHidden;
 
 - (UIButton *)settingsButton {
     if (!_settingsButton) {
-        _settingsButton = [[UIButton alloc] initWithFrame:CGRectZero];
+        _settingsButton = [[UIButton alloc] init];
         [_settingsButton setImage:[UIImage imageNamed:@"settings-button"] forState:UIControlStateNormal];
         [_settingsButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
         [_settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
@@ -80,57 +60,55 @@
 }
 
 
-- (UILabel *)weightLabel {
-    if (!_weightLabel) {
-        _weightLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _weightLabel.textColor = [UIColor whiteColor];
-        _weightLabel.font = [UIFont fontWithName:@"Avenir" size:85.0f];
-    }
-    return _weightLabel;
-}
-
-
-- (UILabel *)bmiLabel {
-    if (!_bmiLabel) {
-        _bmiLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _bmiLabel.textColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
-        _bmiLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16.0f];
-    }
-    return _bmiLabel;
-}
-
-
 - (UIButton *)historyButton {
     if (!_historyButton) {
-        _historyButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        _historyButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16.0f];
-        [_historyButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateNormal];
-        [_historyButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.8f] forState:UIControlStateHighlighted];
+        _historyButton = [[UIButton alloc] init];
+        _historyButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16.0];
+        [_historyButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5f] forState:UIControlStateNormal];
+        [_historyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [_historyButton addTarget:self action:@selector(showHistory:) forControlEvents:UIControlEventTouchUpInside];
-        [_historyButton setTitle:@"All Records" forState:UIControlStateNormal];
-        _historyButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 10.0f, 4.0f, 10.0f);
-        _historyButton.layer.cornerRadius = 4.0f;
-        _historyButton.layer.borderColor = [[UIColor colorWithWhite:1.0f alpha:0.5f] CGColor];
-        _historyButton.layer.borderWidth = 1.0f;
+        [_historyButton setTitle:@"History" forState:UIControlStateNormal];
+        _historyButton.contentEdgeInsets = UIEdgeInsetsMake(5.0, 10.0, 5.0, 10.0);
+        _historyButton.layer.cornerRadius = 5.0;
+        _historyButton.layer.borderWidth = 1.0;
+        _historyButton.layer.borderColor = [[UIColor colorWithWhite:1.0 alpha:0.5f] CGColor];
     }
     return _historyButton;
 }
 
 
+- (WTLWeightView *)weightView {
+    if (!_weightView) {
+        _weightView = [[WTLWeightView alloc] initWithFrame:CGRectZero];
+        [_weightView.weightButton addTarget:self action:@selector(editWeight:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _weightView;
+}
+
+
 - (BEMSimpleLineGraphView *)lineGraphView {
     if (!_lineGraphView) {
-        _lineGraphView = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(0, 60, 320, 250)];
-        _lineGraphView.dataSource = self.lineGraphModelController;
-        _lineGraphView.colorTop = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
-        _lineGraphView.colorBottom = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
+        _lineGraphView = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectZero];
+        _lineGraphView.colorTop = [UIColor wtl_redColor];
+        _lineGraphView.colorBottom = [UIColor wtl_redColor];
         _lineGraphView.colorLine = [UIColor whiteColor];
         _lineGraphView.widthLine = 2.0;
         _lineGraphView.enableTouchReport = YES;
         _lineGraphView.enablePopUpReport = YES;
-        _lineGraphView.enableBezierCurve = NO;
+        _lineGraphView.enableBezierCurve = YES;
         _lineGraphView.animationGraphStyle = BEMLineAnimationDraw;
+        _lineGraphView.dataSource = self.lineGraphModelController;
     }
     return _lineGraphView;
+}
+
+
+- (WTLLineGraphModelController *)lineGraphModelController {
+    if (!_lineGraphModelController) {
+        _lineGraphModelController = [[WTLLineGraphModelController alloc] init];
+        _lineGraphModelController.delegate = self;
+    }
+    return _lineGraphModelController;
 }
 
 
@@ -156,7 +134,7 @@
     }
     
     [_weight addObserver:self forKeyPath:@"amount" options:NSKeyValueObservingOptionNew context:context];
-    [self updateWeightLabelStringWithAmount:_weight.amount];
+    [self updateWeightView];
 }
 
 
@@ -164,63 +142,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = YES;
-    // Remove "Back" title for detail view controller
-    // http://stackoverflow.com/questions/18870128/ios-7-navigation-bar-custom-back-button-without-title
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    self.view.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
-    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)]];
+    self.view.backgroundColor = [UIColor wtl_redColor];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleControls:)];
+    [self.view addGestureRecognizer:tap];
+    
+    self.navigationController.navigationBarHidden = YES;
     
     [self.view addSubview:self.settingsButton];
-    [self.settingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(32.0f);
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0f);
-        make.size.mas_equalTo(CGSizeMake(75.0f, 75.0f));
-    }];
-    
-    [self.view addSubview:self.segmentedControl];
-    [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.greaterThanOrEqualTo(self.view.mas_left).with.offset(20.0f);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-20.0f);
-        make.centerX.equalTo(self.view.mas_centerX);
-    }];
-    
-    [self.view addSubview:self.lineGraphView];
-    [self.lineGraphView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_centerY).with.offset(30.0f);
-        make.bottom.equalTo(self.segmentedControl.mas_top).with.offset(-20.0f);
-        make.width.equalTo(self.view.mas_width);
-    }];
-    
     [self.view addSubview:self.historyButton];
-    [self.historyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.lineGraphView.mas_top).with.offset(-20.0f);
-        make.centerX.equalTo(self.view);
-    }];
-    
-    [self.view addSubview:self.bmiLabel];
-    [self.bmiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.historyButton.mas_top).with.offset(-8.0f);
-        make.centerX.equalTo(self.view);
-    }];
-    self.bmiLabel.text = @"BMI 21.8 - NORMAL";
-    
-    [self.view addSubview:self.weightLabel];
-    [self.weightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view).with.offset(10.0f);
-        make.bottom.equalTo(self.bmiLabel.mas_top);
-        make.height.lessThanOrEqualTo(@90.0f);
-    }];
+    [self.view addSubview:self.lineGraphView];
+    [self.view addSubview:self.segmentedControl];
+    [self.view addSubview:self.weightView];
+    [self setupViewConstraints];
     
     self.weight = [self.lineGraphModelController latestWeight];
     self.segmentedControl.selectedSegmentIndex = WTLLineGraphTimePeriodOneWeek;
     self.lineGraphModelController.timePeriod = WTLLineGraphTimePeriodOneWeek;
+    [self setControlsHidden:[[NSUserDefaults standardUserDefaults] boolForKey:kWTLControlsHiddenKey] animated:NO];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     self.lineGraphModelController.ignoreChange = NO;
     [self.lineGraphModelController reloadData];
 }
@@ -228,6 +173,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    
     self.lineGraphModelController.ignoreChange = YES;
     self.lineGraphModelController.useChangeAnimations = NO;
 }
@@ -240,12 +186,8 @@
 }
 
 
-- (void)hideOrShowControls:(id)sender {
-    if ([UIApplication sharedApplication].statusBarHidden) {
-        [self showControls:YES];
-    } else {
-        [self hideControls:YES];
-    }
+- (void)toggleControls:(id)sender {
+    [self setControlsHidden:!self.controlsHidden animated:YES];
 }
 
 
@@ -256,13 +198,13 @@
 }
 
 
-- (void)showWeightInput:(id)sender {
+- (void)editWeight:(id)sender {
     WTLInputViewController *viewController = [[WTLInputViewController alloc] init];
-    viewController.suffixString = @"KG";
-    viewController.inputString = [NSString stringWithFormat:@"%.1f", self.weight.amount];
     viewController.modalPresentationStyle = UIModalPresentationCustom;
     viewController.transitioningDelegate = self;
     viewController.delegate = self;
+    viewController.suffixString = [[WTLUnitConverter sharedConverter] targetMassUnitSymbol];
+    viewController.inputString = [NSString stringWithFormat:@"%f", self.weight.amount];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
@@ -274,56 +216,73 @@
 }
 
 
-- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer {
-    CGPoint point = [gestureRecognizer locationInView:self.weightLabel];
-    CGRect labelRect = self.weightLabel.bounds;
-    if (CGRectContainsPoint(labelRect, point)) {
-        [self showWeightInput:nil];
-    } else {
-        [self hideOrShowControls:nil];
-    }
-}
-
-
 #pragma mark - Private
 
-- (void)updateWeightLabelStringWithAmount:(CGFloat)amount {
-    NSString *weightString = [NSString stringWithFormat:@"%.1fKG", amount];
-    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:weightString attributes:[[self class] weightLabelAttributes]];
-    [mutableAttributedString addAttributes:[[self class] unitLabelAttributes] range:NSMakeRange(weightString.length - 2, 2)];
-    self.weightLabel.attributedText = mutableAttributedString;
+- (void)setupViewConstraints {
+    [self.settingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).with.offset(32.0);
+        make.right.equalTo(self.view.mas_right).with.offset(-20.0);
+        make.size.mas_equalTo(CGSizeMake(75.0, 75.0));
+    }];
+    
+    [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.greaterThanOrEqualTo(self.view.mas_left).with.offset(20.0);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-20.0);
+        make.centerX.equalTo(self.view.mas_centerX);
+    }];
+    
+    [self.lineGraphView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_centerY).with.offset(30.0);
+        make.bottom.equalTo(self.segmentedControl.mas_top);
+        make.width.equalTo(self.view.mas_width);
+    }];
+    
+    [self.historyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.lineGraphView.mas_top).with.offset(-20.0);
+        make.centerX.equalTo(self.view);
+    }];
+    
+    [self.weightView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.width.equalTo(self.view);
+        make.bottom.equalTo(self.historyButton.mas_top).with.offset(-10.0);
+    }];
 }
 
 
-- (void)hideControls:(BOOL)animated {
-    void (^change)(void) = ^{
-        self.settingsButton.alpha = 0.0f;
-        self.historyButton.alpha = 0.0f;
-        self.segmentedControl.alpha = 0.0f;
+- (void)setControlsHidden:(BOOL)controlsHidden animated:(BOOL)animated {
+    UIApplication *application = [UIApplication sharedApplication];
+
+    if (self.controlsHidden == controlsHidden) {
+        if (application.statusBarHidden != controlsHidden) {
+            [application setStatusBarHidden:controlsHidden withAnimation:animated ? UIStatusBarAnimationFade : UIStatusBarAnimationNone];
+        }
+        return;
+    }
+    self.controlsHidden = controlsHidden;
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:controlsHidden forKey:kWTLControlsHiddenKey];
+    [userDefaults synchronize];
+
+    void (^animations)(void) = ^{
+        self.settingsButton.alpha = controlsHidden ? 0.0 : 1.0;
+        self.historyButton.alpha = controlsHidden ? 0.0 : 1.0;
+        self.segmentedControl.alpha = controlsHidden ? 0.0 : 1.0;
     };
-    
+
     if (animated) {
-        [UIView animateWithDuration:0.4f animations:change completion:nil];
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+        [application setStatusBarHidden:controlsHidden withAnimation:UIStatusBarAnimationFade];
+        [UIView animateWithDuration:0.6 delay:0.0 usingSpringWithDamping:1.0 initialSpringVelocity:1.0 options:UIViewAnimationOptionAllowUserInteraction animations:animations completion:nil];
     } else {
-        change();
+        [application setStatusBarHidden:controlsHidden withAnimation:UIStatusBarAnimationNone];
+        animations();
     }
 }
 
 
-- (void)showControls:(BOOL)animated {
-    void (^change)(void) = ^{
-        self.settingsButton.alpha = 1.0f;
-        self.historyButton.alpha = 1.0f;
-        self.segmentedControl.alpha = 1.0f;
-    };
-    
-    if (animated) {
-        [UIView animateWithDuration:0.4f animations:change completion:nil];
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-    } else {
-        change();
-    }
+- (void)updateWeightView {
+    self.weightView.weight = self.weight.amount;
 }
 
 
@@ -342,8 +301,8 @@
 #pragma mark - WTLInputViewControllerDelegate
 
 - (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result {
-    CGFloat newAmount = [result floatValue];
-    if (self.weight.amount == newAmount) {
+    float newAmount = [result floatValue];
+    if (self.weight.amount - newAmount == 0.0f) {
         return;
     }
     
@@ -379,7 +338,7 @@
     }
     
     if ([keyPath isEqualToString:@"amount"]) {
-        [self updateWeightLabelStringWithAmount:[[change objectForKey:NSKeyValueChangeNewKey] floatValue]];
+        [self updateWeightView];
     }
 }
 

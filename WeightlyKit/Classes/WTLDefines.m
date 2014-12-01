@@ -17,6 +17,7 @@ NSString *const kWTLEnableReminderKey = @"WTLEnableReminder";
 NSString *const kWTLReminderTimeKey = @"WTLReminderTime";
 NSString *const kWTLHasLaunchOnceKey = @"WTLHasLaunchOnce";
 NSString *const kWTLCurrentWeightKey = @"WTLCurrentWeight";
+NSString *const kWTLControlsHiddenKey = @"WTLControlsHidden";
 
 NSString *const kWTLDefaultsInfoTitleKey = @"title";
 NSString *const kWTLDefaultsInfoValueTypeKey = @"type";

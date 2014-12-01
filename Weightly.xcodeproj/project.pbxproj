@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		2011B3AD1A0B6293000DD457 /* WTLDismissInputTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011B3AC1A0B6293000DD457 /* WTLDismissInputTransition.m */; };
 		2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */; };
+		201553411A2B278400E38157 /* WTLWeightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553401A2B278400E38157 /* WTLWeightView.m */; };
+		201553451A2B3EAA00E38157 /* WTLBMICalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553441A2B3EAA00E38157 /* WTLBMICalculator.m */; };
+		201553461A2B3EAA00E38157 /* WTLBMICalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553441A2B3EAA00E38157 /* WTLBMICalculator.m */; };
+		201553491A2B460500E38157 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553481A2B460500E38157 /* WTLUnitConverter.m */; };
+		2015534A1A2B460500E38157 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553481A2B460500E38157 /* WTLUnitConverter.m */; };
+		2015534B1A2C2ECE00E38157 /* WTLWeightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553401A2B278400E38157 /* WTLWeightView.m */; };
 		20156B2B19FE5C9E00142EC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2A19FE5C9E00142EC0 /* main.m */; };
 		20156B2E19FE5C9E00142EC0 /* WTLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */; };
 		20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */; };
@@ -31,7 +37,6 @@
 		205CFFA61A16150B002F26D2 /* WTLPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 205CFFA51A16150B002F26D2 /* WTLPreferences.m */; };
 		205CFFA91A1622C3002F26D2 /* WTLSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 205CFFA81A1622C3002F26D2 /* WTLSegmentedControl.m */; };
 		208C25331A1C919800383A21 /* WTLPersistentDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C25321A1C919800383A21 /* WTLPersistentDataStore.m */; };
-		208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */; };
 		208EA5D41A14830A00AF5084 /* WTLWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D31A14830A00AF5084 /* WTLWeight.m */; };
 		20BC6AA31A29D8E300834502 /* UIColor+Weightly.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BC6AA21A29D8E300834502 /* UIColor+Weightly.m */; };
 		20D912231A11E89D007AF596 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = 20D912221A11E89D007AF596 /* themes.json */; };
@@ -85,6 +90,12 @@
 		201553111A2B0CF700E38157 /* Pods-Weightly.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Weightly.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly/Pods-Weightly.release.xcconfig"; sourceTree = "<group>"; };
 		201553121A2B0D0100E38157 /* Pods-Weightly Today.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Weightly Today.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly Today/Pods-Weightly Today.debug.xcconfig"; sourceTree = "<group>"; };
 		201553131A2B0D0100E38157 /* Pods-Weightly Today.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Weightly Today.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly Today/Pods-Weightly Today.release.xcconfig"; sourceTree = "<group>"; };
+		2015533F1A2B278400E38157 /* WTLWeightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLWeightView.h; sourceTree = "<group>"; };
+		201553401A2B278400E38157 /* WTLWeightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLWeightView.m; sourceTree = "<group>"; };
+		201553431A2B3EAA00E38157 /* WTLBMICalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLBMICalculator.h; sourceTree = "<group>"; };
+		201553441A2B3EAA00E38157 /* WTLBMICalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLBMICalculator.m; sourceTree = "<group>"; };
+		201553471A2B460500E38157 /* WTLUnitConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLUnitConverter.h; sourceTree = "<group>"; };
+		201553481A2B460500E38157 /* WTLUnitConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverter.m; sourceTree = "<group>"; };
 		20156B2519FE5C9E00142EC0 /* Weightly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weightly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20156B2919FE5C9E00142EC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20156B2A19FE5C9E00142EC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -127,8 +138,6 @@
 		205CFFA81A1622C3002F26D2 /* WTLSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSegmentedControl.m; sourceTree = "<group>"; };
 		208C25311A1C919800383A21 /* WTLPersistentDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLPersistentDataStore.h; sourceTree = "<group>"; };
 		208C25321A1C919800383A21 /* WTLPersistentDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLPersistentDataStore.m; sourceTree = "<group>"; };
-		208EA5CC1A13509300AF5084 /* WTLUnitConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLUnitConverter.h; sourceTree = "<group>"; };
-		208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLUnitConverter.m; sourceTree = "<group>"; };
 		208EA5D21A14830A00AF5084 /* WTLWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLWeight.h; sourceTree = "<group>"; };
 		208EA5D31A14830A00AF5084 /* WTLWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLWeight.m; sourceTree = "<group>"; };
 		20BC6AA01A29D41900834502 /* WeightlyKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeightlyKit.h; sourceTree = "<group>"; };
@@ -253,15 +262,6 @@
 			name = Transitions;
 			sourceTree = "<group>";
 		};
-		201D23211A29E1B2002C2F8E /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				208EA5CC1A13509300AF5084 /* WTLUnitConverter.h */,
-				208EA5CD1A13509300AF5084 /* WTLUnitConverter.m */,
-			);
-			name = Util;
-			sourceTree = "<group>";
-		};
 		201D23291A29E3E5002C2F8E /* Weightly Today */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +314,12 @@
 				205CFFA51A16150B002F26D2 /* WTLPreferences.m */,
 				208EA5D21A14830A00AF5084 /* WTLWeight.h */,
 				208EA5D31A14830A00AF5084 /* WTLWeight.m */,
+				2015533F1A2B278400E38157 /* WTLWeightView.h */,
+				201553401A2B278400E38157 /* WTLWeightView.m */,
+				201553431A2B3EAA00E38157 /* WTLBMICalculator.h */,
+				201553441A2B3EAA00E38157 /* WTLBMICalculator.m */,
+				201553471A2B460500E38157 /* WTLUnitConverter.h */,
+				201553481A2B460500E38157 /* WTLUnitConverter.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -333,7 +339,6 @@
 			children = (
 				201D231C1A29E0E3002C2F8E /* Application */,
 				201D23201A29E188002C2F8E /* Transitions */,
-				201D23211A29E1B2002C2F8E /* Util */,
 				201D231D1A29E101002C2F8E /* View Controllers */,
 				201D231F1A29E16A002C2F8E /* Views */,
 			);
@@ -589,18 +594,19 @@
 				208C25331A1C919800383A21 /* WTLPersistentDataStore.m in Sources */,
 				20FC76DE1A29EF43005719D3 /* Weightly.xcdatamodeld in Sources */,
 				20FC76E71A29F49C005719D3 /* NSUserDefaults+Weightly.m in Sources */,
+				201553451A2B3EAA00E38157 /* WTLBMICalculator.m in Sources */,
 				204931EA1A08CE090075F43B /* WTLLineGraphModelController.m in Sources */,
 				203593451A0A5E550097A1AC /* WTLPresentInputTransition.m in Sources */,
 				2035933F1A0A377F0097A1AC /* WTLHistoryViewController.m in Sources */,
 				2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */,
 				20BC6AA31A29D8E300834502 /* UIColor+Weightly.m in Sources */,
 				205CFFA61A16150B002F26D2 /* WTLPreferences.m in Sources */,
-				208EA5CE1A13509300AF5084 /* WTLUnitConverter.m in Sources */,
 				20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */,
 				20566C441A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m in Sources */,
 				20FC76E21A29F054005719D3 /* WTLDefines.m in Sources */,
 				20566C4D1A0F0C5D0071D05D /* WTLThemesViewController.m in Sources */,
 				208EA5D41A14830A00AF5084 /* WTLWeight.m in Sources */,
+				201553411A2B278400E38157 /* WTLWeightView.m in Sources */,
 				20566C501A0F9B040071D05D /* WTLThemeCollectionViewCell.m in Sources */,
 				20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */,
 				203593421A0A57560097A1AC /* WTLInputViewController.m in Sources */,
@@ -610,6 +616,7 @@
 				20566C471A0E27B20071D05D /* WTLWeightTableViewCell.m in Sources */,
 				20156B2B19FE5C9E00142EC0 /* main.m in Sources */,
 				2011B3AD1A0B6293000DD457 /* WTLDismissInputTransition.m in Sources */,
+				201553491A2B460500E38157 /* WTLUnitConverter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,7 +627,10 @@
 				20FC76EA1A29F7D9005719D3 /* WTLPreferences.m in Sources */,
 				20FC76E31A29F054005719D3 /* WTLDefines.m in Sources */,
 				20FC76EB1A29FB4F005719D3 /* WTLPersistentDataStore.m in Sources */,
+				201553461A2B3EAA00E38157 /* WTLBMICalculator.m in Sources */,
 				201D232E1A29E3E5002C2F8E /* WTLTodayViewController.m in Sources */,
+				2015534A1A2B460500E38157 /* WTLUnitConverter.m in Sources */,
+				2015534B1A2C2ECE00E38157 /* WTLWeightView.m in Sources */,
 				20FC76E41A29F06A005719D3 /* UIColor+Weightly.m in Sources */,
 				20FC76E91A29F570005719D3 /* WTLWeight.m in Sources */,
 				20FC76E81A29F49C005719D3 /* NSUserDefaults+Weightly.m in Sources */,
