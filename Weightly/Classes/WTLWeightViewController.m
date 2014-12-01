@@ -14,6 +14,7 @@
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
 #import "WTLWeight.h"
+#import "WTLNumberValidator.h"
 #import "WTLWeightView.h"
 #import "WTLDefines.h"
 #import "UIColor+Weightly.h"
@@ -204,7 +205,9 @@
     viewController.transitioningDelegate = self;
     viewController.delegate = self;
     viewController.suffixString = [[WTLUnitConverter sharedConverter] targetMassUnitSymbol];
-    viewController.inputString = [NSString stringWithFormat:@"%f", self.weight.amount];
+    viewController.inputString = self.weight.amount == 0.0f ? nil : [@(self.weight.amount) stringValue];
+    viewController.validator = [[WTLNumberValidator alloc] initWithMinimumValue:0.0 maximumValue:1500.0];
+    
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
@@ -300,8 +303,10 @@
 
 #pragma mark - WTLInputViewControllerDelegate
 
-- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result {
-    float newAmount = [result floatValue];
+- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithText:(NSString *)text {
+    NSString *string = text ? text : @"";
+    float newAmount = strtof([string cStringUsingEncoding:NSASCIIStringEncoding], nil);
+    
     if (self.weight.amount - newAmount == 0.0f) {
         return;
     }

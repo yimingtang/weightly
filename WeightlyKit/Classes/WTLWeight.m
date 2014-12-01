@@ -49,7 +49,7 @@
         // Create the section identifier as a string representing the number (year * 1000) + month;
         // this way they will be correctly ordered chronologically regardless of the actual name of the month.
         NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit) fromDate:self.timeStamp];
+        NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:self.timeStamp];
         tmp = [NSString stringWithFormat:@"%ld", (components.year * 1000 + components.month)];
         [self setPrimitiveSectionIdentifier:tmp];
     }
@@ -92,7 +92,7 @@
     // 1. Search an object whose index is larger than `index` and `userGenerated = YES`
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(baseIndex + 1, fetchedObjects.count - baseIndex - 1)];
     __block NSUInteger index = NSNotFound;
-    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:kNilOptions usingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
+    [fetchedObjects enumerateObjectsAtIndexes:indexSet options:(NSEnumerationOptions)kNilOptions usingBlock:^(WTLWeight *obj, NSUInteger idx, BOOL *stop) {
         if (obj.userGenerated) {
             index = idx;
             *stop = YES;

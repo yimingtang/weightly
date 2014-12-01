@@ -8,6 +8,7 @@
 
 #import "WTLInputViewController.h"
 #import "WTLTextField.h"
+#import "WTLNumberValidator.h"
 #import "UIColor+Weightly.h"
 
 #import <Masonry/Masonry.h>
@@ -24,6 +25,8 @@
 @synthesize textField = _textField;
 @synthesize doneButton = _doneButton;
 @synthesize delegate = _delegate;
+@synthesize inputString = _inputString;
+@synthesize suffixString = _suffixString;
 
 - (WTLTextField *)textField {
     if (!_textField) {
@@ -86,10 +89,21 @@
 #pragma mark - Actions
 
 - (void)save:(id)sender {
+    if (![self validateInput]) {
+        self.textField.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8f, 0.8f);
+        
+        void (^animations)(void) = ^{
+            self.textField.transform = CGAffineTransformIdentity;
+        };
+        
+        [UIView animateWithDuration:0.8 delay:0 usingSpringWithDamping:0.3f initialSpringVelocity:1.0 options:0 animations:animations completion:nil];
+        return;
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    if ([self.delegate respondsToSelector:@selector(inputViewController:didFinishEditingWithResult:)]) {
-        [self.delegate inputViewController:self didFinishEditingWithResult:self.textField.text];
+    if ([self.delegate respondsToSelector:@selector(inputViewController:didFinishEditingWithText:)]) {
+        [self.delegate inputViewController:self didFinishEditingWithText:self.textField.text];
     }
 }
 
@@ -100,6 +114,20 @@
 
 
 #pragma mark - Private Methods
+
+- (BOOL)validateInput {
+    if (!self.validator) {
+        return YES;
+    }
+    
+    NSString *string = self.textField.text;
+    if (!string) {
+        string = @"";
+    }
+    
+    return [self.validator validateValue:(strtof([string cStringUsingEncoding:NSASCIIStringEncoding], nil))];
+}
+
 
 - (void)resetViewConstraints {
     [self.doneButton mas_remakeConstraints:^(MASConstraintMaker *make) {

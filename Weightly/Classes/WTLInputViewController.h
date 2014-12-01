@@ -8,15 +8,17 @@
 
 @import UIKit;
 
+@class WTLNumberValidator;
 @protocol WTLInputViewControllerDelegate;
 
 @interface WTLInputViewController : UIViewController
 @property (nonatomic, copy) NSString *inputString;
 @property (nonatomic, copy) NSString *suffixString;
+@property (nonatomic) WTLNumberValidator *validator;
 @property (nonatomic, weak) id<WTLInputViewControllerDelegate> delegate;
 @end
 
 @protocol WTLInputViewControllerDelegate <NSObject>
 @optional
-- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithResult:(NSString *)result;
+- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithText:(NSString *)text;
 @end

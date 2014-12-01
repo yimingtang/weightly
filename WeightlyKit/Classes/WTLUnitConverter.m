@@ -159,7 +159,6 @@
         numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
         numberFormatter.minimumFractionDigits = 1;
         numberFormatter.maximumFractionDigits = 2;
-        numberFormatter.roundingMode = NSNumberFormatterRoundDown;
     });
     return numberFormatter;
 }
