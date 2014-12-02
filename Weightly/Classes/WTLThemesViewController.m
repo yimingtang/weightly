@@ -7,9 +7,9 @@
 //
 
 #import "WTLThemesViewController.h"
-#import "WTLPreferences.h"
-#import "WTLDefines.h"
 #import "WTLThemeCollectionViewCell.h"
+
+#import "WeightlyKit.h"
 #import <SAMCategories/UIColor+SAMAdditions.h>
 
 @interface WTLThemesViewController () <UICollectionViewDelegateFlowLayout>

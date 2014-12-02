@@ -13,12 +13,8 @@
 #import "WTLHistoryViewController.h"
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
-#import "WTLWeight.h"
-#import "WTLNumberValidator.h"
-#import "WTLWeightView.h"
-#import "WTLDefines.h"
-#import "UIColor+Weightly.h"
 
+#import "WeightlyKit.h"
 #import <Masonry/Masonry.h>
 #import <BEMSimpleLineGraph/BEMSimpleLineGraphView.h>
 

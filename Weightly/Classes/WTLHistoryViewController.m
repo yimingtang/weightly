@@ -12,10 +12,7 @@
 #import "WTLSectionHeaderView.h"
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
-#import "WTLWeight.h"
-#import "WTLNumberValidator.h"
-#import "WTLDayNumberFormatter.h"
-#import "UIColor+Weightly.h"
+#import "WeightlyKit.h"
 
 @interface WTLHistoryViewController () <UIViewControllerTransitioningDelegate, WTLInputViewControllerDelegate>
 @property (nonatomic) NSIndexPath *selectedIndexPath;

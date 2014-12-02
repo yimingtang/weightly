@@ -13,11 +13,7 @@
 #import "WTLDismissInputTransition.h"
 #import "WTLSegmentedSettingsTableViewCell.h"
 #import "WTLSegmentedControl.h"
-#import "WTLDefines.h"
-#import "WTLPreferences.h"
-#import "WTLUnitConverter.h"
-#import "WTLNumberValidator.h"
-#import "UIColor+Weightly.h"
+#import "WeightlyKit.h"
 
 static NSString *const cellIdentifier = @"cell";
 static NSString *const segmentedCellIdentifier = @"segmentedCell";

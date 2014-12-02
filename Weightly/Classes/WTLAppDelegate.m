@@ -8,10 +8,7 @@
 
 #import "WTLAppDelegate.h"
 #import "WTLWeightViewController.h"
-#import "WTLPersistentDataStore.h"
-#import "WTLPreferences.h"
-#import "WTLDefines.h"
-#import "UIColor+Weightly.h"
+#import "WeightlyKit.h"
 
 @implementation WTLAppDelegate
 

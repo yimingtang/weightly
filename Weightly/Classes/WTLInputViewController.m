@@ -8,8 +8,7 @@
 
 #import "WTLInputViewController.h"
 #import "WTLTextField.h"
-#import "WTLNumberValidator.h"
-#import "UIColor+Weightly.h"
+#import "WeightlyKit.h"
 
 #import <Masonry/Masonry.h>
 

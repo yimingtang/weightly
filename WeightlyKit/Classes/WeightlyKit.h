@@ -10,6 +10,11 @@
 #import "WTLWeight.h"
 #import "WTLPreferences.h"
 #import "WTLPersistentDataStore.h"
+#import "WTLWeightView.h"
+#import "WTLBMICalculator.h"
+#import "WTLUnitConverter.h"
+#import "WTLNumberValidator.h"
+#import "WTLDayNumberFormatter.h"
 
 #import "UIColor+Weightly.h"
 #import "NSUserDefaults+Weightly.h"
