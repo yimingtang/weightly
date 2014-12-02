@@ -24,7 +24,7 @@
     if (_autoUpdateTargetUnitsType) {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     } else {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferencesDidChange) name:NSUserDefaultsDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unitsDidChange) name:kWTLUnitsDidChangeNotificationName object:nil];
     }
     _autoUpdateTargetUnitsType = autoUpdateTargetUnitsType;
 }
@@ -214,7 +214,7 @@
 
 #pragma mark - Private
 
-- (void)preferencesDidChange {
+- (void)unitsDidChange {
     WTLPreferences *preferences = [WTLPreferences sharedPreferences];
     self.targetUnitsType = [[preferences objectForKey:kWTLUnitsKey] integerValue];
 }

@@ -63,7 +63,7 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     navigationBar.translucent = NO;
     [navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [navigationBar setShadowImage:[[UIImage alloc] init]];
+    [navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
 }
 
 
@@ -90,9 +90,11 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     NSDictionary *info = [self.preferences infoForDefaultsKey:key];
     NSArray *options = [info objectForKey:kWTLDefaultsInfoOptionsKey];
     
-    [self.preferences setObject:[options objectAtIndex:segmentedControl.selectedSegmentIndex] forKey:key];
+    id newOption = [options objectAtIndex:segmentedControl.selectedSegmentIndex];
+    [self.preferences setObject:newOption forKey:key];
     
     if ([key isEqualToString:kWTLUnitsKey]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kWTLUnitsDidChangeNotificationName object:newOption];
         [self.tableView reloadData];
     }
 }
@@ -239,7 +241,9 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     WTLUnitConverter *converter = [WTLUnitConverter sharedConverter];
     
     if ([key isEqualToString:kWTLHeightKey]) {
-        [self.preferences setObject:@([converter metricLengthForTargetLength:newValue]) forKey:kWTLHeightKey];
+        NSNumber *newHeight = @([converter metricLengthForTargetLength:newValue]);
+        [self.preferences setObject:newHeight forKey:kWTLHeightKey];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kWTLHeightDidChangeNotificationName object:newHeight];
     } else if ([key isEqualToString:kWTLGoalWeightKey]) {
         [self.preferences setObject:@([converter metricMassForTagretMass:newValue]) forKey:kWTLGoalWeightKey];
     }

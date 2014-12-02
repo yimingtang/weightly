@@ -48,7 +48,7 @@
     // Remove borders and highlighted background
     [self setTintColor:[UIColor clearColor]];
     [self setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1.0 alpha:0.5f],
-                                   NSFontAttributeName: [UIFont fontWithName:@"Avenir-Light" size:20.0]}
+                                   NSFontAttributeName: [UIFont fontWithName:@"Avenir" size:20.0]}
                         forState:UIControlStateNormal];
     [self setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}
                         forState:UIControlStateSelected];

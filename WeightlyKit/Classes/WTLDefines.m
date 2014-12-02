@@ -22,3 +22,6 @@ NSString *const kWTLControlsHiddenKey = @"WTLControlsHidden";
 NSString *const kWTLDefaultsInfoTitleKey = @"title";
 NSString *const kWTLDefaultsInfoValueTypeKey = @"type";
 NSString *const kWTLDefaultsInfoOptionsKey = @"options";
+
+NSString *const kWTLUnitsDidChangeNotificationName = @"WTLUnitsDidChangeNotification";
+NSString *const kWTLHeightDidChangeNotificationName = @"WTLHeightDidChangeNotification";

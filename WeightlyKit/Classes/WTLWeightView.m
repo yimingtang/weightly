@@ -45,16 +45,19 @@
     _weight = weight;
     
     WTLUnitConverter *unitConverter = [WTLUnitConverter sharedConverter];
+    // Set the latest units type
+    WTLPreferences *preferences = [WTLPreferences sharedPreferences];
+    unitConverter.targetUnitsType = [[preferences objectForKey:kWTLUnitsKey] integerValue];
+    
     NSString *symbolString = [unitConverter targetMassUnitSymbol];
     NSString *fullString = [[unitConverter targetDisplayStringForMetricMass:weight] uppercaseString];
-    // Add space
+    // `1` for space
     NSRange symbolRange = NSMakeRange(fullString.length - symbolString.length - 1, symbolString.length + 1);
     
     NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:fullString attributes:[self weightAttributes]];
     [mutableAttributedString addAttributes:[self symbolAttributes] range:symbolRange];
     [self.weightButton setAttributedTitle:mutableAttributedString forState:UIControlStateNormal];
     
-    WTLPreferences *preferences = [WTLPreferences sharedPreferences];
     float height = [[preferences objectForKey:kWTLHeightKey] floatValue];
     NSString *bmiDescription = [WTLBMICalculator fullBMIDescriptionForWeight:weight height:height];
     self.bmiLabel.text = [bmiDescription uppercaseString];

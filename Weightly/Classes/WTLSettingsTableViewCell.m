@@ -34,7 +34,7 @@ CGFloat kWTLSettingsTableViewCellFontSize = 20.0f;
     if (!_valueLabel) {
         _valueLabel = [[UILabel alloc] init];
         _valueLabel.textColor = [UIColor whiteColor];
-        _valueLabel.font = [UIFont fontWithName:@"Avenir-Light" size:kWTLSettingsTableViewCellFontSize];
+        _valueLabel.font = [UIFont fontWithName:@"Avenir" size:kWTLSettingsTableViewCellFontSize];
     }
     return _valueLabel;
 }

@@ -13,6 +13,7 @@
 #import "WTLHistoryViewController.h"
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
+#import "WTLBorderButton.h"
 
 #import "WeightlyKit.h"
 #import <Masonry/Masonry.h>
@@ -21,11 +22,10 @@
 @interface WTLWeightViewController () <UIViewControllerTransitioningDelegate, WTLInputViewControllerDelegate, WTLLineGraphModelControllerDelegate>
 @property (nonatomic, readonly) UIButton *settingsButton;
 @property (nonatomic, readonly) WTLWeightView *weightView;
-@property (nonatomic, readonly) UIButton *historyButton;
+@property (nonatomic, readonly) WTLBorderButton *historyButton;
 @property (nonatomic, readonly) BEMSimpleLineGraphView *lineGraphView;
 @property (nonatomic, readonly) UISegmentedControl *segmentedControl;
 @property (nonatomic) BOOL controlsHidden;
-
 @property (nonatomic) WTLWeight *weight;
 @property (nonatomic, readonly) WTLLineGraphModelController *lineGraphModelController;
 @end
@@ -56,18 +56,11 @@
 }
 
 
-- (UIButton *)historyButton {
+- (WTLBorderButton *)historyButton {
     if (!_historyButton) {
-        _historyButton = [[UIButton alloc] init];
-        _historyButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16.0];
-        [_historyButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5f] forState:UIControlStateNormal];
-        [_historyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        _historyButton = [[WTLBorderButton alloc] init];
         [_historyButton addTarget:self action:@selector(showHistory:) forControlEvents:UIControlEventTouchUpInside];
         [_historyButton setTitle:@"History" forState:UIControlStateNormal];
-        _historyButton.contentEdgeInsets = UIEdgeInsetsMake(5.0, 10.0, 5.0, 10.0);
-        _historyButton.layer.cornerRadius = 5.0;
-        _historyButton.layer.borderWidth = 1.0;
-        _historyButton.layer.borderColor = [[UIColor colorWithWhite:1.0 alpha:0.5f] CGColor];
     }
     return _historyButton;
 }
@@ -134,6 +127,13 @@
 }
 
 
+#pragma mark - NSObject
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
@@ -155,6 +155,11 @@
     self.weight = [self.lineGraphModelController latestWeight];
     self.segmentedControl.selectedSegmentIndex = WTLLineGraphTimePeriodOneWeek;
     self.lineGraphModelController.timePeriod = WTLLineGraphTimePeriodOneWeek;
+    
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(updateWeightView) name:kWTLUnitsDidChangeNotificationName object:nil];
+    [notificationCenter addObserver:self selector:@selector(updateWeightView) name:kWTLHeightDidChangeNotificationName object:nil];
+    
     [self setControlsHidden:[[NSUserDefaults standardUserDefaults] boolForKey:kWTLControlsHiddenKey] animated:NO];
 }
 
@@ -244,7 +249,7 @@
     }];
     
     [self.weightView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
+        make.centerX.equalTo(self.view).with.offset(10.0);
         make.width.equalTo(self.view);
         make.bottom.equalTo(self.historyButton.mas_top).with.offset(-10.0);
     }];
