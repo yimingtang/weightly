@@ -14,6 +14,20 @@
 #pragma mark - Accessors
 
 @synthesize targetUnitsType = _targetUnitsType;
+@synthesize autoUpdateTargetUnitsType = _autoUpdateTargetUnitsType;
+
+- (void)setAutoUpdateTargetUnitsType:(BOOL)autoUpdateTargetUnitsType {
+    if (_autoUpdateTargetUnitsType == autoUpdateTargetUnitsType) {
+        return;
+    }
+    
+    if (_autoUpdateTargetUnitsType) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferencesDidChange) name:NSUserDefaultsDidChangeNotification object:nil];
+    }
+    _autoUpdateTargetUnitsType = autoUpdateTargetUnitsType;
+}
 
 
 #pragma mark - Singleton
@@ -23,9 +37,11 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedConverter = [[self alloc] init];
+        _sharedConverter.autoUpdateTargetUnitsType = YES;
     });
     return _sharedConverter;
 }
+
 
 + (float)convertMassFromKgToLbs:(float)mass {
     return mass * 2.2046f;
@@ -75,7 +91,25 @@
 }
 
 
++ (NSNumberFormatter *)numberFormatter {
+    static NSNumberFormatter *numberFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        numberFormatter.minimumFractionDigits = 1;
+        numberFormatter.maximumFractionDigits = 2;
+    });
+    return numberFormatter;
+}
+
+
 #pragma mark - NSObject
+
+- (void)dealloc {
+    self.autoUpdateTargetUnitsType = NO;
+}
+
 
 - (instancetype)init {
     WTLUnitsType type = [[[WTLPreferences sharedPreferences] objectForKey:kWTLUnitsKey] integerValue];
@@ -86,6 +120,7 @@
 - (instancetype)initWithTargetUnitsTypeType:(WTLUnitsType)type {
     if ((self = [super init])) {
         _targetUnitsType = type;
+        _autoUpdateTargetUnitsType = NO;
     }
     return self;
 }
@@ -131,6 +166,34 @@
 }
 
 
+- (float)metricMassForTagretMass:(float)mass {
+    float result;
+    switch (self.targetUnitsType) {
+        case WTLUnitsTypeImperial:
+            result = [[self class] convertMassFromLbsToKg:mass];
+            break;
+        case WTLUnitsTypeMetric:
+            result = mass;
+            break;
+    }
+    return result;
+}
+
+
+- (float)metricLengthForTargetLength:(float)length {
+    float result;
+    switch (self.targetUnitsType) {
+        case WTLUnitsTypeImperial:
+            result = [[self class] convertLengthFromInToCm:length];
+            break;
+        case WTLUnitsTypeMetric:
+            result = length;
+            break;
+    }
+    return result;
+}
+
+
 - (NSString *)targetDisplayStringForMetricMass:(float)mass {
     float result = [self targetMassForMetricMass:mass];
     NSString *symbol = [self targetMassUnitSymbol];
@@ -151,16 +214,9 @@
 
 #pragma mark - Private
 
-+ (NSNumberFormatter *)numberFormatter {
-    static NSNumberFormatter *numberFormatter = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        numberFormatter = [[NSNumberFormatter alloc] init];
-        numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        numberFormatter.minimumFractionDigits = 1;
-        numberFormatter.maximumFractionDigits = 2;
-    });
-    return numberFormatter;
+- (void)preferencesDidChange {
+    WTLPreferences *preferences = [WTLPreferences sharedPreferences];
+    self.targetUnitsType = [[preferences objectForKey:kWTLUnitsKey] integerValue];
 }
 
 @end

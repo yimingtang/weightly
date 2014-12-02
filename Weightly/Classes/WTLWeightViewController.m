@@ -18,7 +18,6 @@
 #import "WTLWeightView.h"
 #import "WTLDefines.h"
 #import "UIColor+Weightly.h"
-#import "WTLUnitConverter.h"
 
 #import <Masonry/Masonry.h>
 #import <BEMSimpleLineGraph/BEMSimpleLineGraphView.h>
@@ -204,9 +203,12 @@
     viewController.modalPresentationStyle = UIModalPresentationCustom;
     viewController.transitioningDelegate = self;
     viewController.delegate = self;
-    viewController.suffixString = [[[WTLUnitConverter sharedConverter] targetMassUnitSymbol] uppercaseString];
-    viewController.inputString = self.weight.amount == 0.0f ? nil : [@(self.weight.amount) stringValue];
     viewController.validator = [[WTLNumberValidator alloc] initWithMinimumValue:0.0 maximumValue:1500.0];
+    
+    viewController.suffixString = [[self.weight currentUnitSymbol] uppercaseString];
+
+    float amount = [self.weight amountForCurrentUnit];
+    viewController.inputString = amount == 0.0f ? nil : [@(amount) stringValue];
     
     [self presentViewController:viewController animated:YES completion:nil];
 }
@@ -305,13 +307,13 @@
 
 - (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithText:(NSString *)text {
     NSString *string = text ? text : @"";
-    float newAmount = strtof([string cStringUsingEncoding:NSASCIIStringEncoding], NULL);
+    float newValue = strtof([string cStringUsingEncoding:NSASCIIStringEncoding], NULL);
     
-    if (self.weight.amount - newAmount == 0.0f) {
+    if ([self.weight amountForCurrentUnit] - newValue == 0.0f) {
         return;
     }
     
-    self.weight.amount = newAmount;
+    [self.weight setAmountWithCurrentUnit:newValue];
     self.weight.userGenerated = YES;
     
     self.lineGraphModelController.ignoreChange = YES;

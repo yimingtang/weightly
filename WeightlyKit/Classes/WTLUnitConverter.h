@@ -13,6 +13,7 @@
 @interface WTLUnitConverter : NSObject
 
 @property (nonatomic) WTLUnitsType targetUnitsType;
+@property (nonatomic) BOOL autoUpdateTargetUnitsType;
 
 + (float)convertMassFromKgToLbs:(float)mass;
 + (float)convertMassFromLbsToKg:(float)mass;
@@ -30,6 +31,8 @@
 - (NSString *)targetMassUnitSymbol;
 - (float)targetMassForMetricMass:(float)mass;
 - (float)targetLengthForMetricLength:(float)length;
+- (float)metricMassForTagretMass:(float)mass;
+- (float)metricLengthForTargetLength:(float)length;
 - (NSString *)targetDisplayStringForMetricMass:(float)mass;
 - (NSString *)targetDisplayStringForMetricLength:(float)length;
 

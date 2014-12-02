@@ -12,7 +12,6 @@
 #import "WTLSectionHeaderView.h"
 #import "WTLPresentInputTransition.h"
 #import "WTLDismissInputTransition.h"
-#import "WTLUnitConverter.h"
 #import "WTLWeight.h"
 #import "WTLNumberValidator.h"
 #import "WTLDayNumberFormatter.h"
@@ -77,7 +76,7 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     WTLWeightTableViewCell *weightCell = (WTLWeightTableViewCell *)cell;
     WTLWeight *weight = [self objectForViewIndexPath:indexPath];
     weightCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    weightCell.titleLabel.text = [[WTLUnitConverter sharedConverter] targetDisplayStringForMetricMass:weight.amount];
+    weightCell.titleLabel.text = [weight displayString];
     weightCell.minor = !weight.userGenerated;
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -162,7 +161,7 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     inputViewController.modalPresentationStyle = UIModalPresentationCustom;
     inputViewController.transitioningDelegate = self;
     inputViewController.inputString = [@(weight.amount) stringValue];
-    inputViewController.suffixString = [[[WTLUnitConverter sharedConverter] targetMassUnitSymbol] uppercaseString];
+    inputViewController.suffixString = [[weight currentUnitSymbol] uppercaseString];
     inputViewController.delegate = self;
     inputViewController.validator = [[WTLNumberValidator alloc] initWithMinimumValue:0.0 maximumValue:1500.0];
     [self presentViewController:inputViewController animated:YES completion:nil];

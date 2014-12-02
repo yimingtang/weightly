@@ -15,22 +15,26 @@
 #import "WTLSegmentedControl.h"
 #import "WTLDefines.h"
 #import "WTLPreferences.h"
+#import "WTLUnitConverter.h"
+#import "WTLNumberValidator.h"
 #import "UIColor+Weightly.h"
-
-@interface WTLSettingsViewController () <UIViewControllerTransitioningDelegate>
-@property (nonatomic) NSArray *defaultsKeySections;
-@property (nonatomic) WTLPreferences *preferences;
-@end
-
-@implementation WTLSettingsViewController
 
 static NSString *const cellIdentifier = @"cell";
 static NSString *const segmentedCellIdentifier = @"segmentedCell";
+
+@interface WTLSettingsViewController () <UIViewControllerTransitioningDelegate, WTLInputViewControllerDelegate>
+@property (nonatomic) NSArray *defaultsKeySections;
+@property (nonatomic) WTLPreferences *preferences;
+@property (nonatomic) NSIndexPath *selectedIndexPath;
+@end
+
+@implementation WTLSettingsViewController
 
 #pragma mark - Accessors
 
 @synthesize defaultsKeySections = _defaultsKeySections;
 @synthesize preferences = _preferences;
+@synthesize selectedIndexPath = _selectedIndexPath;
 
 - (NSArray *)defaultsKeySections {
     if (!_defaultsKeySections) {
@@ -91,6 +95,10 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     NSArray *options = [info objectForKey:kWTLDefaultsInfoOptionsKey];
     
     [self.preferences setObject:[options objectAtIndex:segmentedControl.selectedSegmentIndex] forKey:key];
+    
+    if ([key isEqualToString:kWTLUnitsKey]) {
+        [self.tableView reloadData];
+    }
 }
 
 
@@ -141,10 +149,11 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
             
             cell.valueLabel.text = [dateFormatter stringFromDate:valueObject];
         } else if (valueType == WTLDefaultsValueTypeNumber) {
+            WTLUnitConverter *converter = [WTLUnitConverter sharedConverter];
             if ([key isEqualToString:kWTLHeightKey]) {
-                cell.valueLabel.text = [NSString stringWithFormat:@"%.1f cm", [valueObject floatValue]];
+                cell.valueLabel.text = [converter targetDisplayStringForMetricLength:[valueObject floatValue]];
             } else if ([key isEqualToString:kWTLGoalWeightKey]) {
-                cell.valueLabel.text = [NSString stringWithFormat:@"%.1f kg", [valueObject floatValue]];
+                cell.valueLabel.text = [converter targetDisplayStringForMetricMass:[valueObject floatValue]];
             }
         }
     }
@@ -183,6 +192,8 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    self.selectedIndexPath = indexPath;
+    
     NSString *defaultsKey = [self defaultsKeyForRowAtIndexPath:indexPath];
     NSDictionary *infoDictionary = [self.preferences infoForDefaultsKey:defaultsKey];
     WTLDefaultsValueType valueType = [[infoDictionary objectForKey:kWTLDefaultsInfoValueTypeKey] integerValue];
@@ -195,15 +206,50 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
             [self.navigationController pushViewController:viewController animated:YES];
         }
     } else if (valueType == WTLDefaultsValueTypeNumber) {
-        WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
-        inputViewController.inputString = [NSString stringWithFormat:@"%.1f", [[self.preferences objectForKey:defaultsKey] floatValue]];
+        NSString *suffixString;
+        NSString *inputString;
+        WTLNumberValidator *validator;
+        WTLUnitConverter *unitConverter = [WTLUnitConverter sharedConverter];
+        
         if ([defaultsKey isEqualToString:kWTLHeightKey]) {
-            inputViewController.suffixString = @"CM";
+            suffixString = [[unitConverter targetLengthUnitSymbol] uppercaseString];
+            validator = [[WTLNumberValidator alloc] initWithMinimumValue:0.0 maximumValue:300.0];
+            float length = [unitConverter targetLengthForMetricLength:[[self.preferences objectForKey:kWTLHeightKey] floatValue]];
+            inputString = [@(length) stringValue];
         } else if ([defaultsKey isEqualToString:kWTLGoalWeightKey]) {
-            inputViewController.suffixString = @"KG";
+            suffixString = [[unitConverter targetMassUnitSymbol] uppercaseString];
+            validator = [[WTLNumberValidator alloc] initWithMinimumValue:0.0 maximumValue:1500.0];
+            float goalWeight = [unitConverter targetLengthForMetricLength:[[self.preferences objectForKey:kWTLGoalWeightKey] floatValue]];
+            inputString = [@(goalWeight) stringValue];
         }
+        
+        WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
+        inputViewController.validator = validator;
+        inputViewController.suffixString = suffixString;
+        inputViewController.inputString = inputString;
+        inputViewController.delegate = self;
+        
         [self showViewController:inputViewController animated:YES];
     }
+}
+
+
+#pragma mark - WTLInputViewControllerDelegate
+
+- (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithText:(NSString *)text {
+    NSString *string = text ? text : @"";
+    float newValue = strtof([string cStringUsingEncoding:NSASCIIStringEncoding], NULL);
+    NSString *key = [self defaultsKeyForRowAtIndexPath:self.selectedIndexPath];
+    WTLUnitConverter *converter = [WTLUnitConverter sharedConverter];
+    
+    if ([key isEqualToString:kWTLHeightKey]) {
+        [self.preferences setObject:@([converter metricLengthForTargetLength:newValue]) forKey:kWTLHeightKey];
+    } else if ([key isEqualToString:kWTLGoalWeightKey]) {
+        [self.preferences setObject:@([converter metricMassForTagretMass:newValue]) forKey:kWTLGoalWeightKey];
+    }
+    [self.preferences synchronize];
+    
+    [self.tableView reloadRowsAtIndexPaths:@[self.selectedIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 

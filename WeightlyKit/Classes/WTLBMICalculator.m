@@ -32,7 +32,7 @@
 #pragma mark - Class Methods
 
 + (float)bmiForWeight:(float)weight height:(float)height {
-    return weight / (height * height);
+    return weight / (height * height) * 10000.0;
 }
 
 
@@ -98,7 +98,7 @@
 
 
 + (NSString *)fullBMIDescriptionForWeight:(float)weight height:(float)height {
-    float bmi = [self bmiCategoryForWeight:weight height:height];
+    float bmi = [self bmiForWeight:weight height:height];
     NSString *bmiCategory = [self descriptionForBMICategory:[self bmiCategoryForBMI:bmi]];
     NSString *bmiString = [[self numberFormatter] stringFromNumber:@(bmi)];
     return [NSString stringWithFormat:@"%@ - %@", bmiString, bmiCategory];

@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, WTLLineGraphTimePeriod) {
     WTLLineGraphTimePeriodOneYear,
 };
 
+
 @class WTLWeight;
 @protocol WTLLineGraphModelControllerDelegate;
 
@@ -29,6 +30,7 @@ typedef NS_ENUM(NSUInteger, WTLLineGraphTimePeriod) {
 - (WTLWeight *)latestWeight;
 
 @end
+
 
 @protocol WTLLineGraphModelControllerDelegate <NSObject>
 @optional

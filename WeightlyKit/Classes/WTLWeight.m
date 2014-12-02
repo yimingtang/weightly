@@ -7,15 +7,16 @@
 //
 
 #import "WTLWeight.h"
+#import "WTLUnitConverter.h"
 
 @interface WTLWeight ()
-
 @property (nonatomic) NSDate *primitiveTimeStamp;
 @property (nonatomic) NSString *primitiveSectionIdentifier;
-
 @end
 
 @implementation WTLWeight
+
+#pragma mark - Accessors
 
 @dynamic amount;
 @dynamic timeStamp;
@@ -23,20 +24,6 @@
 @dynamic sectionIdentifier;
 @dynamic primitiveTimeStamp;
 @dynamic primitiveSectionIdentifier;
-
-#pragma mark - SSManagedObject
-
-+ (NSString *)entityName {
-    return @"Weight";
-}
-
-
-+ (NSArray *)defaultSortDescriptors {
-    return @[[NSSortDescriptor sortDescriptorWithKey:@"timeStamp" ascending:NO]];
-}
-
-
-#pragma mark - Accessors
 
 - (NSString *)sectionIdentifier {
     // Create and cache the section identifier on demand.
@@ -64,6 +51,42 @@
     [self didChangeValueForKey:@"timeStamp"];
     
     [self setPrimitiveSectionIdentifier:nil];
+}
+
+
+#pragma mark - SSManagedObject
+
++ (NSString *)entityName {
+    return @"Weight";
+}
+
+
++ (NSArray *)defaultSortDescriptors {
+    return @[[NSSortDescriptor sortDescriptorWithKey:@"timeStamp" ascending:NO]];
+}
+
+
+#pragma mark - Public
+
+- (float)amountForCurrentUnit {
+    WTLUnitConverter *converter = [WTLUnitConverter sharedConverter];
+    return [converter targetMassForMetricMass:self.amount];
+}
+
+
+- (void)setAmountWithCurrentUnit:(float)amount {
+    WTLUnitConverter *converter = [WTLUnitConverter sharedConverter];
+    self.amount = [converter metricMassForTagretMass:amount];
+}
+
+
+- (NSString *)currentUnitSymbol {
+    return [[WTLUnitConverter sharedConverter] targetMassUnitSymbol];
+}
+
+
+- (NSString *)displayString {
+    return [[WTLUnitConverter sharedConverter] targetDisplayStringForMetricMass:self.amount];
 }
 
 

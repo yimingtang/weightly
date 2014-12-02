@@ -10,12 +10,10 @@
 #import "WTLWeight.h"
 
 @interface WTLLineGraphModelController () <NSFetchedResultsControllerDelegate>
-
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic) NSMutableArray *mutableDataArray;
 @property (nonatomic) BOOL didChangeLatestWeight;
 @property (nonatomic) BOOL shouldReloadData;
-
 @end
 
 @implementation WTLLineGraphModelController
@@ -71,7 +69,6 @@
         _timePeriod = WTLLineGraphTimePeriodOneWeek;
         _ignoreChange = NO;
         _mutableDataArray = [NSMutableArray arrayWithCapacity:365/7];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextWillReset:) name:kSSManagedObjectWillResetNotificationName object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managedObjectContextWillReset:) name:kSSManagedObjectWillResetNotificationName object:nil];
     }
     return self;
