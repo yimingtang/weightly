@@ -48,12 +48,17 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     return _preferences;
 }
 
+#pragma mark - NSObject
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.backgroundColor = [UIColor wtl_redColor];
     self.tableView.rowHeight = 45.0f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[WTLSettingsTableViewCell class] forCellReuseIdentifier:cellIdentifier];
@@ -64,6 +69,10 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
     navigationBar.translucent = NO;
     [navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
+    
+    [self updateAppearance];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAppearance) name:kWTLThemeDidChangeNotificationName object:nil];
 }
 
 
@@ -101,6 +110,12 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
 
 
 #pragma mark - Private Methods
+
+- (void)updateAppearance {
+    [self.navigationController.navigationBar setBarTintColor:[UIColor wtl_themeColor]];
+    self.tableView.backgroundColor = [UIColor wtl_themeColor];
+}
+
 
 - (void)showViewController:(UIViewController *)viewController animated:(BOOL)aniamted {
     viewController.modalPresentationStyle = UIModalPresentationCustom;
@@ -229,6 +244,11 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
         
         [self showViewController:inputViewController animated:YES];
     }
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = self.tableView.backgroundColor;
 }
 
 

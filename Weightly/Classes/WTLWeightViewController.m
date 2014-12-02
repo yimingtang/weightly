@@ -78,8 +78,8 @@
 - (BEMSimpleLineGraphView *)lineGraphView {
     if (!_lineGraphView) {
         _lineGraphView = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectZero];
-        _lineGraphView.colorTop = [UIColor wtl_redColor];
-        _lineGraphView.colorBottom = [UIColor wtl_redColor];
+        _lineGraphView.colorTop = [UIColor wtl_themeColor];
+        _lineGraphView.colorBottom = [UIColor wtl_themeColor];
         _lineGraphView.colorLine = [UIColor whiteColor];
         _lineGraphView.widthLine = 2.0;
         _lineGraphView.enableTouchReport = YES;
@@ -139,7 +139,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor wtl_redColor];
+    self.view.backgroundColor = [UIColor wtl_themeColor];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleControls:)];
     [self.view addGestureRecognizer:tap];
     
@@ -159,6 +159,7 @@
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self selector:@selector(updateWeightView) name:kWTLUnitsDidChangeNotificationName object:nil];
     [notificationCenter addObserver:self selector:@selector(updateWeightView) name:kWTLHeightDidChangeNotificationName object:nil];
+    [notificationCenter addObserver:self selector:@selector(updateAppearance) name:kWTLThemeDidChangeNotificationName object:nil];
     
     [self setControlsHidden:[[NSUserDefaults standardUserDefaults] boolForKey:kWTLControlsHiddenKey] animated:NO];
 }
@@ -289,6 +290,16 @@
 
 - (void)updateWeightView {
     self.weightView.weight = self.weight.amount;
+}
+
+
+- (void)updateAppearance {
+    UIColor *themeColor = [UIColor wtl_themeColor];
+    self.view.backgroundColor = themeColor;
+    self.lineGraphView.colorTop = themeColor;
+    self.lineGraphView.colorBottom = themeColor;
+    NSDictionary *segmentedControlTextAttributes = @{NSForegroundColorAttributeName : [UIColor wtl_themeColor]};
+    [self.segmentedControl setTitleTextAttributes:segmentedControlTextAttributes forState:UIControlStateSelected];
 }
 
 

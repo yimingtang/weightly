@@ -10,6 +10,6 @@
 
 @interface UIColor (Weightly)
 
-+ (instancetype)wtl_redColor;
++ (instancetype)wtl_themeColor;
 
 @end

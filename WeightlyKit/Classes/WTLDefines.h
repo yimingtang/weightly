@@ -35,6 +35,7 @@ extern NSString *const kWTLDefaultsInfoOptionsKey;
 
 extern NSString *const kWTLUnitsDidChangeNotificationName;
 extern NSString *const kWTLHeightDidChangeNotificationName;
+extern NSString *const kWTLThemeDidChangeNotificationName;
 
 
 typedef NS_ENUM(NSUInteger, WTLGenderType) {

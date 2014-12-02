@@ -10,6 +10,4 @@
 
 @interface WTLThemesViewController : UICollectionViewController
 
-@property (nonatomic, copy) NSString *selectedTheme;
-
 @end

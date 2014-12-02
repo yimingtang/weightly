@@ -59,7 +59,7 @@
 - (UIView *)circleView {
     if (!_circleView) {
         _circleView = [[UIView alloc] init];
-        _circleView.backgroundColor = [UIColor wtl_redColor];
+        _circleView.backgroundColor = [UIColor wtl_themeColor];
         _circleView.layer.borderWidth = 1.0;
         _circleView.layer.cornerRadius = 8.0;
     }
@@ -79,7 +79,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        self.backgroundColor = [UIColor wtl_redColor];
+        self.backgroundColor = [UIColor wtl_themeColor];
         
         [self.contentView addSubview:self.dateLabel];
         [self.contentView addSubview:self.lineView];

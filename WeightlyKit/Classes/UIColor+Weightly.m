@@ -7,11 +7,12 @@
 //
 
 #import "UIColor+Weightly.h"
+#import "WTLTheme.h"
 
 @implementation UIColor (Weightly)
 
-+ (instancetype)wtl_redColor {
-    return [self colorWithRed:0.906 green:0.298 blue:0.235 alpha:1.0];
++ (instancetype)wtl_themeColor {
+    return [[WTLTheme currentTheme] color];
 }
 
 @end

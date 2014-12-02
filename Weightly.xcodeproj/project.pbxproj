@@ -18,6 +18,8 @@
 		2015534E1A2C31F000E38157 /* WTLNumberValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015534D1A2C31F000E38157 /* WTLNumberValidator.m */; };
 		201553541A2C4E4D00E38157 /* WTLDayNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553531A2C4E4D00E38157 /* WTLDayNumberFormatter.m */; };
 		201553571A2DB32200E38157 /* WTLBorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553561A2DB32200E38157 /* WTLBorderButton.m */; };
+		2015535D1A2DC5F100E38157 /* WTLTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015535C1A2DC5F100E38157 /* WTLTheme.m */; };
+		2015535E1A2DE25100E38157 /* WTLTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015535C1A2DC5F100E38157 /* WTLTheme.m */; };
 		20156B2B19FE5C9E00142EC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2A19FE5C9E00142EC0 /* main.m */; };
 		20156B2E19FE5C9E00142EC0 /* WTLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */; };
 		20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */; };
@@ -105,13 +107,15 @@
 		201553531A2C4E4D00E38157 /* WTLDayNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDayNumberFormatter.m; sourceTree = "<group>"; };
 		201553551A2DB32200E38157 /* WTLBorderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLBorderButton.h; sourceTree = "<group>"; };
 		201553561A2DB32200E38157 /* WTLBorderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLBorderButton.m; sourceTree = "<group>"; };
+		2015535B1A2DC5F100E38157 /* WTLTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLTheme.h; sourceTree = "<group>"; };
+		2015535C1A2DC5F100E38157 /* WTLTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLTheme.m; sourceTree = "<group>"; };
 		20156B2519FE5C9E00142EC0 /* Weightly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weightly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20156B2919FE5C9E00142EC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20156B2A19FE5C9E00142EC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		20156B2C19FE5C9E00142EC0 /* WTLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTLAppDelegate.h; sourceTree = "<group>"; };
-		20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTLAppDelegate.m; sourceTree = "<group>"; };
+		20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WTLAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20156B2F19FE5C9E00142EC0 /* WTLWeightViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTLWeightViewController.h; sourceTree = "<group>"; };
-		20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTLWeightViewController.m; sourceTree = "<group>"; };
+		20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WTLWeightViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20156B3519FE5C9E00142EC0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		20156B3819FE5C9E00142EC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		201D23261A29E3E5002C2F8E /* Weightly Today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Weightly Today.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,25 +124,25 @@
 		201D232C1A29E3E5002C2F8E /* WTLTodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTLTodayViewController.h; sourceTree = "<group>"; };
 		201D232D1A29E3E5002C2F8E /* WTLTodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTLTodayViewController.m; sourceTree = "<group>"; };
 		2035933A1A0A373C0097A1AC /* WTLSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSettingsViewController.h; sourceTree = "<group>"; };
-		2035933B1A0A373C0097A1AC /* WTLSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSettingsViewController.m; sourceTree = "<group>"; };
+		2035933B1A0A373C0097A1AC /* WTLSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WTLSettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2035933D1A0A377F0097A1AC /* WTLHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLHistoryViewController.h; sourceTree = "<group>"; };
-		2035933E1A0A377F0097A1AC /* WTLHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLHistoryViewController.m; sourceTree = "<group>"; };
+		2035933E1A0A377F0097A1AC /* WTLHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WTLHistoryViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		203593401A0A57560097A1AC /* WTLInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLInputViewController.h; sourceTree = "<group>"; };
-		203593411A0A57560097A1AC /* WTLInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLInputViewController.m; sourceTree = "<group>"; };
+		203593411A0A57560097A1AC /* WTLInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WTLInputViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		203593431A0A5E550097A1AC /* WTLPresentInputTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLPresentInputTransition.h; sourceTree = "<group>"; };
 		203593441A0A5E550097A1AC /* WTLPresentInputTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLPresentInputTransition.m; sourceTree = "<group>"; };
 		204931E81A08CE090075F43B /* WTLLineGraphModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLLineGraphModelController.h; sourceTree = "<group>"; };
 		204931E91A08CE090075F43B /* WTLLineGraphModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLLineGraphModelController.m; sourceTree = "<group>"; };
 		20566C3F1A0DEE9F0071D05D /* WTLSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSettingsTableViewCell.h; sourceTree = "<group>"; };
-		20566C401A0DEE9F0071D05D /* WTLSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSettingsTableViewCell.m; sourceTree = "<group>"; };
+		20566C401A0DEE9F0071D05D /* WTLSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WTLSettingsTableViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20566C421A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSegmentedSettingsTableViewCell.h; sourceTree = "<group>"; };
 		20566C431A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSegmentedSettingsTableViewCell.m; sourceTree = "<group>"; };
 		20566C451A0E27B20071D05D /* WTLWeightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLWeightTableViewCell.h; sourceTree = "<group>"; };
-		20566C461A0E27B20071D05D /* WTLWeightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLWeightTableViewCell.m; sourceTree = "<group>"; };
+		20566C461A0E27B20071D05D /* WTLWeightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WTLWeightTableViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20566C481A0E27FC0071D05D /* WTLSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLSectionHeaderView.h; sourceTree = "<group>"; };
 		20566C491A0E27FC0071D05D /* WTLSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLSectionHeaderView.m; sourceTree = "<group>"; };
 		20566C4B1A0F0C5D0071D05D /* WTLThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLThemesViewController.h; sourceTree = "<group>"; };
-		20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLThemesViewController.m; sourceTree = "<group>"; };
+		20566C4C1A0F0C5D0071D05D /* WTLThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WTLThemesViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20566C4E1A0F9B040071D05D /* WTLThemeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLThemeCollectionViewCell.h; sourceTree = "<group>"; };
 		20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLThemeCollectionViewCell.m; sourceTree = "<group>"; };
 		205CFFA41A16150B002F26D2 /* WTLPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLPreferences.h; sourceTree = "<group>"; };
@@ -335,6 +339,8 @@
 				2015534D1A2C31F000E38157 /* WTLNumberValidator.m */,
 				201553521A2C4E4D00E38157 /* WTLDayNumberFormatter.h */,
 				201553531A2C4E4D00E38157 /* WTLDayNumberFormatter.m */,
+				2015535B1A2DC5F100E38157 /* WTLTheme.h */,
+				2015535C1A2DC5F100E38157 /* WTLTheme.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -620,6 +626,7 @@
 				20566C4A1A0E27FC0071D05D /* WTLSectionHeaderView.m in Sources */,
 				20566C441A0DFD040071D05D /* WTLSegmentedSettingsTableViewCell.m in Sources */,
 				20FC76E21A29F054005719D3 /* WTLDefines.m in Sources */,
+				2015535D1A2DC5F100E38157 /* WTLTheme.m in Sources */,
 				20566C4D1A0F0C5D0071D05D /* WTLThemesViewController.m in Sources */,
 				208EA5D41A14830A00AF5084 /* WTLWeight.m in Sources */,
 				201553411A2B278400E38157 /* WTLWeightView.m in Sources */,
@@ -653,6 +660,7 @@
 				20FC76E91A29F570005719D3 /* WTLWeight.m in Sources */,
 				20FC76E81A29F49C005719D3 /* NSUserDefaults+Weightly.m in Sources */,
 				20FC76DF1A29EF43005719D3 /* Weightly.xcdatamodeld in Sources */,
+				2015535E1A2DE25100E38157 /* WTLTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

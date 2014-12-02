@@ -15,6 +15,7 @@
 #import "WTLUnitConverter.h"
 #import "WTLNumberValidator.h"
 #import "WTLDayNumberFormatter.h"
+#import "WTLTheme.h"
 
 #import "UIColor+Weightly.h"
 #import "NSUserDefaults+Weightly.h"

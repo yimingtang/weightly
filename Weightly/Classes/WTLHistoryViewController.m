@@ -14,14 +14,14 @@
 #import "WTLDismissInputTransition.h"
 #import "WeightlyKit.h"
 
+static NSString *const cellReuseIdentifier = @"cell";
+static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
+
 @interface WTLHistoryViewController () <UIViewControllerTransitioningDelegate, WTLInputViewControllerDelegate>
 @property (nonatomic) NSIndexPath *selectedIndexPath;
 @end
 
 @implementation WTLHistoryViewController
-
-static NSString *const cellReuseIdentifier = @"cell";
-static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
 
 #pragma mark - Accessors
 
@@ -35,12 +35,13 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"line"]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor wtl_themeColor]];
     self.navigationItem.title = @"History";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(done:)];
     
     self.useChangeAnimations = NO;
     
-    self.tableView.backgroundColor = [UIColor wtl_redColor];
+    self.tableView.backgroundColor = [UIColor wtl_themeColor];
     self.tableView.rowHeight = 50.0;
     self.tableView.sectionHeaderHeight = 45.0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

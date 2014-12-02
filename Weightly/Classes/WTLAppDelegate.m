@@ -40,7 +40,7 @@
     
     UINavigationBar *navigationBar = [UINavigationBar appearance];
     [navigationBar setTintColor:[UIColor whiteColor]];
-    [navigationBar setBarTintColor:[UIColor wtl_redColor]];
+    [navigationBar setBarTintColor:[UIColor wtl_themeColor]];
     [navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Avenir-Heavy" size:22.0f],
                                             NSForegroundColorAttributeName: [UIColor whiteColor]}];
     [navigationBar setTitleVerticalPositionAdjustment:3.0f forBarMetrics:UIBarMetricsDefault];
@@ -48,7 +48,7 @@
     // UISegmented Control
     UISegmentedControl *segmentedControl = [UISegmentedControl appearance];
     [segmentedControl setTintColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
-    NSDictionary *segmentedControlTextAttributes = @{NSForegroundColorAttributeName : [UIColor wtl_redColor]};
+    NSDictionary *segmentedControlTextAttributes = @{NSForegroundColorAttributeName : [UIColor wtl_themeColor]};
     [segmentedControl setTitleTextAttributes:segmentedControlTextAttributes forState:UIControlStateSelected];
 }
 

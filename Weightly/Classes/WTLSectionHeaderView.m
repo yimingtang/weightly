@@ -7,6 +7,7 @@
 //
 
 #import "WTLSectionHeaderView.h"
+#import "WeightlyKit.h"
 
 #import <Masonry.h>
 
@@ -45,7 +46,7 @@
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithReuseIdentifier:reuseIdentifier])) {
         UIView *backgroundView = [[UIView alloc] init];
-        backgroundView.backgroundColor = [UIColor colorWithRed:0.906f green:0.298f blue:0.235f alpha:0.9f];
+        backgroundView.backgroundColor = [[UIColor wtl_themeColor] colorWithAlphaComponent:0.9f];
         self.backgroundView = backgroundView;
         
         [self.contentView addSubview:self.titleLabel];

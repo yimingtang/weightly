@@ -25,3 +25,4 @@ NSString *const kWTLDefaultsInfoOptionsKey = @"options";
 
 NSString *const kWTLUnitsDidChangeNotificationName = @"WTLUnitsDidChangeNotification";
 NSString *const kWTLHeightDidChangeNotificationName = @"WTLHeightDidChangeNotification";
+NSString *const kWTLThemeDidChangeNotificationName = @"WTLThemeDidChangeNotification";

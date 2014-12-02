@@ -1,50 +1,66 @@
-[
-  {
-    "title": "Pomegranate",
-    "bg-color": "c0392b",
+{
+  "themes": {
+    "Pomegranate": {
+      "title": "Pomegranate",
+      "color": "c0392b"
+    },
+    "Pumpkin": {
+      "title": "Pumpkin",
+      "color": "d35400"
+    },
+    "Cinnabar": {
+      "title": "Cinnabar",
+      "color": "e74c3c"
+    },
+    "Carrot": {
+      "title": "Carrot",
+      "color": "e67e22"
+    },
+    "Belize hole": {
+      "title": "Belize Hole",
+      "color": "2980b9"
+    },
+    "Nephritis": {
+      "title": "Nephritis",
+      "color": "27ae60"
+    },
+    "Peter river": {
+      "title": "Peter River",
+      "color": "3498db"
+    },
+    "Emerald": {
+      "title": "Emerald",
+      "color": "2ecc71"
+    },
+    "Amethyst": {
+      "title": "Amethyst",
+      "color": "9b59b6"
+    },
+    "Green sea": {
+      "title": "Green Sea",
+      "color": "16a085"
+    },
+    "Midnight blue": {
+      "title": "Midnight Blue",
+      "color": "2c3e50"
+    },
+    "Turquoise": {
+      "title": "Turquoise",
+      "color": "1abc9c"
+    }
   },
-  {
-    "title": "Pumpkin",
-    "bg-color": "d35400",
-  },
-  {
-    "title": "Cinnabar",
-    "bg-color": "e74c3c",
-  },
-  {
-    "title": "Carrot",
-    "bg-color": "e67e22",
-  },
-  {
-    "title": "Belize Hole",
-    "bg-color": "2980b9",
-  },
-  {
-    "title": "Nephritis",
-    "bg-color": "27ae60",
-  },
-  {
-    "title": "Peter River",
-    "bg-color": "3498db",
-  },
-  {
-    "title": "Emerald",
-    "bg-color": "2ecc71",
-  },
-  {
-    "title": "Amethyst",
-    "bg-color": "9b59b6",
-  },
-  {
-    "title": "Green Sea",
-    "bg-color": "16a085",
-  },
-  {
-    "title": "Midnight Blue",
-    "bg-color": "2c3e50",
-  },
-  {
-    "title": "Turquoise",
-    "bg-color": "1abc9c",
-  }
-]
+  "order": [
+    "Pomegranate",
+    "Pumpkin",
+    "Cinnabar",
+    "Carrot",
+    "Belize hole",
+    "Nephritis",
+    "Peter river",
+    "Emerald",
+    "Amethyst",
+    "Green sea",
+    "Midnight blue",
+    "Turquoise"
+  ]
+}

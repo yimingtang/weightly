@@ -13,23 +13,46 @@
 #import <SAMCategories/UIColor+SAMAdditions.h>
 
 @interface WTLThemesViewController () <UICollectionViewDelegateFlowLayout>
-
 @property (nonatomic) CGSize itemSize;
 @property (nonatomic) BOOL needsUpdateItemSize;
 @property (nonatomic) NSArray *themes;
-
+@property (nonatomic) NSArray *themeNames;
+@property (nonatomic) NSString *selectedThemeName;
 @end
 
 @implementation WTLThemesViewController
 
 static NSString *const reuseIdentifier = @"themeCell";
-static NSString *const kWTLThemeTitleKey = @"title";
-static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
 
-@synthesize itemSize = _itemSize;
-@synthesize selectedTheme = _selectedTheme;
-@synthesize needsUpdateItemSize = _needsUpdateItemSize;
 @synthesize themes = _themes;
+@synthesize themeNames = _themeNames;
+@synthesize selectedThemeName = _selectedThemeName;
+@synthesize itemSize = _itemSize;
+@synthesize needsUpdateItemSize = _needsUpdateItemSize;
+
+#pragma mark - Accessors
+
+- (NSArray *)themeNames {
+    if (!_themeNames) {
+         _themeNames = [WTLTheme availableThemeNames];
+    }
+    return _themeNames;
+}
+
+
+- (NSArray *)themes {
+    if (!_themes) {
+        NSMutableArray *mutableArray = [NSMutableArray arrayWithCapacity:self.themeNames.count];
+        for (NSString *name in self.themeNames) {
+            [mutableArray addObject:[WTLTheme themeNamed:name]];
+        }
+        _themes = mutableArray;
+    }
+    return _themes;
+}
+
+
+#pragma mark - Initialization
 
 - (instancetype)init {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -45,27 +68,16 @@ static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
 }
 
 
-#pragma mark - Accessors
-
-- (NSArray *)themes {
-    if (!_themes) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"themes" ofType:@"json"];
-        NSData *data = [NSData dataWithContentsOfFile:path];
-        _themes = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)kNilOptions error:nil];
-    }
-    return _themes;
-}
-
-
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.clearsSelectionOnViewWillAppear = NO;
     
-    self.collectionView.backgroundColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
+    self.collectionView.backgroundColor = [UIColor wtl_themeColor];
     [self.collectionView registerClass:[WTLThemeCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    self.selectedTheme = [[NSUserDefaults standardUserDefaults] stringForKey:kWTLThemeKey];
+    
+    self.selectedThemeName = [[WTLPreferences sharedPreferences] objectForKey:kWTLThemeKey];
 }
 
 
@@ -106,11 +118,6 @@ static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
 }
 
 
-- (NSDictionary *)objectForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.themes[indexPath.item];
-}
-
-
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -121,15 +128,16 @@ static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     WTLThemeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    NSDictionary *theme = [self objectForItemAtIndexPath:indexPath];
-    NSString *title = [theme objectForKey:kWTLThemeTitleKey];
+    NSString *themeName = [self.themeNames objectAtIndex:indexPath.item];
+    WTLTheme *theme = [self.themes objectAtIndex:indexPath.item];
     
-    cell.titleLabel.text = [title uppercaseString];
-    cell.backgroundColor = [UIColor sam_colorWithHex:[theme objectForKey:kWTLThemeBackgroundColorKey]];
+    cell.titleLabel.text = [theme.title uppercaseString];
+    cell.backgroundColor = theme.color;
     cell.weightLabel.text = @"65.3";
     cell.bmiLabel.text = @"21.8 - NORMAL";
     
-    if ([title isEqualToString:self.selectedTheme]) {
+    
+    if ([themeName isEqualToString:self.selectedThemeName]) {
         cell.selected = YES;
         // http://stackoverflow.com/questions/15330844/uicollectionview-select-and-deselect-issue
         // should also call this method so that the collection view will deselect this cell after
@@ -144,9 +152,15 @@ static NSString *const kWTLThemeBackgroundColorKey = @"bg-color";
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *theme = [self objectForItemAtIndexPath:indexPath];
-    self.selectedTheme = [theme objectForKey:kWTLThemeTitleKey];
-    [[NSUserDefaults standardUserDefaults] setObject:self.selectedTheme forKey:kWTLThemeKey];
+    self.selectedThemeName = [self.themeNames objectAtIndex:indexPath.row];
+    
+    WTLPreferences *preferences = [WTLPreferences sharedPreferences];
+    [preferences setObject:self.selectedThemeName forKey:kWTLThemeKey];
+    [preferences synchronize];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor wtl_themeColor];
+    self.collectionView.backgroundColor = [UIColor wtl_themeColor];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kWTLThemeDidChangeNotificationName object:nil];
 }
 
 
