@@ -8,13 +8,14 @@
 
 #import "WTLInputViewController.h"
 #import "WTLTextField.h"
-#import "WeightlyKit.h"
+#import "WTLBorderButton.h"
 
+#import "WeightlyKit.h"
 #import <Masonry/Masonry.h>
 
 @interface WTLInputViewController ()
 @property (nonatomic, readonly) WTLTextField *textField;
-@property (nonatomic, readonly) UIButton *doneButton;
+@property (nonatomic, readonly) WTLBorderButton *doneButton;
 @end
 
 @implementation WTLInputViewController
@@ -36,18 +37,12 @@
 }
 
 
-- (UIButton *)doneButton {
+- (WTLBorderButton *)doneButton {
     if (!_doneButton) {
-        _doneButton = [[UIButton alloc] init];
-        _doneButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16.0f];
-        [_doneButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5f] forState:UIControlStateNormal];
-        [_doneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        _doneButton = [[WTLBorderButton alloc] init];
         [_doneButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
         [_doneButton setTitle:@"Done" forState:UIControlStateNormal];
         _doneButton.contentEdgeInsets = UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0);
-        _doneButton.layer.cornerRadius = 5.0;
-        _doneButton.layer.borderWidth = 1.0;
-        _doneButton.layer.borderColor = [[UIColor colorWithWhite:1.0 alpha:0.5f] CGColor];
     }
     return _doneButton;
 }

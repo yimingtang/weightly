@@ -17,6 +17,7 @@
 		2015534B1A2C2ECE00E38157 /* WTLWeightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553401A2B278400E38157 /* WTLWeightView.m */; };
 		2015534E1A2C31F000E38157 /* WTLNumberValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015534D1A2C31F000E38157 /* WTLNumberValidator.m */; };
 		201553541A2C4E4D00E38157 /* WTLDayNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553531A2C4E4D00E38157 /* WTLDayNumberFormatter.m */; };
+		201553571A2DB32200E38157 /* WTLBorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553561A2DB32200E38157 /* WTLBorderButton.m */; };
 		20156B2B19FE5C9E00142EC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2A19FE5C9E00142EC0 /* main.m */; };
 		20156B2E19FE5C9E00142EC0 /* WTLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */; };
 		20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */; };
@@ -102,6 +103,8 @@
 		2015534D1A2C31F000E38157 /* WTLNumberValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLNumberValidator.m; sourceTree = "<group>"; };
 		201553521A2C4E4D00E38157 /* WTLDayNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLDayNumberFormatter.h; sourceTree = "<group>"; };
 		201553531A2C4E4D00E38157 /* WTLDayNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDayNumberFormatter.m; sourceTree = "<group>"; };
+		201553551A2DB32200E38157 /* WTLBorderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLBorderButton.h; sourceTree = "<group>"; };
+		201553561A2DB32200E38157 /* WTLBorderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLBorderButton.m; sourceTree = "<group>"; };
 		20156B2519FE5C9E00142EC0 /* Weightly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weightly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20156B2919FE5C9E00142EC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20156B2A19FE5C9E00142EC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -253,6 +256,8 @@
 				20566C4F1A0F9B040071D05D /* WTLThemeCollectionViewCell.m */,
 				20566C451A0E27B20071D05D /* WTLWeightTableViewCell.h */,
 				20566C461A0E27B20071D05D /* WTLWeightTableViewCell.m */,
+				201553551A2DB32200E38157 /* WTLBorderButton.h */,
+				201553561A2DB32200E38157 /* WTLBorderButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -629,6 +634,7 @@
 				20156B2B19FE5C9E00142EC0 /* main.m in Sources */,
 				2011B3AD1A0B6293000DD457 /* WTLDismissInputTransition.m in Sources */,
 				201553491A2B460500E38157 /* WTLUnitConverter.m in Sources */,
+				201553571A2DB32200E38157 /* WTLBorderButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,7 +797,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Weightly Today/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -808,7 +814,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Weightly Today/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
