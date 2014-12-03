@@ -232,7 +232,7 @@ static NSString *const segmentedCellIdentifier = @"segmentedCell";
         } else if ([defaultsKey isEqualToString:kWTLGoalWeightKey]) {
             suffixString = [[unitConverter targetMassUnitSymbol] uppercaseString];
             validator = [[WTLNumberValidator alloc] initWithMinimumValue:0.0 maximumValue:1500.0];
-            float goalWeight = [unitConverter targetLengthForMetricLength:[[self.preferences objectForKey:kWTLGoalWeightKey] floatValue]];
+            float goalWeight = [unitConverter targetMassForMetricMass:[[self.preferences objectForKey:kWTLGoalWeightKey] floatValue]];
             inputString = [@(goalWeight) stringValue];
         }
         

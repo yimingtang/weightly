@@ -158,7 +158,7 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
     WTLInputViewController *inputViewController = [[WTLInputViewController alloc] init];
     inputViewController.modalPresentationStyle = UIModalPresentationCustom;
     inputViewController.transitioningDelegate = self;
-    inputViewController.inputString = [@(weight.amount) stringValue];
+    inputViewController.inputString = [@([weight amountForCurrentUnit]) stringValue];
     inputViewController.suffixString = [[weight currentUnitSymbol] uppercaseString];
     inputViewController.delegate = self;
     inputViewController.validator = [[WTLNumberValidator alloc] initWithMinimumValue:0.0 maximumValue:1500.0];
@@ -169,15 +169,15 @@ static NSString *const sectionHeaderReuseIdentifier = @"sectionHeader";
 #pragma mark - WTLInputViewControllerDelegate
 
 - (void)inputViewController:(WTLInputViewController *)inputViewController didFinishEditingWithText:(NSString *)text {
-    WTLWeight *weight = [self objectForViewIndexPath:self.selectedIndexPath];
     NSString *string = text ? text : @"";
-    
     CGFloat newAmount = strtof([string cStringUsingEncoding:NSASCIIStringEncoding], NULL);
-    if (weight.amount - newAmount == 0.0) {
+    WTLWeight *weight = [self objectForViewIndexPath:self.selectedIndexPath];
+    
+    if ([weight amountForCurrentUnit] - newAmount == 0.0) {
         return;
     }
     
-    weight.amount = newAmount;
+    [weight setAmountWithCurrentUnit:newAmount];
     weight.userGenerated = YES;
     
     self.ignoreChange = YES;
