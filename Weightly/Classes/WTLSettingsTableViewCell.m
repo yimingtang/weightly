@@ -11,7 +11,7 @@
 
 #import <Masonry.h>
 
-CGFloat kWTLSettingsTableViewCellFontSize = 20.0f;
+CGFloat kWTLSettingsTableViewCellFontSize = 18.0f;
 
 @implementation WTLSettingsTableViewCell
 

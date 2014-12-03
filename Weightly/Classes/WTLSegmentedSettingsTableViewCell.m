@@ -35,11 +35,12 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
+        [self.valueLabel removeFromSuperview];
         [self.contentView addSubview:self.segmentedControl];
         
         [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.contentView);
-            make.right.equalTo(self.contentView).with.offset(-25.0);
+            make.right.equalTo(self.contentView).with.offset(-16.0);
         }];
     }
     return self;
