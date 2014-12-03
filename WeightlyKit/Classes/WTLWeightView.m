@@ -34,6 +34,8 @@
 - (UILabel *)bmiLabel {
     if (!_bmiLabel) {
         _bmiLabel = [[UILabel alloc] init];
+        _bmiLabel.numberOfLines = 2;
+        _bmiLabel.textAlignment = NSTextAlignmentCenter;
         _bmiLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.5f];
         _bmiLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16.0];
     }
@@ -94,7 +96,7 @@
     static NSDictionary *_weightAttributes = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _weightAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"Avenir" size:80.0],
+        _weightAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"Avenir" size:70.0],
                               NSForegroundColorAttributeName: [UIColor whiteColor]};
     });
     return _weightAttributes;
@@ -115,9 +117,9 @@
 
 - (void)setupConstraints {
     [self.weightButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
+        make.centerX.equalTo(self).with.offset(10.0);
         make.top.equalTo(self);
-        make.height.lessThanOrEqualTo(@80.0);
+        make.height.lessThanOrEqualTo(@70.0);
     }];
 
     [self.bmiLabel mas_makeConstraints:^(MASConstraintMaker *make) {

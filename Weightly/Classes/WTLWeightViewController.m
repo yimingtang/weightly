@@ -250,7 +250,7 @@
     }];
     
     [self.weightView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view).with.offset(10.0);
+        make.centerX.equalTo(self.view);
         make.width.equalTo(self.view);
         make.bottom.equalTo(self.historyButton.mas_top).with.offset(-10.0);
     }];

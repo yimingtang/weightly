@@ -68,10 +68,10 @@
     NSString *string = nil;
     switch (category) {
         case BMICategoryVerySeverelyUnderweight:
-            string = @"Very severely underweight";
+            string = @"\nVery severely underweight";
             break;
         case BMICategorySeverelyUnderweight:
-            string = @"Severely underweight";
+            string = @"\nSeverely underweight";
             break;
         case BMICategoryUnderweight:
             string = @"Underweight";
@@ -89,7 +89,7 @@
             string = @"Severely obese";
             break;
         case BMICategoryObeseClassThree:
-            string = @"Very severely obese";
+            string = @"\nVery severely obese";
             break;
     }
     
@@ -101,7 +101,7 @@
     float bmi = [self bmiForWeight:weight height:height];
     NSString *bmiCategory = [self descriptionForBMICategory:[self bmiCategoryForBMI:bmi]];
     NSString *bmiString = [[self numberFormatter] stringFromNumber:@(bmi)];
-    return [NSString stringWithFormat:@"%@ - %@", bmiString, bmiCategory];
+    return [NSString stringWithFormat:@"BMI %@ - %@", bmiString, bmiCategory];
 }
 
 
