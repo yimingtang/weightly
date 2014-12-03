@@ -46,7 +46,6 @@
 		20BC6AA31A29D8E300834502 /* UIColor+Weightly.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BC6AA21A29D8E300834502 /* UIColor+Weightly.m */; };
 		20D912231A11E89D007AF596 /* themes.json in Resources */ = {isa = PBXBuildFile; fileRef = 20D912221A11E89D007AF596 /* themes.json */; };
 		20D912251A12087D007AF596 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20D912241A12087D007AF596 /* Settings.bundle */; };
-		20FC76D61A29E8D1005719D3 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FC76D51A29E8D1005719D3 /* HealthKit.framework */; };
 		20FC76D81A29E8E9005719D3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FC76D71A29E8E9005719D3 /* StoreKit.framework */; };
 		20FC76DE1A29EF43005719D3 /* Weightly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20FC76DC1A29EF43005719D3 /* Weightly.xcdatamodeld */; };
 		20FC76DF1A29EF43005719D3 /* Weightly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20FC76DC1A29EF43005719D3 /* Weightly.xcdatamodeld */; };
@@ -159,7 +158,6 @@
 		20D912221A11E89D007AF596 /* themes.json */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = themes.json; sourceTree = "<group>"; };
 		20D912241A12087D007AF596 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		20FC76D41A29E8B6005719D3 /* Weightly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Weightly.entitlements; sourceTree = "<group>"; };
-		20FC76D51A29E8D1005719D3 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		20FC76D71A29E8E9005719D3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		20FC76D91A29EA91005719D3 /* Weightly Today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Weightly Today.entitlements"; sourceTree = "<group>"; };
 		20FC76DD1A29EF43005719D3 /* Weightly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weightly.xcdatamodel; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				20FC76D81A29E8E9005719D3 /* StoreKit.framework in Frameworks */,
-				20FC76D61A29E8D1005719D3 /* HealthKit.framework in Frameworks */,
 				A31FD9978DD9EBCBE4E65ADA /* libPods-Weightly.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,7 +407,6 @@
 			isa = PBXGroup;
 			children = (
 				20FC76D71A29E8E9005719D3 /* StoreKit.framework */,
-				20FC76D51A29E8D1005719D3 /* HealthKit.framework */,
 				201D23271A29E3E5002C2F8E /* NotificationCenter.framework */,
 				76DFD8D5055491CECE3E1FCD /* libPods-Weightly.a */,
 				F722647FF19379DA80B46507 /* libPods-Weightly Today.a */,
@@ -479,7 +475,7 @@
 								enabled = 1;
 							};
 							com.apple.HealthKit = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.InAppPurchase = {
 								enabled = 1;
