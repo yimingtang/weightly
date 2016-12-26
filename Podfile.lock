@@ -1,8 +1,8 @@
 PODS:
-  - BEMSimpleLineGraph (3.2)
-  - Masonry (0.5.3)
+  - BEMSimpleLineGraph (4.1)
+  - Masonry (1.0.2)
   - SAMCategories (0.5.2)
-  - SSDataKit (0.3.7)
+  - SSDataKit (0.3.9)
 
 DEPENDENCIES:
   - BEMSimpleLineGraph
@@ -11,9 +11,11 @@ DEPENDENCIES:
   - SSDataKit
 
 SPEC CHECKSUMS:
-  BEMSimpleLineGraph: 68e349eb22320d1a21a29e390d0f67772f6f6f44
-  Masonry: 35368c2ca9577ca87722c12fc52c4bad9b1c1516
-  SAMCategories: dc26f9dc67d371d22f391ee2173bc607a887912e
-  SSDataKit: 5ec82f9ec7cc519d34edd316d9cd5f282a3687f4
+  BEMSimpleLineGraph: 44fd451f27f8e9cf96f2da5bea27603093576dd1
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  SAMCategories: bf8287f7961a0b343168d1fee16338dc1626ea39
+  SSDataKit: bc15712f1adbc43425d61a602120f84fdb970ded
 
-COCOAPODS: 0.35.0
+PODFILE CHECKSUM: 36382f1a15fb901079a96b177d184ea567b40374
+
+COCOAPODS: 1.1.1

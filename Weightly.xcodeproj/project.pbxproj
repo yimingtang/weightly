@@ -11,15 +11,11 @@
 		2011B3B01A0B7B5D000DD457 /* WTLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */; };
 		201553411A2B278400E38157 /* WTLWeightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553401A2B278400E38157 /* WTLWeightView.m */; };
 		201553451A2B3EAA00E38157 /* WTLBMICalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553441A2B3EAA00E38157 /* WTLBMICalculator.m */; };
-		201553461A2B3EAA00E38157 /* WTLBMICalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553441A2B3EAA00E38157 /* WTLBMICalculator.m */; };
 		201553491A2B460500E38157 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553481A2B460500E38157 /* WTLUnitConverter.m */; };
-		2015534A1A2B460500E38157 /* WTLUnitConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553481A2B460500E38157 /* WTLUnitConverter.m */; };
-		2015534B1A2C2ECE00E38157 /* WTLWeightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553401A2B278400E38157 /* WTLWeightView.m */; };
 		2015534E1A2C31F000E38157 /* WTLNumberValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015534D1A2C31F000E38157 /* WTLNumberValidator.m */; };
 		201553541A2C4E4D00E38157 /* WTLDayNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553531A2C4E4D00E38157 /* WTLDayNumberFormatter.m */; };
 		201553571A2DB32200E38157 /* WTLBorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 201553561A2DB32200E38157 /* WTLBorderButton.m */; };
 		2015535D1A2DC5F100E38157 /* WTLTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015535C1A2DC5F100E38157 /* WTLTheme.m */; };
-		2015535E1A2DE25100E38157 /* WTLTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2015535C1A2DC5F100E38157 /* WTLTheme.m */; };
 		20156B2B19FE5C9E00142EC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2A19FE5C9E00142EC0 /* main.m */; };
 		20156B2E19FE5C9E00142EC0 /* WTLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B2D19FE5C9E00142EC0 /* WTLAppDelegate.m */; };
 		20156B3119FE5C9E00142EC0 /* WTLWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20156B3019FE5C9E00142EC0 /* WTLWeightViewController.m */; };
@@ -48,17 +44,10 @@
 		20D912251A12087D007AF596 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20D912241A12087D007AF596 /* Settings.bundle */; };
 		20FC76D81A29E8E9005719D3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FC76D71A29E8E9005719D3 /* StoreKit.framework */; };
 		20FC76DE1A29EF43005719D3 /* Weightly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20FC76DC1A29EF43005719D3 /* Weightly.xcdatamodeld */; };
-		20FC76DF1A29EF43005719D3 /* Weightly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20FC76DC1A29EF43005719D3 /* Weightly.xcdatamodeld */; };
 		20FC76E21A29F054005719D3 /* WTLDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FC76E11A29F054005719D3 /* WTLDefines.m */; };
-		20FC76E31A29F054005719D3 /* WTLDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FC76E11A29F054005719D3 /* WTLDefines.m */; };
-		20FC76E41A29F06A005719D3 /* UIColor+Weightly.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BC6AA21A29D8E300834502 /* UIColor+Weightly.m */; };
 		20FC76E71A29F49C005719D3 /* NSUserDefaults+Weightly.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FC76E61A29F49C005719D3 /* NSUserDefaults+Weightly.m */; };
-		20FC76E81A29F49C005719D3 /* NSUserDefaults+Weightly.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FC76E61A29F49C005719D3 /* NSUserDefaults+Weightly.m */; };
-		20FC76E91A29F570005719D3 /* WTLWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 208EA5D31A14830A00AF5084 /* WTLWeight.m */; };
-		20FC76EA1A29F7D9005719D3 /* WTLPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 205CFFA51A16150B002F26D2 /* WTLPreferences.m */; };
-		20FC76EB1A29FB4F005719D3 /* WTLPersistentDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C25321A1C919800383A21 /* WTLPersistentDataStore.m */; };
-		A31FD9978DD9EBCBE4E65ADA /* libPods-Weightly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DFD8D5055491CECE3E1FCD /* libPods-Weightly.a */; };
-		C8F9DA1AE1BB9258B9CF629B /* libPods-Weightly Today.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F722647FF19379DA80B46507 /* libPods-Weightly Today.a */; };
+		39EC9EEAB489DEA26766E7F0 /* libPods-Weightly Today.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D67A7915D0026C84B88E24 /* libPods-Weightly Today.a */; };
+		E554D055EB48FA8E147ABD2A /* libPods-Weightly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDC06C683A4098CD45DA839 /* libPods-Weightly.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,10 +79,6 @@
 		2011B3AC1A0B6293000DD457 /* WTLDismissInputTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDismissInputTransition.m; sourceTree = "<group>"; };
 		2011B3AE1A0B7B5D000DD457 /* WTLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLTextField.h; sourceTree = "<group>"; };
 		2011B3AF1A0B7B5D000DD457 /* WTLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLTextField.m; sourceTree = "<group>"; };
-		201553101A2B0CF700E38157 /* Pods-Weightly.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Weightly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly/Pods-Weightly.debug.xcconfig"; sourceTree = "<group>"; };
-		201553111A2B0CF700E38157 /* Pods-Weightly.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Weightly.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly/Pods-Weightly.release.xcconfig"; sourceTree = "<group>"; };
-		201553121A2B0D0100E38157 /* Pods-Weightly Today.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Weightly Today.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly Today/Pods-Weightly Today.debug.xcconfig"; sourceTree = "<group>"; };
-		201553131A2B0D0100E38157 /* Pods-Weightly Today.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Weightly Today.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly Today/Pods-Weightly Today.release.xcconfig"; sourceTree = "<group>"; };
 		2015533F1A2B278400E38157 /* WTLWeightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLWeightView.h; sourceTree = "<group>"; };
 		201553401A2B278400E38157 /* WTLWeightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLWeightView.m; sourceTree = "<group>"; };
 		201553431A2B3EAA00E38157 /* WTLBMICalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLBMICalculator.h; sourceTree = "<group>"; };
@@ -165,8 +150,12 @@
 		20FC76E11A29F054005719D3 /* WTLDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLDefines.m; sourceTree = "<group>"; };
 		20FC76E51A29F49C005719D3 /* NSUserDefaults+Weightly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Weightly.h"; sourceTree = "<group>"; };
 		20FC76E61A29F49C005719D3 /* NSUserDefaults+Weightly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Weightly.m"; sourceTree = "<group>"; };
-		76DFD8D5055491CECE3E1FCD /* libPods-Weightly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weightly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F722647FF19379DA80B46507 /* libPods-Weightly Today.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weightly Today.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21D67A7915D0026C84B88E24 /* libPods-Weightly Today.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weightly Today.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C114408BCDAAD5012C7E64B /* Pods-Weightly Today.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weightly Today.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly Today/Pods-Weightly Today.release.xcconfig"; sourceTree = "<group>"; };
+		54EAE4F41FCCE7CED5CAAB6A /* Pods-Weightly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weightly.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly/Pods-Weightly.release.xcconfig"; sourceTree = "<group>"; };
+		8FE73F98E777D0AB0E625529 /* Pods-Weightly Today.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weightly Today.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly Today/Pods-Weightly Today.debug.xcconfig"; sourceTree = "<group>"; };
+		A9DDC0E5DA58D89E06EEEB92 /* Pods-Weightly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weightly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weightly/Pods-Weightly.debug.xcconfig"; sourceTree = "<group>"; };
+		DEDC06C683A4098CD45DA839 /* libPods-Weightly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weightly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20FC76D81A29E8E9005719D3 /* StoreKit.framework in Frameworks */,
-				A31FD9978DD9EBCBE4E65ADA /* libPods-Weightly.a in Frameworks */,
+				E554D055EB48FA8E147ABD2A /* libPods-Weightly.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				201D23281A29E3E5002C2F8E /* NotificationCenter.framework in Frameworks */,
-				C8F9DA1AE1BB9258B9CF629B /* libPods-Weightly Today.a in Frameworks */,
+				39EC9EEAB489DEA26766E7F0 /* libPods-Weightly Today.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,8 +187,8 @@
 				201D23291A29E3E5002C2F8E /* Weightly Today */,
 				20BC6A9E1A29D33600834502 /* WeightlyKit */,
 				20156B2619FE5C9E00142EC0 /* Products */,
-				884C5F01C1EF6329E674EFA6 /* Pods */,
 				B4B6E29601F409052B634EE2 /* Frameworks */,
+				6AD375E9561D8B1233FD3445 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -392,13 +381,13 @@
 			path = "Other Sources";
 			sourceTree = "<group>";
 		};
-		884C5F01C1EF6329E674EFA6 /* Pods */ = {
+		6AD375E9561D8B1233FD3445 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				201553101A2B0CF700E38157 /* Pods-Weightly.debug.xcconfig */,
-				201553111A2B0CF700E38157 /* Pods-Weightly.release.xcconfig */,
-				201553121A2B0D0100E38157 /* Pods-Weightly Today.debug.xcconfig */,
-				201553131A2B0D0100E38157 /* Pods-Weightly Today.release.xcconfig */,
+				A9DDC0E5DA58D89E06EEEB92 /* Pods-Weightly.debug.xcconfig */,
+				54EAE4F41FCCE7CED5CAAB6A /* Pods-Weightly.release.xcconfig */,
+				8FE73F98E777D0AB0E625529 /* Pods-Weightly Today.debug.xcconfig */,
+				2C114408BCDAAD5012C7E64B /* Pods-Weightly Today.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -408,8 +397,8 @@
 			children = (
 				20FC76D71A29E8E9005719D3 /* StoreKit.framework */,
 				201D23271A29E3E5002C2F8E /* NotificationCenter.framework */,
-				76DFD8D5055491CECE3E1FCD /* libPods-Weightly.a */,
-				F722647FF19379DA80B46507 /* libPods-Weightly Today.a */,
+				DEDC06C683A4098CD45DA839 /* libPods-Weightly.a */,
+				21D67A7915D0026C84B88E24 /* libPods-Weightly Today.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -421,12 +410,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 20156B4819FE5C9E00142EC0 /* Build configuration list for PBXNativeTarget "Weightly" */;
 			buildPhases = (
-				288C704495B5B6190D72CE0F /* Check Pods Manifest.lock */,
+				A168F2730163CB15F6D7FBA0 /* [CP] Check Pods Manifest.lock */,
 				20156B2119FE5C9E00142EC0 /* Sources */,
 				20156B2219FE5C9E00142EC0 /* Frameworks */,
 				20156B2319FE5C9E00142EC0 /* Resources */,
-				D1CE5948DC14EA97DCF31CCB /* Copy Pods Resources */,
 				201D23371A29E3E5002C2F8E /* Embed App Extensions */,
+				A04718EAA14614E15B82A9B3 /* [CP] Embed Pods Frameworks */,
+				214B70EEE597DAF692A78ACC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -442,11 +432,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 201D23341A29E3E5002C2F8E /* Build configuration list for PBXNativeTarget "Weightly Today" */;
 			buildPhases = (
-				76BDED8583947C74C12FFA41 /* Check Pods Manifest.lock */,
+				148641104ACDB8097884C005 /* [CP] Check Pods Manifest.lock */,
 				201D23221A29E3E5002C2F8E /* Sources */,
 				201D23231A29E3E5002C2F8E /* Frameworks */,
 				201D23241A29E3E5002C2F8E /* Resources */,
-				295DF39468045777686C9519 /* Copy Pods Resources */,
+				E101B586450DB4C9A538645D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -464,7 +454,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = WTL;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Yiming Tang";
 				TargetAttributes = {
 					20156B2419FE5C9E00142EC0 = {
@@ -540,64 +530,79 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		288C704495B5B6190D72CE0F /* Check Pods Manifest.lock */ = {
+		148641104ACDB8097884C005 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		295DF39468045777686C9519 /* Copy Pods Resources */ = {
+		214B70EEE597DAF692A78ACC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weightly Today/Pods-Weightly Today-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		76BDED8583947C74C12FFA41 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		D1CE5948DC14EA97DCF31CCB /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weightly/Pods-Weightly-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A04718EAA14614E15B82A9B3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weightly/Pods-Weightly-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A168F2730163CB15F6D7FBA0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E101B586450DB4C9A538645D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weightly Today/Pods-Weightly Today-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -645,18 +650,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20FC76EA1A29F7D9005719D3 /* WTLPreferences.m in Sources */,
-				20FC76E31A29F054005719D3 /* WTLDefines.m in Sources */,
-				20FC76EB1A29FB4F005719D3 /* WTLPersistentDataStore.m in Sources */,
-				201553461A2B3EAA00E38157 /* WTLBMICalculator.m in Sources */,
 				201D232E1A29E3E5002C2F8E /* WTLTodayViewController.m in Sources */,
-				2015534A1A2B460500E38157 /* WTLUnitConverter.m in Sources */,
-				2015534B1A2C2ECE00E38157 /* WTLWeightView.m in Sources */,
-				20FC76E41A29F06A005719D3 /* UIColor+Weightly.m in Sources */,
-				20FC76E91A29F570005719D3 /* WTLWeight.m in Sources */,
-				20FC76E81A29F49C005719D3 /* NSUserDefaults+Weightly.m in Sources */,
-				20FC76DF1A29EF43005719D3 /* Weightly.xcdatamodeld in Sources */,
-				2015535E1A2DE25100E38157 /* WTLTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,15 +689,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -716,7 +714,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -737,21 +735,24 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -761,7 +762,7 @@
 		};
 		20156B4919FE5C9E00142EC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 201553101A2B0CF700E38157 /* Pods-Weightly.debug.xcconfig */;
+			baseConfigurationReference = A9DDC0E5DA58D89E06EEEB92 /* Pods-Weightly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Weightly/Resources/Weightly.entitlements";
@@ -769,6 +770,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Weightly/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xianqu.weightly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -776,7 +778,7 @@
 		};
 		20156B4A19FE5C9E00142EC0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 201553111A2B0CF700E38157 /* Pods-Weightly.release.xcconfig */;
+			baseConfigurationReference = 54EAE4F41FCCE7CED5CAAB6A /* Pods-Weightly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Weightly/Resources/Weightly.entitlements";
@@ -784,6 +786,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Weightly/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xianqu.weightly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -791,7 +794,7 @@
 		};
 		201D23351A29E3E5002C2F8E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 201553121A2B0D0100E38157 /* Pods-Weightly Today.debug.xcconfig */;
+			baseConfigurationReference = 8FE73F98E777D0AB0E625529 /* Pods-Weightly Today.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Weightly Today/Resources/Weightly Today.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -801,9 +804,9 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Weightly Today/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.xianqu.weightly.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -812,15 +815,15 @@
 		};
 		201D23361A29E3E5002C2F8E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 201553131A2B0D0100E38157 /* Pods-Weightly Today.release.xcconfig */;
+			baseConfigurationReference = 2C114408BCDAAD5012C7E64B /* Pods-Weightly Today.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Weightly Today/Resources/Weightly Today.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Weightly Today/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.xianqu.weightly.today;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;

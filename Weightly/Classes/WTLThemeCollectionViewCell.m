@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
+#import <Masonry/Masonry.h>
 #import "WTLThemeCollectionViewCell.h"
-
-#import <Masonry.h>
 
 @interface WTLThemeCollectionViewCell ()
 @property (nonatomic) UIImageView *checkmarkImageView;

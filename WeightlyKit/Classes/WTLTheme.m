@@ -9,7 +9,6 @@
 #import "WTLTheme.h"
 #import "WTLDefines.h"
 #import "WTLPreferences.h"
-
 #import <SAMCategories/UIColor+SAMAdditions.h>
 
 static NSString *const kWTLThemeTitleKey = @"title";

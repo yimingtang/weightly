@@ -10,7 +10,6 @@
 #import "WTLUnitConverter.h"
 #import "WTLBMICalculator.h"
 #import "WTLPreferences.h"
-
 #import <Masonry/Masonry.h>
 
 @implementation WTLWeightView

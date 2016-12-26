@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
+#import <Masonry/Masonry.h>
 #import "WTLSegmentedSettingsTableViewCell.h"
 #import "WTLSegmentedControl.h"
 
-#import <Masonry.h>
 
 @implementation WTLSegmentedSettingsTableViewCell
 

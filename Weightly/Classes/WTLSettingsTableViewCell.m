@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
+#import <Masonry/Masonry.h>
 #import "WTLSettingsTableViewCell.h"
 #import "UIColor+Weightly.h"
-
-#import <Masonry.h>
 
 CGFloat kWTLSettingsTableViewCellFontSize = 18.0f;
 

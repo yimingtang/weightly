@@ -105,7 +105,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *bundleInfo = [[NSBundle mainBundle] infoDictionary];
         NSString *shortVersion = [bundleInfo objectForKey:@"CFBundleShortVersionString"];
-        NSString *version = [bundleInfo objectForKey:(NSString *)kCFBundleVersionKey];
+        NSString *version = [bundleInfo objectForKey:(__bridge NSString *)kCFBundleVersionKey];
         NSString *versionString = [NSString stringWithFormat:@"%@ (%@)", shortVersion, version];
         NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
         [standardDefaults setObject:versionString forKey:@"WTLVersion"];

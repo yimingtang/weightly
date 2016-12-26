@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
-#import <BEMSimpleLineGraphView.h>
+#import <BEMSimpleLineGraph/BEMSimpleLineGraphView.h>
 
 typedef NS_ENUM(NSUInteger, WTLLineGraphTimePeriod) {
     WTLLineGraphTimePeriodOneWeek,

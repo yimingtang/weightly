@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Yiming Tang. All rights reserved.
 //
 
+#import <Masonry/Masonry.h>
 #import "WTLSectionHeaderView.h"
 #import "WeightlyKit.h"
 
-#import <Masonry.h>
 
 @interface WTLSectionHeaderView ()
 @property (nonatomic) UIView *lineView;

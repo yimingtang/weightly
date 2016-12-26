@@ -8,7 +8,6 @@
 
 #import "WTLThemesViewController.h"
 #import "WTLThemeCollectionViewCell.h"
-
 #import "WeightlyKit.h"
 #import <SAMCategories/UIColor+SAMAdditions.h>
 

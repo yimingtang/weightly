@@ -88,7 +88,7 @@
 
 - (void)configureCoreDataStack {
     NSDictionary *applicationInfo = [[NSBundle mainBundle] infoDictionary];
-    NSString *applicationName = [applicationInfo objectForKey:(NSString *)kCFBundleNameKey];
+    NSString *applicationName = [applicationInfo objectForKey:(__bridge NSString *)kCFBundleNameKey];
     NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     NSURL *url = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite", applicationName]];
     [SSManagedObject setPersistentStoreURL:url];
