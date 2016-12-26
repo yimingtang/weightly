@@ -1,3 +1,5 @@
 # Weightly
 
-Weightly App
+A tiny weight tracker.
+
+![Screenshot](assets/screenshot.png)
